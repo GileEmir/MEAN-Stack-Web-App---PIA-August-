@@ -1,0 +1,29 @@
+/* layout.component.css */
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  header {
+    background: #333;
+    color: white;
+    padding: 1rem;
+  }
+  
+  .main-content {
+    display: flex;
+    flex: 1;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background: #f4f4f4;
+    padding: 1rem;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 1rem;
+  }
+  

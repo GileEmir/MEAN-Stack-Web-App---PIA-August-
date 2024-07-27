@@ -1,0 +1,62 @@
+<!-- 
+<div [ngClass]="{ 'dark-mode': store.semidark, 'print-hidden': true }">
+    <nav class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-260px shadow transition-all duration-300">
+      <div class="h-full bg-white dark:bg-dark-background">
+        <div class="flex items-center justify-between px-4 py-3">
+          <a routerLink="/dashboard/sales" class="main-logo flex shrink-0 items-center">
+     
+          </a>
+       
+      
+       
+        </div>
+        <div class="mx-4 pb-5">
+          <div class="dropdown">
+            <div hlMenu class="align-middle">
+              <a href="javascript:;" hlMenuButton class="btn btn-primary dropdown-toggle w-full">
+              
+                "sidebar.add
+              </a>
+              <ul *hlMenuItems @toggleAnimation class="w-full ltr-right-0 rtl-left-0">
+                <li>
+                  <a routerLink="/dashboard/tickets/flight/create/new" *hlMenuItem="let menuItem">{{ "sidebar.plane_ticket" | translate }}</a>
+                </li>
+                <li>
+                  <a routerLink="/dashboard/travels/draft/create" *hlMenuItem="let menuItem">{{ "sidebar.travel" | translate }}</a>
+                </li>
+                <li>
+                  <a routerLink="/dashboard/tickets/bus/create/new" *hlMenuItem="let menuItem">{{ "sidebar.bus_ticket" | translate }}</a>
+                </li>
+                <li>
+                  <a routerLink="/dashboard/group-travels/create" *hlMenuItem="let menuItem">{{ "sidebar.group_travel" | translate }}</a>
+                </li>
+                <li>
+                  <a routerLink="/dashboard/other-services/create" *hlMenuItem="let menuItem">{{ "sidebar.other_services" | translate }}</a>
+                </li>
+                <li>
+                  <a routerLink="/dashboard/transfers/create" *hlMenuItem="let menuItem">{{ "sidebar.transfer" | translate }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <ng-scrollbar class="relative custom-scrollbar">
+          <ul class="relative space-y-0.5 p-4 py-0 font-semibold">
+            <ng-container *ngFor="let section of sidebarSections">
+              <h2 class="section-title">
+                
+              </h2>
+              <li *ngFor="let item of section.items" class="menu nav-item">
+                <a [routerLink]="item.path" class="nav-link group" routerLinkActive="active">
+                  <div class="flex items-center">
+                    
+                    
+                  </div>
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-scrollbar>
+      </div>
+    </nav>
+  </div> -->

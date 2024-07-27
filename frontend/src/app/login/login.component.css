@@ -1,0 +1,97 @@
+/* Global styles */
+body {
+    min-height: 100vh;
+    background-image: url('/assets/images/auth/bg-gradient.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Background images */
+  .bg-image-1 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    max-height: 893px;
+  }
+  
+  .bg-image-2 {
+    position: absolute;
+    top: 0;
+    left: 24px;
+    height: 40px;
+  }
+  
+  .bg-image-3 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 300px;
+  }
+  
+  .bg-image-4 {
+    position: absolute;
+    bottom: 0;
+    right: 28%;
+  }
+  
+  /* Login form container */
+  .form-container {
+    position: relative;
+    max-width: 870px;
+    width: 100%;
+    background: linear-gradient(45deg, #fff9f9 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, #fff9f9 100%);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Inner form styling */
+  .form-inner {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+    max-width: 440px;
+    margin: auto;
+  }
+  
+  /* Titles and texts */
+  h1 {
+    color: #433EE4; /* Adjust the color to match the primary color */
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  /* Form inputs */
+  input[type="text"],
+  input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+  }
+  
+  /* Submit button */
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0;
+    border-radius: 0.25rem;
+    color: white;
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    cursor: pointer;
+  }
+  
+  /* Additional styles for positioning and responsiveness */
+  @media (min-width: 768px) {
+    .bg-image-2 {
+      left: calc(30% - 24px);
+    }
+  }

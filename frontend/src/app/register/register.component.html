@@ -1,0 +1,109 @@
+<div>
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('/assets/images/auth/bg-gradient.png'); background-size: cover; background-position: center;">
+    <img src="/assets/images/auth/garden.png" alt="image" style="height: 100%; width: 100%; object-fit: cover;" />
+  </div>
+  
+    <div>
+    
+    
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vw; max-width: 500px; background: #EDF2EF; padding: 2em; border-radius: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center; margin-top: 0; margin-bottom: 1em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 1.5em;">Vasa Masta-Vasa Basta</h1>
+  
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <p style="margin: 0; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1em; color: grey; font-style: italic;">{{message}}</p>
+          <ng-container *ngIf="(message !== 'Enter your credentials to continue') && (message !== 'Looks Good')">
+              <icon-warning-hex></icon-warning-hex>
+          </ng-container>
+        </div>
+  
+        <form>
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 1; margin-right: 0.5em;">
+                <!-- Username -->
+                <label for="username" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Username</label>
+                <input [(ngModel)]="username" type="username" id="username" placeholder="Enter Username" name="username" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+              <div style="flex: 1; margin-left: 0.5em;">
+                <!-- Password -->
+                <label for="password" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Password</label>
+                <input [(ngModel)]="password" type="password" id="password" placeholder="Enter Password" name="password" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 1; margin-right: 0.5em;">
+                <!-- First Name -->
+                <label for="first_name" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">First Name</label>
+                <input [(ngModel)]="first_name" type="text" id="first_name" placeholder="Enter First Name" name="first_name" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+              <div style="flex: 1; margin-left: 0.5em;">
+                <!-- Last Name -->
+                <label for="last_name" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Last Name</label>
+                <input [(ngModel)]="last_name" type="text" id="last_name" placeholder="Enter Last Name" name="last_name" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 1; margin-right: 0.5em;">
+                <!-- Gender -->
+                <label for="gender" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Gender</label>
+                <select [(ngModel)]="gender" id="gender" name="gender" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+                  <option value="">Select Gender</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+              </div>
+              <div style="flex: 1; margin-left: 0.5em;">
+                <!-- Address -->
+                <label for="address" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Address</label>
+                <input [(ngModel)]="address" type="text" id="address" placeholder="Enter Address" name="address" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 1; margin-right: 0.5em;">
+                <!-- Phone Number -->
+                <label for="phone_number" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Phone Number</label>
+                <input [(ngModel)]="phone_number" type="text" id="phone_number" placeholder="Enter Phone Number" name="phone_number" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+              <div style="flex: 1; margin-left: 0.5em;">
+                <!-- Email -->
+                <label for="email" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Email</label>
+                <input [(ngModel)]="email" type="email" id="email" placeholder="Enter Email" name="email" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 1; margin-right: 0.5em;">
+                <!-- Profile Picture -->
+                <label for="profile_pic" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Profile Picture</label>
+                <input [(ngModel)]="profile_pic" type="text" id="profile_pic" placeholder="Enter Profile Picture URL" name="profile_pic" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+              <div style="flex: 1; margin-left: 0.5em;">
+                <!-- Credit Card Number -->
+                <label for="credit_card_number" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Credit Card Number</label>
+                <input [(ngModel)]="credit_card_number" type="text" id="credit_card_number" placeholder="Enter Credit Card Number" name="credit_card_number" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+              </div>
+            </div>
+          
+            <!-- Type and Register Button remain as they were, not in a flex container -->
+            <div style="margin-bottom: 1em;">
+              <label for="type" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Type</label>
+              <select [(ngModel)]="type" id="type" name="type" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+                <option value="">Select Type</option>
+                <option value="owner">Owner</option>
+                <option value="decor">Decorator</option>
+              </select>
+            </div>
+          
+            <div style="text-align: center;">
+              <button (click)="register()" style="width: 100%; padding: 1em; border: none; background-color: #57C4E5;color:#EDF2EF; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease;">Register</button>
+            </div>
+          </form>
+          <div style="text-align: center;">
+            <h1 style="margin-top: 0; margin-top: 1.5em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 0.7em;">Already have an Account?</h1>
+            <a routerLink="" style="display: block; margin-top: 1; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:  #0055ff9d; font-size: 0.9em;">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
