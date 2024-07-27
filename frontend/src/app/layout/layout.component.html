@@ -1,28 +1,4 @@
-<!-- layout.component.html -->
-<div class="layout">
-    <div class="main-container min-h-screen text-black dark:text-white-dark" >
-        <!--  BEGIN SIDEBAR  -->
-        <app-sidebar></app-sidebar>
-        <!--  END SIDEBAR  -->
-  
-        <div class="main-content flex min-h-screen flex-col">
-          <!--  BEGIN TOP NAVBAR  -->
-          <app-header></app-header>
-          <!--  END TOP NAVBAR  -->
-  
-          <!--  BEGIN CONTENT AREA  -->
-          <div class="animation p-5 print:p-0">
-            <div class="panel mb-3 flex items-center overflow-x-auto whitespace-nowrap p-5 text-primary print:hidden">
-              <!-- <app-breadcrumbs></app-breadcrumbs> -->
-            </div>
-            <router-outlet></router-outlet>
-          </div>
-          <!--  END CONTENT AREA  -->
-  
-          <!-- BEGIN FOOTER -->
-          <app-footer class="mt-auto"></app-footer>
-          <!-- END FOOTER -->
-        </div>
-      </div>
+<div>
+  <h1>Layout Component</h1>
+  <router-outlet></router-outlet>
 </div>
-  

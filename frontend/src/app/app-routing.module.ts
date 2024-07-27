@@ -19,10 +19,10 @@ const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "**", redirectTo: "login", pathMatch: "full" }, // Wildcard route to catch undefined paths
   {
-    path: 'dashboard',
+    path: "dashboard",
     component: LayoutComponent,
     children: [
-      { path: 'main-page', component: MainPageComponent },
+      { path: "main-page", component: MainPageComponent },
       // Add other routes here that need the layout
     ]
   }

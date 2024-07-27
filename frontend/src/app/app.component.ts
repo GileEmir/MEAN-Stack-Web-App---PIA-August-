@@ -10,23 +10,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Vasa Masta-Vasa Basta';
-  name="Kralju";
-  allUsers: User[] = [];
-
   constructor(private router:Router){
     
   }
   
-
-  message="";
-  username:string="";
-  password:string="";
-
-
-
-  
-
-  login(){
-   
-  }
 }
