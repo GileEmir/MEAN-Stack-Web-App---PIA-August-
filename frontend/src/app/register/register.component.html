@@ -79,13 +79,15 @@
                 <label for="profile_pic" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Profile Picture</label>
                 <input [(ngModel)]="profile_pic" type="text" id="profile_pic" placeholder="Enter Profile Picture URL" name="profile_pic" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
               </div>
-              <div style="flex: 1; margin-left: 0.5em;">
-                <!-- Credit Card Number -->
-                <label for="credit_card_number" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Credit Card Number</label>
-                <input [(ngModel)]="credit_card_number" type="text" id="credit_card_number" placeholder="Enter Credit Card Number" name="credit_card_number" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
-              </div>
             </div>
-          
+
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 1; margin: 0.5em; display: flex; align-items: center;">
+                  <label for="creditCardNumber" style="margin-right: 0.5em;">Credit Card Number:</label>
+                    <input type="text" id="creditCardNumber" name="creditCardNumber" (input)="validateCard($event)" style="flex: 1; margin-right: 0.5em;">
+                    <img id="cardIcon" src="/assets/images/card/credit-card.png" alt="" style="display: inline; width: 50px; height: 30px;">
+                </div>
+            </div>
             <!-- Type and Register Button remain as they were, not in a flex container -->
             <div style="margin-bottom: 1em;">
               <label for="type" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Type</label>
