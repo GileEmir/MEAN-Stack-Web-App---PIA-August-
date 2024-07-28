@@ -24,18 +24,26 @@ export class AdminLoginComponent implements OnInit {
 
 
   login() {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z]{3,})(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/;
+
     if (this.username === "") {
       this.message = "Please enter username";
       return;
     } else if (this.password === "") {
       this.message = "Please enter password";
       return;
+    } else if (!passwordPattern.test(this.password)) {
+      this.message = "Password must be 6-10 characters long, start with a letter, and include at least one uppercase letter, three lowercase letters, one number, and one special character.";
+      return;
     }
+    
     this.userService.admin_login(this.username, this.password).subscribe((userFromDB: User) => {
       if (userFromDB) {
         if (userFromDB.type === "admin") {
-          this.router.navigate(['admin']);
-        } 
+          localStorage.setItem('logg', JSON.stringify(userFromDB));
+          this.message = "Enter your credentials to continue";
+          this.router.navigate(['/dashboard/admin']);
+        }
       } else {
         this.message = "Invalid credentials. Please try again.";
       }

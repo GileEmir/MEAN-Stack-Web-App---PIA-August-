@@ -8,24 +8,25 @@ import { RegisterComponent } from './register/register.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MainPageComponent } from './mainpage/mainpage.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: "admin_login", component: AdminLoginComponent,pathMatch: "full"  },
   { path: "login", component: LoginComponent ,pathMatch: "full" },
-  { path: "owner", component: OwnerComponent },
-  { path: "admin", component: AdminComponent },
-  { path: "decor", component: DecorComponent },
   { path: "register", component: RegisterComponent },
   { path: "", redirectTo: "login", pathMatch: "full" },
-  { path: "**", redirectTo: "login", pathMatch: "full" }, // Wildcard route to catch undefined paths
   {
     path: "dashboard",
     component: LayoutComponent,
+    canActivate: [authGuard],
     children: [
-      { path: "main-page", component: MainPageComponent },
-      // Add other routes here that need the layout
-    ]
-  }
+      { path: "main_page", component: MainPageComponent },
+      { path: "owner", component: OwnerComponent,canActivate: [authGuard] },
+      { path: "admin", component: AdminComponent,canActivate: [authGuard] },
+      { path: "decor", component: DecorComponent,canActivate: [authGuard] },
+  ]
+  },
+  { path: "**", redirectTo: "login", pathMatch: "full" }, // Wildcard route to catch undefined paths
 ];
 
 

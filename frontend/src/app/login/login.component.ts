@@ -17,23 +17,29 @@ export class LoginComponent {
   constructor(private userService:UserService,private router:Router){}
 
   login(){
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z]{3,})(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/;
+
     if (this.username === "") {
       this.message = "Please enter username";
       return;
     } else if (this.password === "") {
       this.message = "Please enter password";
       return;
+    } else if (!passwordPattern.test(this.password)) {
+      this.message = "Password must be 6-10 characters long, start with a letter, and include at least one uppercase letter, three lowercase letters, one number, and one special character.";
+      return;
     }
+    
     this.userService.login(this.username, this.password).subscribe((userFromDB: User) => {
       if (userFromDB) {
         if (userFromDB.type === "owner") {
           localStorage.setItem('logg', JSON.stringify(userFromDB));
           this.message = "Enter your credentials to continue";
-          this.router.navigate(['/owner']);
+          this.router.navigate(['/dashboard/owner']);
         } else if (userFromDB.type === "decor") {
           localStorage.setItem('logg', JSON.stringify(userFromDB));
           this.message = "Enter your credentials to continue";
-          this.router.navigate(['/decor']);
+          this.router.navigate(['/dashboard/decor']);
         }
       } else {
         this.message = "Invalid credentials. Please try again.";
