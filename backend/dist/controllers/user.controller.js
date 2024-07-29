@@ -29,8 +29,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const bcrypt = __importStar(require("bcryptjs"));
+const DEFAULT_PROFILE_PIC_PATH = 'uploads/defaultProfilePic.png';
 class UserController {
     constructor() {
+        this.getAllUserNames = (req, res) => {
+            user_1.default.find({}, 'username') // Fetch all users and return only the username field
+                .then(users => {
+                const usernames = users.map(user => user.username);
+                res.json(usernames);
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
         this.login = (req, res) => {
             let usernameP = req.body.username;
             let passwordP = req.body.password;
@@ -80,18 +92,37 @@ class UserController {
         this.register = (req, res) => {
             let username = req.body.username;
             let password = req.body.password;
-            let firstname = req.body.firstname;
-            let lastname = req.body.lastname;
+            let first_name = req.body.first_name;
+            let last_name = req.body.last_name;
+            let gender = req.body.gender;
+            let address = req.body.address;
+            let phone_number = req.body.phone_number;
+            let email = req.body.email;
+            let profilePicPath = req.file ? req.file.path : '';
+            let credit_card_number = req.body.credit_card_number;
+            let type = req.body.type;
+            // Check if the profile picture is the default one
+            if (profilePicPath === DEFAULT_PROFILE_PIC_PATH) {
+                profilePicPath = DEFAULT_PROFILE_PIC_PATH;
+            }
             let user = {
                 username: username,
-                password: password,
-                firstname: firstname,
-                lastname: lastname
+                password: bcrypt.hashSync(password, 8), // Hash the password before saving
+                first_name: first_name,
+                last_name: last_name,
+                gender: gender,
+                address: address,
+                phone_number: phone_number,
+                email: email,
+                profile_pic: profilePicPath, // Save the profile picture path
+                credit_card_number: credit_card_number,
+                type: type
             };
             new user_1.default(user).save().then(ok => {
                 res.json({ message: "ok" });
             }).catch(err => {
                 console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
             });
         };
     }
