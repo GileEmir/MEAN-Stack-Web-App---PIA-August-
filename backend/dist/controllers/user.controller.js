@@ -32,6 +32,37 @@ const bcrypt = __importStar(require("bcryptjs"));
 const DEFAULT_PROFILE_PIC_PATH = 'uploads/defaultProfilePic.png';
 class UserController {
     constructor() {
+        this.changePassword = (req, res) => {
+            const username = req.body.username;
+            const oldPassword = req.body.oldPassword;
+            const newPassword = req.body.newPassword;
+            user_1.default.findOne({ username: username })
+                .then(user => {
+                if (!user) {
+                    res.status(404).json({ message: 'User not found' });
+                }
+                else {
+                    const passwordMatch = bcrypt.compareSync(oldPassword, user.password);
+                    if (!passwordMatch) {
+                        res.status(403).json({ message: 'Old password is incorrect' });
+                    }
+                    else {
+                        const hashedPassword = bcrypt.hashSync(newPassword, 8);
+                        user.password = hashedPassword;
+                        return user.save();
+                    }
+                }
+            })
+                .then(updatedUser => {
+                if (updatedUser) {
+                    res.status(200).json({ message: 'Password updated successfully' });
+                }
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
         this.getAllUserNames = (req, res) => {
             user_1.default.find({}, 'username') // Fetch all users and return only the username field
                 .then(users => {

@@ -67,4 +67,26 @@ export class UserService {
   declineUser(user: User) {
     return this.http.post(`${this.baseUrl}/decline_user`, user);
   }
+
+  
+  getUserRole(): string | null {
+    const user = this.getLoggedInUser();
+    return user ? user.type : null; // Using 'type' instead of 'role'
+  }
+  
+  hasRole(role: string): boolean {
+    const userRole = this.getUserRole();
+    return userRole === role;
+  }
+
+  
+  changePassword(username: string, oldPassword: string, newPassword: string): Observable<any> {
+    const payload = {
+      username,
+      oldPassword,
+      newPassword
+    };
+
+    return this.http.post(`${this.baseUrl}/change-password`, payload);
+  }
 }

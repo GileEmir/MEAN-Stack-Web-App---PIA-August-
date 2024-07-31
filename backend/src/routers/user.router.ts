@@ -1,3 +1,4 @@
+
 import { UserController } from '../controllers/user.controller';
 import express from 'express';
 import multer from 'multer';
@@ -44,6 +45,10 @@ userRouter.route("/accept_user").post(
 userRouter.route("/decline_user").post(
   (req, res) => new UserController().declineUser(req, res)
 );  
+
+userRouter.route("/change-password").post(
+  (req, res) => new UserController().changePassword(req, res)
+);
 
 
 export default userRouter;

@@ -21,8 +21,8 @@ export class HeaderComponent {
     this.menuOpen = !this.menuOpen;
   }
 
-  logout() {
-    // Implement your logout logic here
-    this.router.navigate(['/login']);
+  logout(){
+    localStorage.removeItem("logg");
+    this.router.navigate(['']);
   }
 }

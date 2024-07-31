@@ -10,43 +10,16 @@ header {
   padding: 1rem;
 }
 
-.main-content {
-  display: flex;
-  flex: 1;
-  margin-top: 64px; /* Adjust this value based on the height of your fixed header */
-  margin-left: 220px; /* Adjust this value based on the width of your fixed sidebar */
-  padding: 1rem; /* Add padding for content spacing */
-  box-sizing: border-box; /* Ensure padding is included in the width */
-  transition: margin-left 0.3s ease; /* Add transition for smooth toggle */
-}
-
-.sidebar-collapsed .main-content {
-  margin-left: 0; /* Move content to the left when sidebar is collapsed */
-}
-
-.sidebar {
-  width: 250px;
-  background: #f4f4f4;
-  padding: 1rem;
-}
-
-.content {
-  flex: 1;
-  padding: 1rem;
-}.layout {
+.main-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-}
-
-header {
-  background: #333;
-  color: white;
-  padding: 1rem;
+  flex: 1;
+  min-height: 0; /* Ensure the main container can shrink */
 }
 
 .main-content {
   display: flex;
+  flex-direction: column;
   flex: 1;
   margin-top: 64px; /* Adjust this value based on the height of your fixed header */
   margin-left: 220px; /* Adjust this value based on the width of your fixed sidebar */
@@ -68,4 +41,12 @@ header {
 .content {
   flex: 1;
   padding: 1rem;
+}
+
+footer {
+  margin-top: auto;
+  padding: 1rem;
+  background: #333;
+  color: white;
+  text-align: center;
 }

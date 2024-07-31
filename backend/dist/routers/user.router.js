@@ -26,4 +26,5 @@ userRouter.route("/get_all_usernames").get((req, res) => new user_controller_1.U
 userRouter.route("/get_requested_users").get((req, res) => new user_controller_1.UserController().getRequestedUsers(req, res));
 userRouter.route("/accept_user").post((req, res) => new user_controller_1.UserController().acceptUser(req, res));
 userRouter.route("/decline_user").post((req, res) => new user_controller_1.UserController().declineUser(req, res));
+userRouter.route("/change-password").post((req, res) => new user_controller_1.UserController().changePassword(req, res));
 exports.default = userRouter;

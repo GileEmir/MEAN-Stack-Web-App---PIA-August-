@@ -8,6 +8,37 @@ const DEFAULT_PROFILE_PIC_PATH = 'uploads/defaultProfilePic.png';
 
 
 export class UserController{
+
+    changePassword = (req: express.Request, res: express.Response) => {
+        const username = req.body.username;
+        const oldPassword = req.body.oldPassword;
+        const newPassword = req.body.newPassword;
+
+        UserM.findOne({ username: username })
+            .then(user => {
+                if (!user) {
+                    res.status(404).json({ message: 'User not found' });
+                } else {
+                    const passwordMatch = bcrypt.compareSync(oldPassword, user.password);
+                    if (!passwordMatch) {
+                        res.status(403).json({ message: 'Old password is incorrect' });
+                    } else {
+                        const hashedPassword = bcrypt.hashSync(newPassword, 8);
+                        user.password = hashedPassword;
+                        return user.save();
+                    }
+                }
+            })
+            .then(updatedUser => {
+                if (updatedUser) {
+                    res.status(200).json({ message: 'Password updated successfully' });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+    }
     
     
     getAllUserNames = (req: express.Request, res: express.Response) => {

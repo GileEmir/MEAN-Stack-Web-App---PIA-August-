@@ -9,23 +9,43 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MainPageComponent } from './mainpage/mainpage.component';
 import { authGuard } from './auth.guard';
+import { RoleGuard } from './role.guard';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 const routes: Routes = [
+  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: 'change_password', component: PasswordChangeComponent },
   { path: "admin_login", component: AdminLoginComponent,pathMatch: "full"  },
   { path: "login", component: LoginComponent ,pathMatch: "full" },
   { path: "register", component: RegisterComponent },
-  { path: "", redirectTo: "login", pathMatch: "full" },
   {
     path: "dashboard",
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
       { path: "main_page", component: MainPageComponent },
-      { path: "owner", component: OwnerComponent,canActivate: [authGuard] },
-      { path: "admin", component: AdminComponent,canActivate: [authGuard] },
-      { path: "decor", component: DecorComponent,canActivate: [authGuard] },
-  ]
+      { 
+        path: "owner", 
+        component: OwnerComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'owner' } 
+      },
+      { 
+        path: "admin", 
+        component: AdminComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'admin' } 
+      },
+      { 
+        path: "decor", 
+        component: DecorComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'decor' } 
+      },
+    ]
   },
+  { path: 'not_authorized', component: NotAuthorizedComponent },
   { path: "**", redirectTo: "login", pathMatch: "full" }, // Wildcard route to catch undefined paths
 ];
 
