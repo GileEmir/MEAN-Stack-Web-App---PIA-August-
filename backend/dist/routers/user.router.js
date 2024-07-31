@@ -23,4 +23,7 @@ userRouter.route("/admin_login").post((req, res) => new user_controller_1.UserCo
 userRouter.route("/register").post(upload.single('profile_pic'), // Add multer middleware
 (req, res) => new user_controller_1.UserController().register(req, res));
 userRouter.route("/get_all_usernames").get((req, res) => new user_controller_1.UserController().getAllUserNames(req, res));
+userRouter.route("/get_requested_users").get((req, res) => new user_controller_1.UserController().getRequestedUsers(req, res));
+userRouter.route("/accept_user").post((req, res) => new user_controller_1.UserController().acceptUser(req, res));
+userRouter.route("/decline_user").post((req, res) => new user_controller_1.UserController().declineUser(req, res));
 exports.default = userRouter;

@@ -1,20 +1,18 @@
-<div class="sidebar text-white w-64 min-h-screen" style="background-color: #4580E0;">
-  <div class="sidebar-header p-4 text-lg font-bold">
-    <div class="image-container">
-      <img src="assets/images/auth/vmvb2.png" alt="image" class="full-image" />
-    </div>
+<div class="sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header">
+    <div class="image-placeholder"></div> <!-- Placeholder div -->
   </div>
-  <ul class="sidebar-menu p-4">
-    <li class="sidebar-item py-2">
+  <ul class="sidebar-menu">
+    <li class="sidebar-item">
       <a href="#" class="sidebar-link">Home</a>
     </li>
-    <li class="sidebar-item py-2">
+    <li class="sidebar-item">
       <a href="#" class="sidebar-link">About</a>
     </li>
-    <li class="sidebar-item py-2">
+    <li class="sidebar-item">
       <a href="#" class="sidebar-link">Services</a>
     </li>
-    <li class="sidebar-item py-2">
+    <li class="sidebar-item">
       <a href="#" class="sidebar-link">Contact</a>
     </li>
   </ul>

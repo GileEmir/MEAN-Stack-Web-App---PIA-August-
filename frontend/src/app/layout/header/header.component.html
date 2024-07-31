@@ -1,2 +1,13 @@
-<p>header works!</p>
-<app-logout></app-logout>
+<div class="header" style="background-color: #4580E0;">
+    <button class="toggle-button" (click)="toggleSidebar()">☰</button>
+    <img src="assets/images/auth/vmvb-removebg-preview.png" alt="image" class="header-image" />
+
+    <div class="user-">
+      <img src="assets/images/auth/user-icon.png" alt="User Icon" class="user-icon" (click)="toggleMenu()" />
+      <div class="menu" *ngIf="menuOpen">
+        <ul>
+          <li (click)="logout()">Logout</li>
+        </ul>
+      </div>
+    </div>
+</div>

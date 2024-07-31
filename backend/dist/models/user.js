@@ -15,7 +15,8 @@ const userSchema = new mongoose_1.default.Schema({
     email: String,
     profile_pic: String,
     credit_card_number: String,
-    type: String
+    type: String,
+    status: String
 }, {
     versionKey: false
 });

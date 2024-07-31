@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   email: string = "";
   profile_pic: File | null = null; // Change to File type
   profilePicPreview: string | ArrayBuffer | null = null;
+  status: string = "requested";
   defaultProfilePic: string = '/assets/images/auth/default_profile_pic.jpg';
 
   all_user_names: string[] = [];
@@ -86,7 +87,10 @@ export class RegisterComponent implements OnInit {
 
   register() {
     const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z]{3,})(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/;
-
+    const creditCardPattern = /^\d{16}$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneNumberPattern = /^[\d\s/-]+$/;
+    
     if (this.username == "") {
       this.message = "Please enter username";
     } else if (this.all_user_names.includes(this.username)) {
@@ -106,12 +110,18 @@ export class RegisterComponent implements OnInit {
       this.message = "Please enter address";
     } else if (this.phone_number == "") {
       this.message = "Please enter phone number";
+    } else if (!phoneNumberPattern.test(this.phone_number)) {
+      this.message = "Please enter a valid phone number containing only digits";
     } else if (this.email == "") {
       this.message = "Please enter email";
+    } else if (!emailPattern.test(this.email)) {
+      this.message = "Please enter a valid email address";
     } else if (this.profile_pic == null) {
       this.message = "Please select a profile picture";
     } else if (this.credit_card_number == "") {
       this.message = "Please enter credit card number";
+    } else if (!creditCardPattern.test(this.credit_card_number)) {
+      this.message = "Please enter a valid 16-digit credit card number";
     } else {
       // Create FormData object
       const formData = new FormData();
@@ -123,12 +133,13 @@ export class RegisterComponent implements OnInit {
       formData.append('address', this.address);
       formData.append('phone_number', this.phone_number);
       formData.append('email', this.email);
+      formData.append('status', this.status); 
       if (this.profile_pic && this.profile_pic.name !== 'defaultProfilePic.png') {
         formData.append('profile_pic', this.profile_pic); // Append the file only if it's not the default
       }
       formData.append('credit_card_number', this.credit_card_number);
       formData.append('type', this.type); // Append the type
-
+    
       // Call the backend API to register the user
       this.userService.register(formData).subscribe(
         (response) => {
@@ -141,8 +152,8 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
-    return false;  
-  }
+    return false; 
+}
 
   validateCard(event: any) {
     const cardNumber = event.target.value;

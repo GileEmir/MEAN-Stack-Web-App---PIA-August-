@@ -45,7 +45,7 @@ export class LoginComponent {
         this.message = "Invalid credentials. Please try again.";
       }
     }, error => {
-      this.message = "An error occurred. Please try again.";
+      this.message = "Invalid credentials. Please try again.";
     });
     return false;
   }

@@ -2,6 +2,7 @@ import { UserController } from '../controllers/user.controller';
 import express from 'express';
 import multer from 'multer';
 import path from 'path'; // Import the path module
+import user from '../models/user';
 
 const userRouter = express.Router();
 
@@ -31,6 +32,18 @@ userRouter.route("/register").post(
 userRouter.route("/get_all_usernames").get(
     (req, res) => new UserController().getAllUserNames(req, res)
 );
+
+userRouter.route("/get_requested_users").get(
+    (req, res) => new UserController().getRequestedUsers(req, res)
+);
+
+userRouter.route("/accept_user").post(
+    (req, res) => new UserController().acceptUser(req, res)
+);  
+
+userRouter.route("/decline_user").post(
+  (req, res) => new UserController().declineUser(req, res)
+);  
 
 
 export default userRouter;

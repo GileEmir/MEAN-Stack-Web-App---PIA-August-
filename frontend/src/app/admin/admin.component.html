@@ -1,1 +1,19 @@
 <p>admin works!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>
+        <button (click)="acceptUser(user)">Accept</button>
+        <button (click)="declineUser(user)">Decline</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,28 +1,26 @@
-<!-- layout.component.html -->
-<div class="layout">
-    <div class="main-container min-h-screen text-black dark:text-white-dark" >
-        <!--  BEGIN SIDEBAR  -->
-        <app-sidebar></app-sidebar>
-        <!--  END SIDEBAR  -->
-  
-        <div class="main-content flex min-h-screen flex-col">
-          <!--  BEGIN TOP NAVBAR  -->
-          <app-header></app-header>
-          <!--  END TOP NAVBAR  -->
-  
-          <!--  BEGIN CONTENT AREA  -->
-          <div class="animation p-5 print:p-0">
-            <div class="panel mb-3 flex items-center overflow-x-auto whitespace-nowrap p-5 text-primary print:hidden">
-              <!-- <app-breadcrumbs></app-breadcrumbs> -->
-            </div>
-            <router-outlet></router-outlet>
-          </div>
-          <!--  END CONTENT AREA  -->
-  
-          <!-- BEGIN FOOTER -->
-          <app-footer class="mt-auto"></app-footer>
-          <!-- END FOOTER -->
+<div class="layout flex" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <!--  BEGIN TOP NAVBAR  -->
+  <app-header (toggleSidebarEvent)="toggleSidebar()"></app-header>
+  <!--  END TOP NAVBAR  -->
+
+  <div class="main-container flex flex-col min-h-screen w-full">
+    <!--  BEGIN SIDEBAR  -->
+    <app-sidebar [isCollapsed]="isSidebarCollapsed" (toggle)="toggleSidebar()"></app-sidebar>
+    <!--  END SIDEBAR  -->
+
+    <div class="main-content flex flex-col flex-grow pt-16">
+      <!--  BEGIN CONTENT AREA  -->
+      <div class="animation p-5 print:p-0">
+        <div class="panel mb-3 flex items-center overflow-x-auto whitespace-nowrap p-5 text-primary print:hidden">
+          <!-- <app-breadcrumbs></app-breadcrumbs> -->
         </div>
+        <router-outlet></router-outlet>
       </div>
+      <!--  END CONTENT AREA  -->
+
+      <!-- BEGIN FOOTER -->
+      <app-footer class="mt-auto"></app-footer>
+      <!-- END FOOTER -->
+    </div>
+  </div>
 </div>
-  

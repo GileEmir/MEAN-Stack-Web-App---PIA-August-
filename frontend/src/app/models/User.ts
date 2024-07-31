@@ -10,4 +10,5 @@ export class User {
     profile_pic: string = "";
     credit_card_number: string = "";
     type: string = "";
+    status: string = "";
 }
