@@ -21,22 +21,36 @@
   width: auto; /* Maintain aspect ratio */
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-right: 1rem;
+}
 .user-icon {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .menu {
   position: absolute;
   right: 0;
-  margin-top: 3rem;
-  width: 12rem;
-  background-color: white;
+  margin-top: 7rem; /* Increase margin-top to move the menu further down */
+  width: 14rem; /* Slightly increase the width */
+  background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Add a subtle gradient */
   color: black;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem; /* Increase border radius for a more rounded look */
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 1rem; /* Add padding inside the menu */
 }
 
 .menu ul {
@@ -46,12 +60,14 @@
 }
 
 .menu li {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem; /* Increase padding for better spacing */
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add color transition */
 }
 
 .menu li:hover {
-  background-color: #f0f0f0;
+  background-color: #e0e0e0; /* Change hover background color */
+  color: #333; /* Change hover text color */
 }
 
 .toggle-button {
@@ -62,7 +78,7 @@
   padding: 0 15px; /* Adjust padding to maintain alignment */
   cursor: pointer;
   border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
   font-size: 1.2rem; /* Adjust font size for better consistency */
   font-weight: bold; /* Make the font bold */
   margin-right: 10px; /* Add some margin to the right */
@@ -70,4 +86,16 @@
 
 .toggle-button:hover {
   background-color: #79A0E0;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

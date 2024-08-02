@@ -1,0 +1,11 @@
+.footer-content {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    color: #333; /* Adjust text color as needed */
+    background-color: transparent; /* Make background transparent */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000; 
+  }

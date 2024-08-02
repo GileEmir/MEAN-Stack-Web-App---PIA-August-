@@ -3,7 +3,7 @@
     <div class="image-placeholder"></div> <!-- Placeholder div -->
   </div>
   <ul class="sidebar-menu">
-    <li class="sidebar-item">
+    <!-- <li class="sidebar-item">
       <a href="#" class="sidebar-link">Home</a>
     </li>
     <li class="sidebar-item">
@@ -14,6 +14,36 @@
     </li>
     <li class="sidebar-item">
       <a href="#" class="sidebar-link">Contact</a>
+    </li> -->
+    <li class="sidebar-item" *ngIf="isCurrentPath('/dashboard/main_page')">
+      <a href="#" class="sidebar-link">Dashboard Main Page</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+      <a routerLink="/dashboard/owner/info" class="sidebar-link">Owner profile</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+      <a routerLink="/dashboard/owner/companies" class="sidebar-link">Companies</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+      <a routerLink="/dashboard/owner/appointments" class="sidebar-link">Appointments</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+      <a routerLink="/dashboard/owner/maintenance" class="sidebar-link">Maintenance</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+      <a href="#" class="sidebar-link">Decor profile</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+      <a href="#" class="sidebar-link">Decor profile</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+      <a href="#" class="sidebar-link">Appointments</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+      <a href="#" class="sidebar-link">Maintenance</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+      <a href="#" class="sidebar-link">Statistics</a>
     </li>
   </ul>
 </div>

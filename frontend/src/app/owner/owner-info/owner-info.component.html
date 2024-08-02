@@ -1,0 +1,35 @@
+<div class="owner-info-container">
+    <div class="profile-header">
+      <div class="profile-text">
+        <h1>{{ my_user.first_name }} {{ my_user.last_name }}</h1>
+        <p class="username">@{{ my_user.username }}</p>
+      </div>
+      <img [src]="getProfilePicPath()" alt="Profile Picture" style="max-width:100px; max-height: 100px;">
+    </div>
+    <div class="profile-details">
+      <div class="detail-item">
+        <label>Email:</label>
+        <p>{{ my_user.email }}</p>
+      </div>
+      <div class="detail-item">
+        <label>Phone Number:</label>
+        <p>{{ my_user.phone_number }}</p>
+      </div>
+      <div class="detail-item">
+        <label>Address:</label>
+        <p>{{ my_user.address }}</p>
+      </div>
+      <div class="detail-item">
+        <label>Gender:</label>
+        <p>{{ my_user.gender }}</p>
+      </div>
+      <div class="detail-item">
+        <label>Account Type:</label>
+        <p>{{ my_user.type }}</p>
+      </div>
+      <div class="detail-item">
+        <label>Status:</label>
+        <p>{{ my_user.status }}</p>
+      </div>
+    </div>
+</div>

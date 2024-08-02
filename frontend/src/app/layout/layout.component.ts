@@ -1,3 +1,4 @@
+// layout.component.ts
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/User';
 import { UserService } from '../services/user.service';
@@ -23,6 +24,5 @@ export class LayoutComponent implements OnInit {
     if (user) {
       this.my_user = user;
     }
-    console.log('User:', this.my_user);
   }
 }

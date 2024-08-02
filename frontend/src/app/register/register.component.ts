@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   profile_pic: File | null = null; // Change to File type
   profilePicPreview: string | ArrayBuffer | null = null;
   status: string = "requested";
-  defaultProfilePic: string = '/assets/images/auth/default_profile_pic.jpg';
+  defaultProfilePic: string = '/assets/images/auth/user_icon.png';
 
   all_user_names: string[] = [];
 

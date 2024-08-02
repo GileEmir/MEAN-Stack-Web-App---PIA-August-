@@ -1,11 +1,11 @@
-<div class="layout flex" [class.sidebar-collapsed]="isSidebarCollapsed">
+<div [class.sidebar-collapsed]="isSidebarCollapsed" class="layout flex flex-col min-h-screen">
   <!--  BEGIN TOP NAVBAR  -->
   <app-header (toggleSidebarEvent)="toggleSidebar()"></app-header>
   <!--  END TOP NAVBAR  -->
 
-  <div class="main-container flex flex-col min-h-screen w-full">
+  <div class="main-container flex flex-col flex-grow w-full">
     <!--  BEGIN SIDEBAR  -->
-    <app-sidebar [isCollapsed]="isSidebarCollapsed" (toggle)="toggleSidebar()"></app-sidebar>
+    <app-sidebar [isCollapsed]="isSidebarCollapsed" [user]="my_user" (toggle)="toggleSidebar()"></app-sidebar>
     <!--  END SIDEBAR  -->
 
     <div class="main-content flex flex-col flex-grow pt-16">
@@ -19,7 +19,7 @@
       <!--  END CONTENT AREA  -->
 
       <!-- BEGIN FOOTER -->
-      <app-footer class="mt-auto"></app-footer>
+      <app-footer></app-footer>
       <!-- END FOOTER -->
     </div>
   </div>

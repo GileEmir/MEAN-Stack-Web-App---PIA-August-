@@ -35,7 +35,7 @@ export class LoginComponent {
         if (userFromDB.type === "owner") {
           localStorage.setItem('logg', JSON.stringify(userFromDB));
           this.message = "Enter your credentials to continue";
-          this.router.navigate(['/dashboard/owner']);
+          this.router.navigate(['/dashboard/owner/info']);
         } else if (userFromDB.type === "decor") {
           localStorage.setItem('logg', JSON.stringify(userFromDB));
           this.message = "Enter your credentials to continue";

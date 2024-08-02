@@ -20,6 +20,10 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { OwnerInfoComponent } from './owner/owner-info/owner-info.component';
+import { OwnerCompaniesComponent } from './owner/owner-companies/owner-companies.component';
+import { OwnerAppointmentsComponent } from './owner/owner-appointments/owner-appointments.component';
+import { OwnerMaintenanceComponent } from './owner/owner-maintenance/owner-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     HeaderComponent,
     FooterComponent,
     NotAuthorizedComponent,
-    PasswordChangeComponent
+    PasswordChangeComponent,
+    OwnerInfoComponent,
+    OwnerCompaniesComponent,
+    OwnerAppointmentsComponent,
+    OwnerMaintenanceComponent
   ],
   imports: [
     BrowserModule,

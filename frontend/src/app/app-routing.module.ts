@@ -12,6 +12,10 @@ import { authGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { OwnerInfoComponent } from './owner/owner-info/owner-info.component';
+import { OwnerCompaniesComponent } from './owner/owner-companies/owner-companies.component';
+import { OwnerAppointmentsComponent } from './owner/owner-appointments/owner-appointments.component';
+import { OwnerMaintenanceComponent } from './owner/owner-maintenance/owner-maintenance.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
@@ -22,14 +26,38 @@ const routes: Routes = [
   {
     path: "dashboard",
     component: LayoutComponent,
+    children: [
+      { path: "main_page", component: MainPageComponent }
+    ]
+  },
+  {
+    path: "dashboard",
+    component: LayoutComponent,
     canActivate: [authGuard],
     children: [
-      { path: "main_page", component: MainPageComponent },
       { 
-        path: "owner", 
-        component: OwnerComponent, 
+        path: "owner/info", 
+        component: OwnerInfoComponent, 
         canActivate: [RoleGuard], 
-        data: { expectedRole: 'owner' } 
+        data: { expectedRole: 'owner' }
+      },
+      { 
+        path: "owner/companies", 
+        component: OwnerCompaniesComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'owner' }
+      },
+      { 
+        path: "owner/appointments", 
+        component: OwnerAppointmentsComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'owner' }
+      },
+      { 
+        path: "owner/maintenance", 
+        component: OwnerMaintenanceComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'owner' }
       },
       { 
         path: "admin", 

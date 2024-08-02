@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainPageComponent } from './mainpage.component';
+import { OwnerInfoComponent } from './owner-info.component';
 
-describe('MainPageComponent', () => {
-  let component: MainPageComponent;
-  let fixture: ComponentFixture<MainPageComponent>;
+describe('OwnerInfoComponent', () => {
+  let component: OwnerInfoComponent;
+  let fixture: ComponentFixture<OwnerInfoComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MainPageComponent]
+      declarations: [OwnerInfoComponent]
     });
-    fixture = TestBed.createComponent(MainPageComponent);
+    fixture = TestBed.createComponent(OwnerInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

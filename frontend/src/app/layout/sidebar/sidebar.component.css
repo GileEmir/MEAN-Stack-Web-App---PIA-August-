@@ -28,10 +28,20 @@
 }
 
 .sidebar-item {
-  padding: 0.5rem 1rem 0.5rem 0.5rem; /* Adjust padding to create more space on the right */
-  border-bottom: 1px solid transparent; /* Add transparent border */
-  margin-bottom: 0.5rem; /* Add margin to create space between items */
-  position: relative; /* Position relative for pseudo-element */
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 0.5rem;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Add transition for smooth animation */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Modern box shadow */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  background-color: #5086E0; /* Initial background color */
+}
+
+.sidebar-item:hover {
+  transform: translateX(5px); /* Pop-out effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  background-color: #79A0E0; /* Change background color on hover */
 }
 
 .sidebar-item::after {
@@ -39,27 +49,25 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.25rem; /* Position the pseudo-element */
+  bottom: -0.25rem;
   height: 1px;
-  background: linear-gradient(to right, #79A0E0, transparent); /* Gradient border */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  background: linear-gradient(to right, #79A0E0, transparent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-item:last-child::after {
-  display: none; /* Remove border from the last item */
+  display: none;
 }
 
 .sidebar-link {
-  color: #DCE0E0; /* Change text color */
+  color: #DCE0E0;
   text-decoration: none;
   display: block;
-  transition: transform 0.3s, box-shadow 0.3s; /* Add transition for pop-out effect */
+  transition: color 0.3s; /* Transition for color change */
 }
 
 .sidebar-link:hover {
   color: #fff;
-  transform: translateX(5px); /* Pop-out effect */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow */
 }
 
 .image-container {
