@@ -31,19 +31,16 @@
       <a routerLink="/dashboard/owner/maintenance" class="sidebar-link">Maintenance</a>
     </li>
     <li class="sidebar-item" *ngIf="user?.type=='decor'">
-      <a href="#" class="sidebar-link">Decor profile</a>
+      <a [routerLink]="['/decor/info']" class="sidebar-link">Decor profile</a>
     </li>
     <li class="sidebar-item" *ngIf="user?.type=='decor'">
-      <a href="#" class="sidebar-link">Decor profile</a>
+      <a [routerLink]="['/decor/appointments']" class="sidebar-link">Appointments</a>
     </li>
     <li class="sidebar-item" *ngIf="user?.type=='decor'">
-      <a href="#" class="sidebar-link">Appointments</a>
+      <a [routerLink]="['/decor/maintenance']" class="sidebar-link">Maintenance</a>
     </li>
     <li class="sidebar-item" *ngIf="user?.type=='decor'">
-      <a href="#" class="sidebar-link">Maintenance</a>
-    </li>
-    <li class="sidebar-item" *ngIf="user?.type=='decor'">
-      <a href="#" class="sidebar-link">Statistics</a>
+      <a [routerLink]="['/decor/statistics']" class="sidebar-link">Statistics</a>
     </li>
   </ul>
 </div>

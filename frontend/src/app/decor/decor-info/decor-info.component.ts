@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-owner-info',
-  templateUrl: './owner-info.component.html',
-  styleUrls: ['./owner-info.component.css']
+  selector: 'app-decor-info',
+  templateUrl: './decor-info.component.html',
+  styleUrls: ['./decor-info.component.css']
 })
-export class OwnerInfoComponent implements OnInit {
+export class DecorInfoComponent {
+
 
   my_user: User = new User();
   updated_user: User = new User();

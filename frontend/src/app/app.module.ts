@@ -24,6 +24,10 @@ import { OwnerInfoComponent } from './owner/owner-info/owner-info.component';
 import { OwnerCompaniesComponent } from './owner/owner-companies/owner-companies.component';
 import { OwnerAppointmentsComponent } from './owner/owner-appointments/owner-appointments.component';
 import { OwnerMaintenanceComponent } from './owner/owner-maintenance/owner-maintenance.component';
+import { DecorInfoComponent } from './decor/decor-info/decor-info.component';
+import { DecorAppointmentsComponent } from './decor/decor-appointments/decor-appointments.component';
+import { DecorMaintenanceComponent } from './decor/decor-maintenance/decor-maintenance.component';
+import { DecorStatisticsComponent } from './decor/decor-statistics/decor-statistics.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import { OwnerMaintenanceComponent } from './owner/owner-maintenance/owner-maint
     OwnerInfoComponent,
     OwnerCompaniesComponent,
     OwnerAppointmentsComponent,
-    OwnerMaintenanceComponent
+    OwnerMaintenanceComponent,
+    DecorInfoComponent,
+    DecorAppointmentsComponent,
+    DecorMaintenanceComponent,
+    DecorStatisticsComponent
   ],
   imports: [
     BrowserModule,

@@ -3,22 +3,28 @@ import { UserController } from '../controllers/user.controller';
 import express from 'express';
 import multer from 'multer';
 import path from 'path'; // Import the path module
-import user from '../models/user';
+import fs from 'fs';
 
 const userRouter = express.Router();
 
+// Ensure the uploads directory exists
+const uploadDir = path.resolve(__dirname, '..', '..', 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
 
-// Configure multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, '../../uploads')); // Ensure the path is correct
+        cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-}
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + '-' + file.originalname);
+    }
 });
 
 const upload = multer({ storage: storage });
+
 
 userRouter.route("/login").post(
   (req, res) => new UserController().login(req, res)
@@ -49,6 +55,14 @@ userRouter.route("/decline_user").post(
 userRouter.route("/change-password").post(
   (req, res) => new UserController().changePassword(req, res)
 );
+userRouter.route("/updateUserWithProfilePic").post(
+  upload.single('profile_pic'), // Middleware to handle file upload
+  (req, res) => new UserController().updateUserWithProfilePic(req, res)
+);
+userRouter.route("/updateUser").post(
+  (req, res) => new UserController().updateUser(req, res)
+);
+
 
 
 export default userRouter;

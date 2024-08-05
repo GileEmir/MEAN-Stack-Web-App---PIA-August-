@@ -7,14 +7,20 @@ const user_controller_1 = require("../controllers/user.controller");
 const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path")); // Import the path module
+const fs_1 = __importDefault(require("fs"));
 const userRouter = express_1.default.Router();
-// Configure multer for file uploads
+// Ensure the uploads directory exists
+const uploadDir = path_1.default.resolve(__dirname, '..', '..', 'uploads');
+if (!fs_1.default.existsSync(uploadDir)) {
+    fs_1.default.mkdirSync(uploadDir);
+}
 const storage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path_1.default.join(__dirname, '../../uploads')); // Ensure the path is correct
+        cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path_1.default.extname(file.originalname));
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + '-' + file.originalname);
     }
 });
 const upload = (0, multer_1.default)({ storage: storage });
@@ -27,4 +33,7 @@ userRouter.route("/get_requested_users").get((req, res) => new user_controller_1
 userRouter.route("/accept_user").post((req, res) => new user_controller_1.UserController().acceptUser(req, res));
 userRouter.route("/decline_user").post((req, res) => new user_controller_1.UserController().declineUser(req, res));
 userRouter.route("/change-password").post((req, res) => new user_controller_1.UserController().changePassword(req, res));
+userRouter.route("/updateUserWithProfilePic").post(upload.single('profile_pic'), // Middleware to handle file upload
+(req, res) => new user_controller_1.UserController().updateUserWithProfilePic(req, res));
+userRouter.route("/updateUser").post((req, res) => new user_controller_1.UserController().updateUser(req, res));
 exports.default = userRouter;

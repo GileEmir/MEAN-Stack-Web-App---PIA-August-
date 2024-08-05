@@ -39,7 +39,7 @@ export class LoginComponent {
         } else if (userFromDB.type === "decor") {
           localStorage.setItem('logg', JSON.stringify(userFromDB));
           this.message = "Enter your credentials to continue";
-          this.router.navigate(['/dashboard/decor']);
+          this.router.navigate(['/dashboard/decor/info']);
         }
       } else {
         this.message = "Invalid credentials. Please try again.";

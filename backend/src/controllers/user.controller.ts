@@ -3,12 +3,14 @@ import UserM from '../models/user'
 import * as bcrypt from 'bcryptjs';
 import { Request, Response } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
+import multer from 'multer';
+
+const upload = multer();
 
 const DEFAULT_PROFILE_PIC_PATH = 'uploads/defaultProfilePic.png';
 
 
 export class UserController{
-
     changePassword = (req: express.Request, res: express.Response) => {
         const username = req.body.username;
         const oldPassword = req.body.oldPassword;
@@ -134,20 +136,19 @@ export class UserController{
         let address = req.body.address;
         let phone_number = req.body.phone_number;
         let email = req.body.email;
-        let profilePicPath = req.file ? req.file.path : '';
+        let profilePicPath = req.file ? `/uploads/${req.file.filename}` : '';
         let credit_card_number = req.body.credit_card_number;
         let type = req.body.type;
         let status = req.body.status;
     
-         // Check if the profile picture is the default one
-            if (profilePicPath === DEFAULT_PROFILE_PIC_PATH) {
-                profilePicPath = DEFAULT_PROFILE_PIC_PATH;
-            }
-            
-            
-            let user = {
-                username: username,
-                password: bcrypt.hashSync(password, 8), // Hash the password before saving
+        // Check if the profile picture is the default one
+        if (profilePicPath === DEFAULT_PROFILE_PIC_PATH) {
+            profilePicPath = DEFAULT_PROFILE_PIC_PATH;
+        }
+    
+        let user = {
+            username: username,
+            password: bcrypt.hashSync(password, 8), // Hash the password before saving
             first_name: first_name,
             last_name: last_name,
             gender: gender,
@@ -215,4 +216,93 @@ export class UserController{
             });
     }
     
+    updateUserWithProfilePic = (req: Request, res: Response) => {
+        const {
+            username,
+            first_name,
+            last_name,
+            gender,
+            address,
+            phone_number,
+            email,
+            credit_card_number,
+            type,
+            status
+        } = req.body;
+    
+        let profilePicPath = req.file ? `/uploads/${req.file.filename}` : '';
+    
+        // Check if the profile picture is the default one
+        if (profilePicPath === DEFAULT_PROFILE_PIC_PATH) {
+            profilePicPath = DEFAULT_PROFILE_PIC_PATH;
+        }
+    
+        const updatedUser = {
+            first_name,
+            last_name,
+            gender,
+            address,
+            phone_number,
+            email,
+            profile_pic: profilePicPath, // Save the profile picture path
+            credit_card_number,
+            type,
+            status
+        };
+    
+        UserM.findOneAndUpdate({ username: username }, updatedUser, { new: true })
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({ message: "User not found" });
+                }
+                res.json({ message: "User updated successfully", user });
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+    }
+            
+    updateUser = (req: express.Request, res: express.Response) => {
+        upload.none()(req, res, async (err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Internal Server Error' });
+            }
+    
+            const username = req.params.username || req.body.username;
+    
+            if (!username) {
+                return res.status(400).json({ message: 'Username is required' });
+            }
+    
+            const updateData = {
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                gender: req.body.gender,
+                address: req.body.address,
+                phone_number: req.body.phone_number,
+                email: req.body.email,
+                credit_card_number: req.body.credit_card_number,
+                type: req.body.type,
+                status: req.body.status
+            };
+    
+            // Check if at least one field is provided for update
+            const hasUpdateFields = Object.values(updateData).some(value => value !== undefined);
+            if (!hasUpdateFields) {
+                return res.status(400).json({ message: 'At least one field is required to update' });
+            }
+    
+            try {
+                const updatedUser = await UserM.findOneAndUpdate({ username: username }, updateData, { new: true });
+    
+                if (!updatedUser) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+    
+                return res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+            } catch (err) {
+                return res.status(500).json({ message: 'Internal Server Error' });
+            }
+        });
+    }
 }

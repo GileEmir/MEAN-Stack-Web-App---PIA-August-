@@ -22,6 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -29,6 +38,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const bcrypt = __importStar(require("bcryptjs"));
+const multer_1 = __importDefault(require("multer"));
+const upload = (0, multer_1.default)();
 const DEFAULT_PROFILE_PIC_PATH = 'uploads/defaultProfilePic.png';
 class UserController {
     constructor() {
@@ -155,7 +166,7 @@ class UserController {
             let address = req.body.address;
             let phone_number = req.body.phone_number;
             let email = req.body.email;
-            let profilePicPath = req.file ? req.file.path : '';
+            let profilePicPath = req.file ? `/uploads/${req.file.filename}` : '';
             let credit_card_number = req.body.credit_card_number;
             let type = req.body.type;
             let status = req.body.status;
@@ -193,6 +204,73 @@ class UserController {
                 console.log(err);
                 res.status(500).json({ message: 'Internal Server Error' });
             });
+        };
+        this.updateUserWithProfilePic = (req, res) => {
+            const { username, first_name, last_name, gender, address, phone_number, email, credit_card_number, type, status } = req.body;
+            let profilePicPath = req.file ? `/uploads/${req.file.filename}` : '';
+            // Check if the profile picture is the default one
+            if (profilePicPath === DEFAULT_PROFILE_PIC_PATH) {
+                profilePicPath = DEFAULT_PROFILE_PIC_PATH;
+            }
+            const updatedUser = {
+                first_name,
+                last_name,
+                gender,
+                address,
+                phone_number,
+                email,
+                profile_pic: profilePicPath, // Save the profile picture path
+                credit_card_number,
+                type,
+                status
+            };
+            user_1.default.findOneAndUpdate({ username: username }, updatedUser, { new: true })
+                .then(user => {
+                if (!user) {
+                    return res.status(404).json({ message: "User not found" });
+                }
+                res.json({ message: "User updated successfully", user });
+            })
+                .catch(err => {
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
+        this.updateUser = (req, res) => {
+            upload.none()(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
+                if (err) {
+                    return res.status(500).json({ message: 'Internal Server Error' });
+                }
+                const username = req.params.username || req.body.username;
+                if (!username) {
+                    return res.status(400).json({ message: 'Username is required' });
+                }
+                const updateData = {
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    gender: req.body.gender,
+                    address: req.body.address,
+                    phone_number: req.body.phone_number,
+                    email: req.body.email,
+                    credit_card_number: req.body.credit_card_number,
+                    type: req.body.type,
+                    status: req.body.status
+                };
+                // Check if at least one field is provided for update
+                const hasUpdateFields = Object.values(updateData).some(value => value !== undefined);
+                if (!hasUpdateFields) {
+                    return res.status(400).json({ message: 'At least one field is required to update' });
+                }
+                try {
+                    const updatedUser = yield user_1.default.findOneAndUpdate({ username: username }, updateData, { new: true });
+                    if (!updatedUser) {
+                        return res.status(404).json({ message: 'User not found' });
+                    }
+                    return res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+                }
+                catch (err) {
+                    return res.status(500).json({ message: 'Internal Server Error' });
+                }
+            }));
         };
     }
     acceptUser(req, res) {

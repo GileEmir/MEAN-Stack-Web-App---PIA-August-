@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
+
   
   constructor(private http:HttpClient) { }
   
@@ -42,6 +43,14 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/register`, formData);
   }
 
+  updateUserWithProfilePic(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/updateUserWithProfilePic`, formData);
+  }
+
+  updateUser(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/updateUser`, formData);
+  }
+  
   setLoggedInUser(user: User): void {
     localStorage.setItem('logg', JSON.stringify(user));
   }
