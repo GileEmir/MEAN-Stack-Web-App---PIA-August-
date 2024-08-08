@@ -20,6 +20,7 @@ import { DecorInfoComponent } from './decor/decor-info/decor-info.component';
 import { DecorAppointmentsComponent } from './decor/decor-appointments/decor-appointments.component';
 import { DecorMaintenanceComponent } from './decor/decor-maintenance/decor-maintenance.component';
 import { DecorStatisticsComponent } from './decor/decor-statistics/decor-statistics.component';
+import { CompanyDetailComponent } from './companydetail/companydetail.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
@@ -48,6 +49,12 @@ const routes: Routes = [
       { 
         path: "owner/companies", 
         component: OwnerCompaniesComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'owner' }
+      },
+      { 
+        path: "owner/companies/:id", 
+        component: CompanyDetailComponent, 
         canActivate: [RoleGuard], 
         data: { expectedRole: 'owner' }
       },

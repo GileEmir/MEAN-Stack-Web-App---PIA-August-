@@ -1,0 +1,105 @@
+#map {
+    height: 400px;
+    width: 100%;
+}
+.company-detail {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .company-detail:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .company-header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .company-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .company-header p {
+    margin: 5px 0 0;
+    color: #666;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .company-info p {
+    margin: 10px 0;
+    color: #333;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  .company-info a {
+    color: #007bff;
+    text-decoration: none;
+    animation: fadeIn 2.5s ease-in-out;
+  }
+  
+  .company-info a:hover {
+    text-decoration: underline;
+  }
+  
+  .company-comments {
+    margin-top: 20px;
+  }
+  
+  .company-comments h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+    animation: fadeIn 3s ease-in-out;
+  }
+  
+  .company-comments ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .company-comments li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    animation: fadeIn 3.5s ease-in-out;
+  }
+  
+  .company-location {
+    margin-top: 20px;
+  }
+  
+  .company-location h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+    animation: fadeIn 4s ease-in-out;
+  }
+  
+  .company-scheduling,
+  .company-canvas {
+    margin-top: 20px;
+    animation: fadeIn 4.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

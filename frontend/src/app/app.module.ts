@@ -1,7 +1,14 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +35,10 @@ import { DecorInfoComponent } from './decor/decor-info/decor-info.component';
 import { DecorAppointmentsComponent } from './decor/decor-appointments/decor-appointments.component';
 import { DecorMaintenanceComponent } from './decor/decor-maintenance/decor-maintenance.component';
 import { DecorStatisticsComponent } from './decor/decor-statistics/decor-statistics.component';
+import { CompanyDetailComponent } from './companydetail/companydetail.component';
+import { ScheduleFormComponent } from './schedule-form/schedule-form.component';
+import { GardenCanvasComponent } from './garden-canvas/garden-canvas.component';
+import { GardenSchedulingComponent } from './garden-scheduling/garden-scheduling.component';
 
 @NgModule({
   declarations: [
@@ -52,16 +63,27 @@ import { DecorStatisticsComponent } from './decor/decor-statistics/decor-statist
     DecorInfoComponent,
     DecorAppointmentsComponent,
     DecorMaintenanceComponent,
-    DecorStatisticsComponent
+    DecorStatisticsComponent,
+    CompanyDetailComponent,
+    ScheduleFormComponent,
+    GardenCanvasComponent,
+    GardenSchedulingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    IconModule
+    IconModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
+  
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

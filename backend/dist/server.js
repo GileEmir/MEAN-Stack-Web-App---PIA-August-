@@ -7,7 +7,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const user_router_1 = __importDefault(require("./routers/user.router"));
+const company_router_1 = __importDefault(require("./routers/company.router"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const gardenSchedule_router_1 = __importDefault(require("./routers/gardenSchedule.router"));
 const app = (0, express_1.default)();
 // Configure CORS
 app.use((0, cors_1.default)({
@@ -24,5 +26,7 @@ conn.once('open', () => {
 });
 const router = express_1.default.Router();
 router.use('/users', user_router_1.default);
+router.use('/companies', company_router_1.default);
+router.use('/garden-schedules', gardenSchedule_router_1.default);
 app.use("/", router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
