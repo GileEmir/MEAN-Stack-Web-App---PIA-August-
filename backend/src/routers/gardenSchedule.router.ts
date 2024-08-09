@@ -11,4 +11,20 @@ gardenScheduleRouter.route("/schedules").get(
   (req, res) => new GardenScheduleController().getAllSchedules(req, res)
 );
 
+gardenScheduleRouter.route("/user-schedules/:username").get(
+  (req, res) => new GardenScheduleController().getSchedulesByUser(req, res)
+);
+
+
+gardenScheduleRouter.route("/cancel-schedule").post(
+  (req, res) => new GardenScheduleController().cancelSchedule(req, res)
+);
+
+gardenScheduleRouter.route("/:appointmentId/rating").post(
+  (req, res) => new GardenScheduleController().addCommentToCompany(req, res)
+);
+
+gardenScheduleRouter.route("/update-rated").post(
+  (req, res) => new GardenScheduleController().updateRated(req, res)
+);
 export default gardenScheduleRouter;

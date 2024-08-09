@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import GardenLayout from './gardenLayout'; // Import the GardenLayout schema
+import Company from './company'; // Import the Company schema
+import User from './user'; // Import the User schema
 
 const gardenScheduleSchema = new mongoose.Schema(
   {
@@ -56,6 +58,22 @@ const gardenScheduleSchema = new mongoose.Schema(
     layout: {
       type: GardenLayout.schema, // Reference the GardenLayout schema
       required: false
+    },
+    company: {
+      type: Company.schema, // Reference the Company schema
+      required: true
+    },
+    user: {
+      type: User.schema, // Reference the User schema
+      required: true
+    },
+    canceled: {
+      type: Boolean,
+      default: false
+    },
+    rated: {
+      type: Boolean,
+      default: false
     }
   },
   {

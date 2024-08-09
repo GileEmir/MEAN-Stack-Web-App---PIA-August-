@@ -1,1 +1,41 @@
-<p>owner-maintenance works!</p>
+<div>
+    <h2>Completed Jobs</h2>
+    <table>
+    <thead>
+      <tr>
+        <th>Completion Date</th>
+        <th>Company</th>
+        <th>Area of Pools or Fountains</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of finnishedAppointments">
+        <td>{{ job.date | date: 'short' }}</td>
+        <td>{{ job.company.name }}</td>
+        <td>{{ job.poolArea && job.fountainArea ? job.poolArea + ' / ' + job.fountainArea : job.poolArea || job.fountainArea }}</td>
+        <td>
+        <button *ngIf="isMaintenanceDue(job)" (click)="scheduleMaintenance(job)">Schedule Maintenance</button>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  
+    <h2>Maintenance Jobs</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Job Date</th>
+          <th>Company</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of maintenanceJobs">
+          <td>{{ job.date | date: 'short' }}</td>
+          <td>{{ job.company.name }}</td>
+          <td>{{ job.canceled ? 'Canceled' : 'In Progress' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

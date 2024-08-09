@@ -5,6 +5,8 @@ import { Company } from '../models/Company'; // Import the Company model
 import * as L from 'leaflet'; // Import Leaflet
 import { GardenLayout } from '../models/GardenLayout';
 import { GardenSchedulingComponent } from '../garden-scheduling/garden-scheduling.component';
+import { UserService } from '../services/user.service'; // Import UserService
+import { User } from '../models/User'; // Import the User model
 
 @Component({
   selector: 'app-companydetail',
@@ -18,17 +20,21 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
 
   layout: GardenLayout | undefined;
 
-  @ViewChild('gardenScheduling') gardenSchedulingComponent!: GardenSchedulingComponent;
-  onLayoutChange(newLayout: GardenLayout): void {
-    this.layout = newLayout;
-  }
-  submitGardenSchedule(): void {
-    this.gardenSchedulingComponent.onSubmit();
-  }
+  my_user: User = new User();
+  selectedFile: File | null = null;
+  message: string = '';
 
-  constructor(private route: ActivatedRoute, private companyService: CompanyService, private cdr: ChangeDetectorRef) {}
+  @ViewChild('gardenScheduling') gardenSchedulingComponent!: GardenSchedulingComponent;
+
+  constructor(
+    private route: ActivatedRoute,
+    private companyService: CompanyService,
+    private userService: UserService, // Inject UserService
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
+    this.loadUser();
     const companyId = this.route.snapshot.paramMap.get('id');
     if (companyId) {
       this.companyService.getCompanyById(companyId).subscribe(
@@ -74,5 +80,23 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
         console.error('Company location coordinates are not available');
       }
     }
+  }
+
+  private loadUser(): void {
+    const user = this.userService.getLoggedInUser();
+    if (user) {
+      this.my_user = user;
+      console.log('Loaded user:', this.my_user);
+    } else {
+      console.error('No user found');
+    }
+  }
+
+  onLayoutChange(newLayout: GardenLayout): void {
+    this.layout = newLayout;
+  }
+
+  submitGardenSchedule(): void {
+    this.gardenSchedulingComponent.onSubmit();
   }
 }

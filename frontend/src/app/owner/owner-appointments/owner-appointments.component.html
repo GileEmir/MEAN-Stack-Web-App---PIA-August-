@@ -1,1 +1,70 @@
-<p>owner-appointments works!</p>
+<div>
+    <h2>Current Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Appointment Date</th>
+          <th>Company</th>
+          <th>Services</th>
+          <th>Rating and Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of currentAppointments">
+          <td>{{ getAppointmentDate(appointment) }}</td>
+          <td>{{ appointment.company.name }}</td>
+          <td>{{ getServices(appointment) }}</td>
+          <td>
+            <span *ngIf="appointment.canceled">Cancelled</span>
+            <button *ngIf="!appointment.canceled && canCancelAppointment(appointment)" (click)="cancelAppointment(appointment)">Cancel</button>
+            <span *ngIf="!appointment.canceled && !canCancelAppointment(appointment)">Not Cancellable</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h2>Past Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Appointment Date</th>
+          <th>Company</th>
+          <th>Average Rating</th>
+          <th>Rating and Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of pastAppointments">
+          <td>{{ getAppointmentDate(appointment) }}</td>
+          <td>{{ appointment.company.name }}</td>
+          <td>
+            <span class="stars">
+              <ng-container *ngFor="let star of [0, 1, 2, 3, 4]; let i = index">
+                <span [ngClass]="{
+                  'filled-star': i < floor(roundToQuarter(appointment.company.averageRating)),
+                  'three-quarter-star': i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0.75,
+                  'half-star': i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0.5,
+                  'one-quarter-star': i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0.25,
+                  'empty-star': i > floor(roundToQuarter(appointment.company.averageRating)) || (i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0)
+                }">&#9733;</span>
+              </ng-container>
+            </span>
+          </td>
+          <td>
+            <span *ngIf="appointment.canceled">Cancelled</span>
+            <div *ngIf="!appointment.canceled">
+              <div *ngIf="appointment.rated">Already Rated</div>
+              <div *ngIf="!appointment.rated">
+                <div class="stars">
+                    Your rating :<span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="myRating = star" [ngClass]="{'filled-star': star <= myRating, 'empty-star': star > myRating}">&#9733;</span>
+                </div>
+                <div *ngIf="hoverRating > 0">Your rating: {{ hoverRating }}</div>
+                <textarea #commentInput name="comment" placeholder="Enter your comment"></textarea>
+                <button (click)="submitRatingAndComment(appointment, myRating, commentInput.value)">Submit Rating and Comment</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

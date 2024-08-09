@@ -11,13 +11,13 @@
   top: 0;
   left: 0;
   z-index: 1000; /* Ensure it stays on top */
-  height: 64px; /* Set the height to match the image height */
+  height: 64px !important; /* Set the height to match the image height */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the bottom */
 }
 
 .header-image {
-  height: 100%; /* Ensure the image height fits within the header */
-  max-height: 64px; /* Set a maximum height to match the header height */
+  height: 100% !important; /* Ensure the image height fits within the header */
+  min-height: 64px !important; /* Set a maximum height to match the header height */
   width: auto; /* Maintain aspect ratio */
 }
 

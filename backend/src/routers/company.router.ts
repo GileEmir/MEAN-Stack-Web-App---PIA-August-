@@ -50,4 +50,8 @@ companyRouter.route("/:id").get(
   (req, res) => new CompanyController().getCompanyById(req, res)
 );
 
+companyRouter.route("/:id/comments").post(
+  (req, res) => new CompanyController().addCommentToCompany(req, res)
+);
+
 export default companyRouter;

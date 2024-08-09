@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CompanyService {
+
   private apiUrl = 'http://localhost:4000/companies';
 
   constructor(private http: HttpClient) {}
@@ -25,5 +26,9 @@ export class CompanyService {
 
   searchCompanies(query: string): Observable<Company[]> {
     return this.http.get<Company[]>(`${this.apiUrl}?search=${query}`);
+  }
+
+  updateCompanyComments($oid: any, newComment: { user: string; comment: string; date: string; rating: number; }): Observable<Company> {
+    return this.http.post<Company>(`${this.apiUrl}/${$oid}/comments`, newComment);
   }
 }

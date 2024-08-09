@@ -12,6 +12,6 @@ export interface Company {
     owner: string; // Assuming owner is a string representing the ObjectId
     services: string[];
     pricing: string; // Assuming pricing is a string
-    comments: { user: string, comment: string, date: Date }[];
+    comments: { user: string, comment: string, rating: number, date: Date }[];
     location: { type: 'Point', coordinates: [number, number] };
 }

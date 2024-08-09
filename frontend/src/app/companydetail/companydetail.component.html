@@ -15,16 +15,20 @@
     <h2>Comments</h2>
     <ul>
       <li *ngFor="let comment of company.comments">
-        <p><strong>{{ comment.user }}</strong> ({{ comment.date | date }}): {{ comment.comment }}</p>
+        <p><strong>{{ comment.user }}</strong> ({{ comment.date | date }}): {{ comment.comment }} <strong>Rating:</strong> {{ comment.rating }}</p>
       </li>
     </ul>
   </div>
   <div class="company-location">
     <h2>Location</h2>
-    <div id="map" style="height: 400px; width: 100%;"></div>
+    <div id="map"></div>
   </div>
   <div class="company-scheduling">
-    <app-garden-scheduling #gardenScheduling [options]="company.services" [layout]="layout"></app-garden-scheduling>
+    <app-garden-scheduling #gardenScheduling 
+    [options]="company.services" 
+    [layout]="layout"
+    [company]="company"
+    [user]="my_user"></app-garden-scheduling>
   </div>
   <div class="company-canvas">
     <app-garden-canvas (layoutChange)="onLayoutChange($event)"></app-garden-canvas>

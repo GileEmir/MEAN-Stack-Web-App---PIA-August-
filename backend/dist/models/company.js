@@ -16,7 +16,12 @@ const companySchema = new mongoose_1.default.Schema({
     owner: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'UserM' },
     services: [String],
     pricing: String,
-    comments: [{ user: String, comment: String, date: Date }],
+    comments: [{
+            user: String,
+            comment: String,
+            rating: Number,
+            date: { type: Date, default: Date.now }
+        }],
     location: {
         type: { type: String, enum: ['Point'], required: true },
         coordinates: { type: [Number], required: true }

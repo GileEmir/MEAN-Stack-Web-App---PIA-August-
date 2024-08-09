@@ -2,7 +2,7 @@
 import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GardenLayout, Shape } from './../models/GardenLayout'; // Adjust the path as needed
-import { GardenLayoutService } from './../services/garden-layout.service'; // Adjust the path as needed
+
 
 @Component({
   selector: 'app-garden-canvas',
@@ -18,7 +18,7 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
   shapeColor: string = '#00FF00';
   shapeSize: number = 50;
 
-  constructor(private http: HttpClient, private gardenLayoutService: GardenLayoutService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
 
@@ -228,13 +228,5 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
     }
   }
 
-  saveGardenLayout(): void {
-    const layout: GardenLayout = { shapes: this.shapes };
-    this.gardenLayoutService.saveLayout(layout)
-      .subscribe(response => {
-        console.log('Garden layout saved:', response);
-      }, error => {
-        console.error('Error saving garden layout:', error);
-      });
-  }
+  
 }

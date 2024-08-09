@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const gardenLayout_1 = __importDefault(require("./gardenLayout")); // Import the GardenLayout schema
+const company_1 = __importDefault(require("./company")); // Import the Company schema
+const user_1 = __importDefault(require("./user")); // Import the User schema
 const gardenScheduleSchema = new mongoose_1.default.Schema({
     date: {
         type: String,
@@ -59,6 +61,22 @@ const gardenScheduleSchema = new mongoose_1.default.Schema({
     layout: {
         type: gardenLayout_1.default.schema, // Reference the GardenLayout schema
         required: false
+    },
+    company: {
+        type: company_1.default.schema, // Reference the Company schema
+        required: true
+    },
+    user: {
+        type: user_1.default.schema, // Reference the User schema
+        required: true
+    },
+    canceled: {
+        type: Boolean,
+        default: false
+    },
+    rated: {
+        type: Boolean,
+        default: false
     }
 }, {
     versionKey: false
