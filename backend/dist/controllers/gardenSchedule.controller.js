@@ -54,7 +54,6 @@ class GardenScheduleController {
         this.cancelSchedule = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const schedule = req.body;
             const { date, time, totalArea, gardenType, company, user } = schedule;
-            console.log('cancelSchedule called with schedule:', schedule);
             if (!date || !time || !totalArea || !gardenType || !company || !user) {
                 console.warn('Required fields are missing in request body');
                 res.status(400).json({ message: 'Required fields are missing' });
@@ -68,14 +67,12 @@ class GardenScheduleController {
                     return;
                 }
                 const { _id } = foundSchedule;
-                console.log('Found schedule with id:', _id);
                 const updatedSchedule = yield gardenSchedule_1.default.findByIdAndUpdate(_id, { canceled: true }, { new: true });
                 if (!updatedSchedule) {
                     console.warn('Schedule not found for id:', _id);
                     res.status(404).json({ message: 'Schedule not found' });
                     return;
                 }
-                console.log('Schedule canceled successfully:', updatedSchedule);
                 res.status(200).json({ message: 'Schedule canceled successfully', data: updatedSchedule });
             }
             catch (error) {
@@ -84,20 +81,16 @@ class GardenScheduleController {
             }
         });
         this.addCommentToCompany = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            console.log('Entered addCommentToCompany method with body:', req.body);
             const { companyId, user, comment, rating } = req.body;
             // Validate required fields
             if (!companyId || !user || !comment || rating == null) {
-                console.log('Validation failed: companyId, user, comment, and rating are required');
                 res.status(400).json({ message: 'companyId, user, comment, and rating are required' });
                 return;
             }
             try {
                 // Find the company by ID
-                console.log('Finding company with ID:', companyId);
                 const company = yield company_1.default.findById(companyId);
                 if (!company) {
-                    console.log('Company not found with ID:', companyId);
                     res.status(404).json({ message: 'Company not found' });
                     return;
                 }
@@ -109,11 +102,9 @@ class GardenScheduleController {
                     date: new Date()
                 };
                 // Add the new comment to the company's comments array
-                console.log('Adding new comment to company:', newComment);
                 company.comments.push(newComment);
                 yield company.save();
                 // Respond with success message and updated company data
-                console.log('Comment added successfully');
                 res.status(200).json({ message: 'Comment added successfully', data: company });
             }
             catch (error) {
@@ -172,6 +163,30 @@ class GardenScheduleController {
         })
             .catch(error => {
             res.status(500).json({ message: 'Internal server error' });
+        });
+    }
+    getMaintenanceJobsByUser(req, res) {
+        const username = req.params.username;
+        user_1.default.findOne({ username: username })
+            .then(user => {
+            if (!user) {
+                res.status(404).json({ message: 'User not found' });
+                return Promise.reject('User not found'); // Reject the promise to stop the chain
+            }
+            return gardenSchedule_1.default.find({ 'user.username': user.username, description: 'Maintenance' });
+        })
+            .then(schedules => {
+            if (schedules.length > 0) {
+                res.status(200).json(schedules);
+            }
+            else {
+                res.status(404).json({ message: 'No maintenance jobs found for user' });
+            }
+        })
+            .catch(error => {
+            if (error !== 'User not found') { // Avoid sending another response if user was not found
+                res.status(500).json({ message: 'Internal server error' });
+            }
         });
     }
 }

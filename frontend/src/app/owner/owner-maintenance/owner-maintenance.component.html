@@ -1,24 +1,34 @@
 <div>
     <h2>Completed Jobs</h2>
     <table>
-    <thead>
-      <tr>
-        <th>Completion Date</th>
-        <th>Company</th>
-        <th>Area of Pools or Fountains</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let job of finnishedAppointments">
-        <td>{{ job.date | date: 'short' }}</td>
-        <td>{{ job.company.name }}</td>
-        <td>{{ job.poolArea && job.fountainArea ? job.poolArea + ' / ' + job.fountainArea : job.poolArea || job.fountainArea }}</td>
-        <td>
-        <button *ngIf="isMaintenanceDue(job)" (click)="scheduleMaintenance(job)">Schedule Maintenance</button>
-        </td>
-      </tr>
-    </tbody>
+      <thead>
+        <tr>
+          <th>Completion Date</th>
+          <th>Company</th>
+          <th>Area of Pools or Fountains</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of finnishedAppointments">
+          <td>{{ getFormattedDate(job.date, job.time) }}</td>
+          <td>{{ job.company.name }}</td>
+          <td>{{ job.poolArea && job.fountainArea ? job.poolArea + ' / ' + job.fountainArea : job.poolArea || job.fountainArea }}</td>
+          <td>
+            <div *ngIf="isMaintenanceDue(job)">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="maintenanceDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="time" placeholder="Choose a time" [(ngModel)]="maintenanceTime">
+              </mat-form-field>
+            </div>
+            <button *ngIf="isMaintenanceDue(job)" (click)="scheduleMaintenance(job)">Schedule Maintenance</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   
     <h2>Maintenance Jobs</h2>
@@ -28,13 +38,19 @@
           <th>Job Date</th>
           <th>Company</th>
           <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let job of maintenanceJobs">
-          <td>{{ job.date | date: 'short' }}</td>
+          <td>{{ getFormattedDate(job.date, job.time) }}</td>
           <td>{{ job.company.name }}</td>
           <td>{{ job.canceled ? 'Canceled' : 'In Progress' }}</td>
+          <td>
+            <span *ngIf="job.canceled">Cancelled</span>
+            <button *ngIf="!job.canceled && canCancelJob(job)" (click)="cancelJob(job)">Cancel</button>
+            <span *ngIf="!job.canceled && !canCancelJob(job)">Not Cancellable</span>
+          </td>
         </tr>
       </tbody>
     </table>

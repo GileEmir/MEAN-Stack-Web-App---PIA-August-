@@ -18,6 +18,9 @@ export class OwnerMaintenanceComponent implements OnInit {
   errorMessage: string = '';
   my_user: User = new User();
 
+  maintenanceDate: Date = new Date();
+  maintenanceTime: string = '';
+
   constructor(private userService: UserService, private gardenSchedulingService: GardenSchedulingService, private companyService: CompanyService) {}
 
   ngOnInit() {
@@ -74,28 +77,77 @@ export class OwnerMaintenanceComponent implements OnInit {
     }
   }
 
+  cancelJob(job: GardenSchedule): void {
+    console.log('Attempting to cancel job:', job);
+    this.gardenSchedulingService.cancelSchedule(job).subscribe(
+      () => {
+        console.log('Job canceled:', job);
+        this.fetchMaintenanceJobs();
+      },
+      (error) => {
+        console.error('Failed to cancel the job:', error);
+        this.errorMessage = 'Failed to cancel the job';
+      }
+    );
+  }
+
+  canCancelJob(job: GardenSchedule): boolean {
+    const now = new Date();
+    const datePart = job.date.split('T')[0];
+    const jobDate = new Date(`${datePart}T00:00:00.000Z`);
+    const [hours, minutes] = job.time.split(':').map(Number);
+
+    jobDate.setUTCHours(hours, minutes, 0, 0);
+
+    const timeDifference = jobDate.getTime() - now.getTime();
+    const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+    return daysDifference >= 1;
+  }
+
   fetchMaintenanceJobs() {
-    // this.gardenSchedulingService.getMaintenanceJobs().subscribe(
-    //   (jobs: GardenSchedule[]) => {
-    //     this.maintenanceJobs = jobs;
-    //   },
-    //   (error) => {
-    //     this.errorMessage = error;
-    //   }
-    // );
+    const username = this.my_user.username; // Replace with the actual username
+    this.gardenSchedulingService.getMaintenanceJobsByUser(username).subscribe(
+      (jobs: GardenSchedule[]) => {
+        this.maintenanceJobs = jobs;
+      },
+      (error) => {
+        this.errorMessage = error;
+      }
+    );
   }
 
   scheduleMaintenance(job: GardenSchedule) {
-    // this.gardenSchedulingService.scheduleMaintenance(job).subscribe(
-    //   () => {
-    //     alert('Maintenance scheduled successfully');
-    //     this.fetchCompletedJobs();
-    //     this.fetchMaintenanceJobs();
-    //   },
-    //   (error) => {
-    //     this.errorMessage = 'Failed to schedule maintenance';
-    //   }
-    // );
+    if (this.maintenanceDate && this.maintenanceTime) {
+      // Show a confirmation dialog
+      const isConfirmed = window.confirm('Are you sure you want to schedule maintenance?');
+  
+      if (isConfirmed) {
+        // Manually adjust the date to ensure it doesn't shift due to timezone differences
+        const adjustedDate = new Date(this.maintenanceDate.getTime() - this.maintenanceDate.getTimezoneOffset() * 60000);
+        const formattedDate = adjustedDate.toISOString().split('T')[0]; // Convert Date to 'YYYY-MM-DD' format
+        const newJob: GardenSchedule = {
+          ...job,
+          date: formattedDate,
+          time: this.maintenanceTime,
+          description: 'Maintenance'
+        };
+        this.gardenSchedulingService.scheduleGarden(newJob).subscribe(
+          response => {
+            console.log('Garden schedule submitted successfully', response);
+            this.fetchAppointments();
+            this.fetchMaintenanceJobs();
+            alert('Garden Maintenance submitted successfully');
+          },
+          error => {
+            this.errorMessage = 'Error submitting garden schedule. Please try again later.';
+            console.error('Error submitting garden schedule', error);
+          }
+        );
+      }
+    } else {
+      this.errorMessage = 'Please select a date and time for maintenance.';
+    }
   }
 
   isMaintenanceDue(job: GardenSchedule): boolean {
@@ -104,4 +156,24 @@ export class OwnerMaintenanceComponent implements OnInit {
     const sixMonthsInMilliseconds = 6 * 30 * 24 * 60 * 60 * 1000;
     return (now.getTime() - completionDate.getTime()) > sixMonthsInMilliseconds;
   }
+
+  getFormattedDate(date: string, time: string): string {
+    const datePart = date.split('T')[0];
+    const formattedDate = new Date(`${datePart}T00:00:00.000Z`);
+    const [hours, minutes] = time.split(':').map(Number);
+  
+    formattedDate.setUTCHours(hours, minutes, 0, 0);
+  
+    const options: Intl.DateTimeFormatOptions = { 
+      year: 'numeric', 
+      month: 'numeric', 
+      day: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: true, 
+      timeZone: 'UTC' 
+    };
+    return formattedDate.toLocaleString('en-US', options);
+  }
+  
 }

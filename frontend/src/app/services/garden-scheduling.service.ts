@@ -20,6 +20,9 @@ export class GardenSchedulingService {
     return this.http.get<GardenSchedule[]>(`${this.apiUrl}/schedules`);
   }
 
+  getMaintenanceJobsByUser(username: string): Observable<GardenSchedule[]> {
+    return this.http.get<GardenSchedule[]>(`${this.apiUrl}/user-maintenance-jobs/${username}`);
+  }
   getSchedulesByUser( username: string): Observable<GardenSchedule[]> {
     return this.http.get<GardenSchedule[]>(`${this.apiUrl}/user-schedules/${username}`);
   }

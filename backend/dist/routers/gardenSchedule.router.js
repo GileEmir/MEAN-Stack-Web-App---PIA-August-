@@ -12,4 +12,5 @@ gardenScheduleRouter.route("/user-schedules/:username").get((req, res) => new ga
 gardenScheduleRouter.route("/cancel-schedule").post((req, res) => new gardenSchedule_controller_1.GardenScheduleController().cancelSchedule(req, res));
 gardenScheduleRouter.route("/:appointmentId/rating").post((req, res) => new gardenSchedule_controller_1.GardenScheduleController().addCommentToCompany(req, res));
 gardenScheduleRouter.route("/update-rated").post((req, res) => new gardenSchedule_controller_1.GardenScheduleController().updateRated(req, res));
+gardenScheduleRouter.route("/user-maintenance-jobs/:username").get((req, res) => new gardenSchedule_controller_1.GardenScheduleController().getMaintenanceJobsByUser(req, res));
 exports.default = gardenScheduleRouter;

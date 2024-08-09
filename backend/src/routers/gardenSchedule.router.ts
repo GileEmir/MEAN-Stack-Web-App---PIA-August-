@@ -27,4 +27,8 @@ gardenScheduleRouter.route("/:appointmentId/rating").post(
 gardenScheduleRouter.route("/update-rated").post(
   (req, res) => new GardenScheduleController().updateRated(req, res)
 );
+gardenScheduleRouter.route("/user-maintenance-jobs/:username").get(
+   (req, res) => new GardenScheduleController().getMaintenanceJobsByUser(req, res)
+);
+
 export default gardenScheduleRouter;
