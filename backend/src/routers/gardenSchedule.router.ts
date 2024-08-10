@@ -15,17 +15,38 @@ gardenScheduleRouter.route("/user-schedules/:username").get(
   (req, res) => new GardenScheduleController().getSchedulesByUser(req, res)
 );
 
+gardenScheduleRouter.route("/company-schedules/:companyId").get(
+  (req, res) => new GardenScheduleController().getSchedulesByCompany(req, res)
+);
+
 
 gardenScheduleRouter.route("/cancel-schedule").post(
   (req, res) => new GardenScheduleController().cancelSchedule(req, res)
+);
+
+gardenScheduleRouter.route("/decline-schedule").post(
+  (req, res) => new GardenScheduleController().declineAppointment(req, res)
+);
+
+gardenScheduleRouter.route("/accept-schedule").post(
+  (req, res) => new GardenScheduleController().acceptAppointment(req, res)
 );
 
 
 gardenScheduleRouter.route("/update-rated").post(
   (req, res) => new GardenScheduleController().updateRated(req, res)
 );
+
 gardenScheduleRouter.route("/user-maintenance-jobs/:username").get(
    (req, res) => new GardenScheduleController().getMaintenanceJobsByUser(req, res)
+);
+
+gardenScheduleRouter.route("/worker").post(
+  (req, res) => new GardenScheduleController().getSchedulesForWorker(req, res)
+);
+
+gardenScheduleRouter.route("/finnish-appointment").post(
+  (req, res) => new GardenScheduleController().finnishAppointment(req, res)
 );
 
 export default gardenScheduleRouter;

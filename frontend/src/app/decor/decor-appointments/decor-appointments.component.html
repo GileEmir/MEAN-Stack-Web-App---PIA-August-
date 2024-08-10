@@ -1,1 +1,91 @@
-<p>decor-appointments works!</p>
+<div>
+    <h2>Available Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Appointment Date</th>
+          <th>Company</th>
+          <th>Services</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of availableAppointments">
+          <ng-container *ngIf="!hasUserRefused(appointment, my_user.username)">
+            <td>{{ getAppointmentDate(appointment) }}</td>
+            <td>{{ appointment.company.name }}</td>
+            <td>{{ getServices(appointment) }}</td>
+            <td>
+              <div class="actions-container">
+                <div class="confirm-box">
+                  <button (click)="confirmAppointment(appointment)">Confirm</button>
+                </div>
+                <div class="refuse-box">
+                  <input #refusalComment type="text" placeholder="Enter refusal comment" />
+                  <button (click)="cancelAppointment(appointment, refusalComment.value)">Refuse</button>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h2>My Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Appointment Date</th>
+          <th>Company</th>
+          <th>Services</th>
+          <th>Finish Job</th>
+          <th>Upload Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of myAppointments">
+          <td>{{ getAppointmentDate(appointment) }}</td>
+          <td>{{ appointment.company.name }}</td>
+          <td>{{ getServices(appointment) }}</td>
+          <td>
+            <button *ngIf="!appointment.completionDate || appointment.completionDate === ''" (click)="finishJob(appointment)">Finish Job</button>
+            <span *ngIf="appointment.completionDate && appointment.completionDate !== ''">Finished job on: {{ getCompletionDate(appointment) }}</span>
+          </td>
+          <td>
+            <input type="file" (change)="onFileSelected($event, appointment)" />
+            <button (click)="submitPhoto(appointment)">Submit Photo</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h2>Past Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Appointment Date</th>
+          <th>Company</th>
+          <th>Average Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of pastAppointments">
+          <td>{{ getAppointmentDate(appointment) }}</td>
+          <td>{{ appointment.company.name }}</td>
+          <td>
+            <span class="stars">
+              <ng-container *ngFor="let star of [0, 1, 2, 3, 4]; let i = index">
+                <span [ngClass]="{
+                    'filled-star': i < floor(roundToQuarter(appointment.company.averageRating)),
+                    'three-quarter-star': i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0.75,
+                    'half-star': i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0.5,
+                    'one-quarter-star': i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0.25,
+                    'empty-star': i > floor(roundToQuarter(appointment.company.averageRating)) || (i === floor(roundToQuarter(appointment.company.averageRating)) && fractionalPart(roundToQuarter(appointment.company.averageRating)) === 0)
+                  }">&#9733;</span>
+              </ng-container>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

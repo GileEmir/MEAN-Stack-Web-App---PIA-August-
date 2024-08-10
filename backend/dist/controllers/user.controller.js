@@ -189,7 +189,7 @@ class UserController {
                 credit_card_number: credit_card_number,
                 type: type,
                 status: status,
-                companyId: null // Set companyId to null by default
+                companyId: "" // Set companyId to null by default
             };
             new user_1.default(user).save().then(ok => {
                 res.json({ message: "ok" });

@@ -24,6 +24,7 @@ export interface GardenSchedule {
   rated:boolean;
   workerId?: string | null; // Add this field
   status: 'pending' | 'accepted' | 'refused'; // Add this field
-  refusalComment?: string; // Add this field
-  refusedBy: string[]; // Add this field to track workers who refused the job
+  refusedBy: { username: string; comment: string }[]; // Modify this field to track workers who refused the job with comments
+  completionPhoto?: string; // Add this field for the completion photo
+  completionDate?: string; // Add this field for the completion date
 }

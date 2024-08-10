@@ -87,13 +87,20 @@ const gardenScheduleSchema = new mongoose_1.default.Schema({
         enum: ['pending', 'accepted', 'refused'],
         default: 'pending'
     },
-    refusalComment: {
-        type: String,
-        default: ''
-    },
     refusedBy: {
-        type: [String],
+        type: [
+            {
+                username: String,
+                comment: String
+            }
+        ],
         default: []
+    },
+    completionPhoto: {
+        type: String
+    },
+    completionDate: {
+        type: String
     }
 }, {
     versionKey: false

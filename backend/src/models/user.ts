@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
         credit_card_number: String,
         type: String,
         status: String,
-        companyId: { type: String, default: null } // Add companyId field with default value null
+        companyId: { type: String, default: "" } // Add companyId field with default value null
     },
     {
         versionKey: false
