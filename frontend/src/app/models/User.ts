@@ -11,4 +11,5 @@ export class User {
     credit_card_number: string = "";
     type: string = "";
     status: string = "";
+    companyId: string | null = null; // Field for the company ID for workers
 }

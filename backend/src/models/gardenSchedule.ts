@@ -74,6 +74,23 @@ const gardenScheduleSchema = new mongoose.Schema(
     rated: {
       type: Boolean,
       default: false
+    },
+    workerId: {
+      type: String,
+      default: null
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'accepted', 'refused'],
+      default: 'pending'
+    },
+    refusalComment: {
+      type: String,
+      default: ''
+    },
+    refusedBy: {
+      type: [String],
+      default: []
     }
   },
   {

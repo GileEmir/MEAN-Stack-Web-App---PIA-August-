@@ -17,7 +17,7 @@ export class GardenScheduleController {
   }
 
   scheduleGarden = (req: Request, res: Response) => {
-    const { date, time, totalArea, gardenType, poolArea, greenArea, furnitureArea, fountainArea, tables, chairs, description, options, layout, company, user, rated } = req.body;
+    const { date, time, totalArea, gardenType, poolArea, greenArea, furnitureArea, fountainArea, tables, chairs, description, options, layout, company, user, rated, workerId, status, refusalComment, refusedBy } = req.body;
 
     // Validate required fields
     if (!date || !time || !totalArea || !gardenType || !company || !user) {
@@ -41,7 +41,11 @@ export class GardenScheduleController {
       company, // Include the company field
       user, // Include the user field
       canceled: false, // Set the canceled field to false by default
-      rated: rated || false // Set the rated field to false by default if not provided
+      rated: rated || false, // Set the rated field to false by default if not provided
+      workerId: workerId || null, // Set workerId to null by default if not provided
+      status: status || 'pending', // Set status to 'pending' by default if not provided
+      refusalComment: refusalComment || '', // Set refusalComment to empty string by default if not provided
+      refusedBy: refusedBy || [] // Set refusedBy to empty array by default if not provided
     });
 
     newSchedule.save()
@@ -115,43 +119,6 @@ export class GardenScheduleController {
     }
   }
   
-  addCommentToCompany = async (req: Request, res: Response): Promise<void> => {
-    const { companyId, user, comment, rating } = req.body;
-
-    // Validate required fields
-    if (!companyId || !user || !comment || rating == null) {
-        res.status(400).json({ message: 'companyId, user, comment, and rating are required' });
-        return;
-      }
-      
-      try {
-        // Find the company by ID
-        const company = await Company.findById(companyId);
-        
-        if (!company) {
-            res.status(404).json({ message: 'Company not found' });
-            return;
-        }
-        
-        // Create a new comment object
-        const newComment = {
-          user,
-            comment,
-            rating,
-            date: new Date()
-        };
-
-        // Add the new comment to the company's comments array
-        company.comments.push(newComment);
-        await company.save();
-
-        // Respond with success message and updated company data
-        res.status(200).json({ message: 'Comment added successfully', data: company });
-    } catch (error) {
-        console.error('Error adding comment to company:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-  }
   updateRated = async (req: Request<{}, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>): Promise<void> => {
     const { id } = req.body;
 

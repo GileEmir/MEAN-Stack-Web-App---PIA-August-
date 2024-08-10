@@ -112,7 +112,11 @@ export class GardenSchedulingComponent implements OnInit {
         company: this.company!,
         user: this.user!,
         canceled: false,
-        rated:false
+        rated:false,
+        workerId: null, 
+        status: 'pending',
+        refusalComment: '',
+        refusedBy: [],
       };
   
       console.log('Submitting garden schedule:', gardenSchedule);

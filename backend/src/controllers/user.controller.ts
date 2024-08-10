@@ -75,7 +75,8 @@ export class UserController{
                         profile_pic: user.profile_pic,
                         credit_card_number: user.credit_card_number,
                         type: user.type,
-                        status: user.status
+                        status: user.status,
+                        companyId: user.companyId
                     };
                     res.json(userResponse);
                 } else {
@@ -111,7 +112,8 @@ export class UserController{
                     profile_pic: user.profile_pic,
                     credit_card_number: user.credit_card_number,
                     type: user.type,
-                    status: user.status
+                    status: user.status,
+                    companyId: user.companyId
                 };
                 res.json(userResponse);
             } else {
@@ -140,12 +142,12 @@ export class UserController{
         let credit_card_number = req.body.credit_card_number;
         let type = req.body.type;
         let status = req.body.status;
-    
+
         // Check if the profile picture is the default one
         if (profilePicPath === DEFAULT_PROFILE_PIC_PATH) {
             profilePicPath = DEFAULT_PROFILE_PIC_PATH;
         }
-    
+
         let user = {
             username: username,
             password: bcrypt.hashSync(password, 8), // Hash the password before saving
@@ -158,9 +160,10 @@ export class UserController{
             profile_pic: profilePicPath, // Save the profile picture path
             credit_card_number: credit_card_number,
             type: type,
-            status: status
+            status: status,
+            companyId: null // Set companyId to null by default
         };
-    
+
         new UserM(user).save().then(ok => {
             res.json({ message: "ok" });
         }).catch(err => {

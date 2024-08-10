@@ -20,9 +20,6 @@ gardenScheduleRouter.route("/cancel-schedule").post(
   (req, res) => new GardenScheduleController().cancelSchedule(req, res)
 );
 
-gardenScheduleRouter.route("/:appointmentId/rating").post(
-  (req, res) => new GardenScheduleController().addCommentToCompany(req, res)
-);
 
 gardenScheduleRouter.route("/update-rated").post(
   (req, res) => new GardenScheduleController().updateRated(req, res)

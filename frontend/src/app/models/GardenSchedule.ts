@@ -22,4 +22,8 @@ export interface GardenSchedule {
   rating?: number; // Optional rating field (1-5)
   canceled: boolean;
   rated:boolean;
+  workerId?: string | null; // Add this field
+  status: 'pending' | 'accepted' | 'refused'; // Add this field
+  refusalComment?: string; // Add this field
+  refusedBy: string[]; // Add this field to track workers who refused the job
 }

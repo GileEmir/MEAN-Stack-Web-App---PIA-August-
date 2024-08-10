@@ -13,13 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GardenScheduleController = void 0;
-const company_1 = __importDefault(require("../models/company"));
 const gardenSchedule_1 = __importDefault(require("../models/gardenSchedule"));
 const user_1 = __importDefault(require("../models/user")); // Correctly import the UserM model
 class GardenScheduleController {
     constructor() {
         this.scheduleGarden = (req, res) => {
-            const { date, time, totalArea, gardenType, poolArea, greenArea, furnitureArea, fountainArea, tables, chairs, description, options, layout, company, user, rated } = req.body;
+            const { date, time, totalArea, gardenType, poolArea, greenArea, furnitureArea, fountainArea, tables, chairs, description, options, layout, company, user, rated, workerId, status, refusalComment, refusedBy } = req.body;
             // Validate required fields
             if (!date || !time || !totalArea || !gardenType || !company || !user) {
                 return res.status(400).json({ message: 'date, time, totalArea, gardenType, company, and user are required' });
@@ -41,7 +40,11 @@ class GardenScheduleController {
                 company, // Include the company field
                 user, // Include the user field
                 canceled: false, // Set the canceled field to false by default
-                rated: rated || false // Set the rated field to false by default if not provided
+                rated: rated || false, // Set the rated field to false by default if not provided
+                workerId: workerId || null, // Set workerId to null by default if not provided
+                status: status || 'pending', // Set status to 'pending' by default if not provided
+                refusalComment: refusalComment || '', // Set refusalComment to empty string by default if not provided
+                refusedBy: refusedBy || [] // Set refusedBy to empty array by default if not provided
             });
             newSchedule.save()
                 .then(savedSchedule => {
@@ -77,38 +80,6 @@ class GardenScheduleController {
             }
             catch (error) {
                 console.error('Error canceling schedule:', error);
-                res.status(500).json({ message: 'Internal server error' });
-            }
-        });
-        this.addCommentToCompany = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { companyId, user, comment, rating } = req.body;
-            // Validate required fields
-            if (!companyId || !user || !comment || rating == null) {
-                res.status(400).json({ message: 'companyId, user, comment, and rating are required' });
-                return;
-            }
-            try {
-                // Find the company by ID
-                const company = yield company_1.default.findById(companyId);
-                if (!company) {
-                    res.status(404).json({ message: 'Company not found' });
-                    return;
-                }
-                // Create a new comment object
-                const newComment = {
-                    user,
-                    comment,
-                    rating,
-                    date: new Date()
-                };
-                // Add the new comment to the company's comments array
-                company.comments.push(newComment);
-                yield company.save();
-                // Respond with success message and updated company data
-                res.status(200).json({ message: 'Comment added successfully', data: company });
-            }
-            catch (error) {
-                console.error('Error adding comment to company:', error);
                 res.status(500).json({ message: 'Internal server error' });
             }
         });

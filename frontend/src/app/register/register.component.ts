@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   profilePicPreview: string | ArrayBuffer | null = null;
   status: string = "requested";
   defaultProfilePic: string = '/assets/images/auth/user_icon.png';
+  companyId: string | null = null; // Add this field
 
   all_user_names: string[] = [];
 
@@ -139,6 +140,8 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
+            this.companyId = null;
+
         // Create FormData object
         const formData = new FormData();
         formData.append('username', this.username);
@@ -155,6 +158,7 @@ export class RegisterComponent implements OnInit {
         }
         formData.append('credit_card_number', this.credit_card_number);
         formData.append('type', this.type); // Append the type
+        formData.append('companyId', this.companyId === null ? 'null' : this.companyId); // Append the companyId as 'null' if it's null
     
         // Call the backend API to register the user
         this.userService.register(formData).subscribe(
@@ -169,7 +173,7 @@ export class RegisterComponent implements OnInit {
         );
     }
     return false; 
-}
+  }
 
   validateCard(event: any) {
     const cardNumber = event.target.value;

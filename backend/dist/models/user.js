@@ -16,7 +16,8 @@ const userSchema = new mongoose_1.default.Schema({
     profile_pic: String,
     credit_card_number: String,
     type: String,
-    status: String
+    status: String,
+    companyId: { type: String, default: null } // Add companyId field with default value null
 }, {
     versionKey: false
 });

@@ -104,7 +104,8 @@ class UserController {
                             profile_pic: user.profile_pic,
                             credit_card_number: user.credit_card_number,
                             type: user.type,
-                            status: user.status
+                            status: user.status,
+                            companyId: user.companyId
                         };
                         res.json(userResponse);
                     }
@@ -140,7 +141,8 @@ class UserController {
                             profile_pic: user.profile_pic,
                             credit_card_number: user.credit_card_number,
                             type: user.type,
-                            status: user.status
+                            status: user.status,
+                            companyId: user.companyId
                         };
                         res.json(userResponse);
                     }
@@ -186,7 +188,8 @@ class UserController {
                 profile_pic: profilePicPath, // Save the profile picture path
                 credit_card_number: credit_card_number,
                 type: type,
-                status: status
+                status: status,
+                companyId: null // Set companyId to null by default
             };
             new user_1.default(user).save().then(ok => {
                 res.json({ message: "ok" });
