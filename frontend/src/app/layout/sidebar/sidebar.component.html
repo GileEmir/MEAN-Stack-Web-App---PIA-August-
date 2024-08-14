@@ -16,7 +16,7 @@
       <a href="#" class="sidebar-link">Contact</a>
     </li> -->
     <li class="sidebar-item" *ngIf="isCurrentPath('/dashboard/main_page')">
-      <a href="#" class="sidebar-link">Dashboard Main Page</a>
+      <a href="/dashboard/main_page" class="sidebar-link">Dashboard Main Page</a>
     </li>
     <li class="sidebar-item" *ngIf="user?.type=='owner'">
       <a routerLink="/dashboard/owner/info" class="sidebar-link">Owner profile</a>
@@ -41,6 +41,20 @@
     </li>
     <li class="sidebar-item" *ngIf="user?.type=='decor'">
       <a routerLink="/dashboard/decor/statistics" class="sidebar-link">Statistics</a>
+    </li>
+
+
+    <li class="sidebar-item" *ngIf="user?.type=='admin'">
+      <a routerLink="/dashboard/admin/registration-requests" class="sidebar-link">Registration Requests</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='admin'">
+      <a routerLink="/dashboard/admin/owners" class="sidebar-link">Owners</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='admin'">
+      <a routerLink="/dashboard/admin/decors" class="sidebar-link">Decors</a>
+    </li>
+    <li class="sidebar-item" *ngIf="user?.type=='admin'">
+      <a routerLink="/dashboard/admin/companies" class="sidebar-link">Companies</a>
     </li>
   </ul>
 </div>

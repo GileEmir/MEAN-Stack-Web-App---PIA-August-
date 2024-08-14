@@ -96,6 +96,7 @@ export class GardenSchedulingComponent implements OnInit {
       appointmentDate.setHours(hours, minutes, 0, 0);
   
       const gardenSchedule: GardenSchedule = {
+        _id : '',
         date: appointmentDate.toISOString().split('T')[0], // Store date part only
         time: selectedTime, // Store time part only
         totalArea: formValue.totalArea,
@@ -118,6 +119,8 @@ export class GardenSchedulingComponent implements OnInit {
         refusedBy: [],
         completionPhoto: '',
         completionDate: '',
+        dateOfCompletionPhotoUpload : '',
+        estimatedCompletionDate: '',
       };
   
       console.log('Submitting garden schedule:', gardenSchedule);

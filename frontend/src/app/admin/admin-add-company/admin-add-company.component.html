@@ -1,0 +1,67 @@
+<form style="overflow: hidden;">
+    <div style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-right: 0.5em;">
+            <label for="companyName" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Company Name</label>
+            <input [(ngModel)]="companyName" type="text" id="companyName" placeholder="Enter Company Name" name="companyName" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        </div>
+        <div style="flex: 1; margin-left: 0.5em;">
+            <label for="companyAddress" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Company Address</label>
+            <input [(ngModel)]="companyAddress" type="text" id="companyAddress" placeholder="Enter Company Address" name="companyAddress" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-right: 0.5em;">
+            <label for="services" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Services</label>
+            <input [(ngModel)]="services" type="text" id="services" placeholder="Enter Services" name="services" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        </div>
+        <div style="flex: 1; margin-left: 0.5em;">
+            <label for="priceList" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Price List</label>
+            <select [(ngModel)]="priceList" id="priceList" name="priceList" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+                <option value="" disabled selected>Select Pricing Option</option>
+                <option value="Basic">Basic</option>
+                <option value="Standard">Standard</option>
+                <option value="Medium">Medium</option>
+                <option value="Premium">Premium</option>
+                <option value="Deluxe">Deluxe</option>
+                <option value="Enterprise">Enterprise</option>
+            </select>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-right: 0.5em;">
+            <label for="mapLocation" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Map Location</label>
+            <input [(ngModel)]="mapLocation" type="text" id="mapLocation" placeholder="Pick on the Map" name="mapLocation" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        </div>
+        <div style="flex: 1; margin-left: 0.5em;">
+            <label for="contactPerson" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Contact Person</label>
+            <input [(ngModel)]="contactPerson" type="text" id="contactPerson" placeholder="Enter Contact Person" name="contactPerson" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-right: 0.5em;">
+            <label for="annualLeaveStart" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Annual Leave Start</label>
+            <mat-form-field style="width: 100%;">
+                <input matInput [matDatepicker]="startPicker" placeholder="Choose a start date" [(ngModel)]="annualLeaveStart" name="annualLeaveStart">
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div style="flex: 1; margin-left: 0.5em;">
+            <label for="annualLeaveEnd" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Annual Leave End</label>
+            <mat-form-field style="width: 100%;">
+                <input matInput [matDatepicker]="endPicker" placeholder="Choose an end date" [(ngModel)]="annualLeaveEnd" name="annualLeaveEnd">
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div id="map" style="height: 400px; margin-bottom: 1em;"></div>
+
+    <div style="text-align: center;">
+        <button (click)="registerCompany()" style="width: 100%; padding: 1em; border: none; background-color: #57C4E5;color:#EDF2EF; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease;">Register</button>
+    </div>
+</form>

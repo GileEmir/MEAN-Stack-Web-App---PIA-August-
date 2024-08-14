@@ -33,4 +33,5 @@ companyRouter.route("/").get((req, res) => new company_controller_1.CompanyContr
 companyRouter.route("/search").get((req, res) => new company_controller_1.CompanyController().searchCompanies(req, res));
 companyRouter.route("/:id").get((req, res) => new company_controller_1.CompanyController().getCompanyById(req, res));
 companyRouter.route("/:id/comments").post((req, res) => new company_controller_1.CompanyController().addCommentToCompany(req, res));
+companyRouter.route("/register").post((req, res) => new company_controller_1.CompanyController().registerCompany(req, res));
 exports.default = companyRouter;

@@ -31,4 +31,8 @@ export class CompanyService {
   updateCompanyComments($oid: any, newComment: { user: string; comment: string; date: string; rating: number; }): Observable<Company> {
     return this.http.post<Company>(`${this.apiUrl}/${$oid}/comments`, newComment);
   }
+
+  registerCompany(data: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, data);
+  }
 }

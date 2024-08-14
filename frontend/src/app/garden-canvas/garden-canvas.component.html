@@ -1,10 +1,10 @@
 <div>
   <h2>Design Your Garden</h2>
-  <button (click)="selectShape('square')">Select Square</button>
-  <button (click)="selectShape('rectangle')">Select Rectangle</button>
-  <button (click)="selectShape('circle')">Select Circle</button>
-  <button (click)="selectShape('smallCircle')">Select Small Circle</button>
-  <button (click)="selectShape('smallRectangle')">Select Small Rectangle</button>
+  <button (click)="selectShape('smallGreenSquare')">Small green square (bush)</button>
+  <button (click)="selectShape('largeBlueRectangle')">Large blue rectangle (pool)</button>
+  <button (click)="selectShape('largeBlueCircle')">Large blue circle (fountain)</button>
+  <button (click)="selectShape('smallBrownCircle')">Small brown circle (tree)</button>
+  <button (click)="selectShape('smallGrayRectangle')">Small gray rectangle (chairs/loungers)</button>
   <br>
   <label for="shapeSize">Size:</label>
   <input id="shapeSize" type="number" [(ngModel)]="shapeSize" min="1" max="100">

@@ -42,7 +42,7 @@ export class AdminLoginComponent implements OnInit {
         if (userFromDB.type === "admin") {
           localStorage.setItem('logg', JSON.stringify(userFromDB));
           this.message = "Enter your credentials to continue";
-          this.router.navigate(['/dashboard/admin']);
+          this.router.navigate(['/dashboard/admin/registration-requests']);
         }
       } else {
         this.message = "Invalid credentials. Please try again.";

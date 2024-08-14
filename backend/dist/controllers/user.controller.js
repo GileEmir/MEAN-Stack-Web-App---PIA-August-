@@ -39,6 +39,7 @@ exports.UserController = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const bcrypt = __importStar(require("bcryptjs"));
 const multer_1 = __importDefault(require("multer"));
+const gardenSchedule_1 = __importDefault(require("../models/gardenSchedule"));
 const upload = (0, multer_1.default)();
 const DEFAULT_PROFILE_PIC_PATH = 'uploads/defaultProfilePic.png';
 class UserController {
@@ -85,12 +86,33 @@ class UserController {
                 res.status(500).json({ message: 'Internal Server Error' });
             });
         };
-        this.login = (req, res) => {
+        this.getAllEmails = (req, res) => {
+            user_1.default.find({}, 'email') // Fetch all users and return only the email field
+                .then(users => {
+                const emails = users.map(user => user.email); // Correctly map to email
+                res.json(emails);
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
+        this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
             let usernameP = req.body.username;
             let passwordP = req.body.password;
-            user_1.default.findOne({ username: usernameP })
-                .then((user) => {
-                if (user && (user.type === 'owner' || user.type === 'decor') && user.status === 'active') {
+            try {
+                let user = yield user_1.default.findOne({ username: usernameP });
+                if (user && (user.type === 'owner' || user.type === 'decor')) {
+                    yield this.checkPhotoUpload(usernameP);
+                    // Re-fetch the user to get the updated status
+                    user = yield user_1.default.findOne({ username: usernameP });
+                    if (!user) {
+                        return res.status(404).json({ message: 'User not found' });
+                    }
+                    // Check if the user's status is "active"
+                    if (user.status !== 'active' && user.status !== 'blocked') {
+                        return res.status(403).json({ message: 'User is not active' });
+                    }
                     const passwordMatch = bcrypt.compareSync(passwordP, user.password);
                     if (passwordMatch) {
                         const userResponse = {
@@ -116,12 +138,35 @@ class UserController {
                 else {
                     res.status(403).json({ message: 'Unauthorized' });
                 }
-            })
-                .catch((err) => {
+            }
+            catch (err) {
                 console.log(err);
                 res.status(500).json({ message: 'Internal Server Error' });
-            });
-        };
+            }
+        });
+        this.checkPhotoUpload = (username) => __awaiter(this, void 0, void 0, function* () {
+            const decorator = yield user_1.default.findOne({ username, type: 'decor', status: 'active' });
+            console.log("Entered the chedkPhotoUpload function");
+            if (!decorator) {
+                return;
+            }
+            const jobs = yield gardenSchedule_1.default.find({ workerId: username, completionDate: { $exists: true } });
+            for (const job of jobs) {
+                if (!job.completionDate) {
+                    continue; // Skip this job if completionDate is not defined
+                }
+                const completionDate = new Date(job.completionDate);
+                const now = new Date();
+                const photoUploadDate = job.dateOfCompletionPhotoUpload ? new Date(job.dateOfCompletionPhotoUpload) : null;
+                // Check if there is no photoUploadDate and if the current time is more than 24 hours past the completionDate
+                if (!photoUploadDate && (now.getTime() - completionDate.getTime()) > 24 * 60 * 60 * 1000) {
+                    console.log("found a job that is more than 24 hours past the completion date");
+                    decorator.status = 'blocked';
+                    yield decorator.save();
+                    break;
+                }
+            }
+        });
         this.admin_login = (req, res) => {
             let usernameP = req.body.username;
             let passwordP = req.body.password;
@@ -208,6 +253,105 @@ class UserController {
                 res.status(500).json({ message: 'Internal Server Error' });
             });
         };
+        this.getBlockedUsers = (req, res) => {
+            user_1.default.find({ status: 'blocked' })
+                .then(users => {
+                res.json(users);
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
+        this.getAllOwners = (req, res) => {
+            user_1.default.find({ type: 'owner', status: "active" })
+                .then(users => {
+                res.json(users);
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
+        this.getAllDecors = (req, res) => {
+            user_1.default.find({ type: 'decor', status: "active" })
+                .then(users => {
+                res.json(users);
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
+        this.getUnemployedDecors = (req, res) => {
+            user_1.default.find({
+                type: 'decor',
+                status: "active",
+                $or: [
+                    { companyId: null },
+                    { companyId: "" }
+                ]
+            })
+                .then(users => {
+                res.json(users);
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
+        this.getUserByUsername = (req, res) => {
+            const { username } = req.body;
+            user_1.default.findOne({ username: username })
+                .then(users => {
+                res.json(users);
+            })
+                .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+        };
+        this.unblockUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const username = req.body.username;
+            console.log(`Received request to unblock user: ${username}`);
+            try {
+                console.log(`Attempting to update user status to 'active' for username: ${username}`);
+                const updatedUser = yield user_1.default.findOneAndUpdate({ username: username, status: 'blocked' }, { status: 'active' }, { new: true });
+                if (!updatedUser) {
+                    console.log(`User not found or not in requested status: ${username}`);
+                    res.status(404).send({ message: 'User not found or not in requested status' });
+                    return;
+                }
+                console.log(`User status updated to 'active' for username: ${username}`);
+                // Find all jobs for the user that have been finished but do not have a completion photo uploaded
+                console.log(`Finding jobs for user: ${username} that have been finished but do not have a completion photo uploaded`);
+                const jobs = yield gardenSchedule_1.default.find({
+                    workerId: username,
+                    completionDate: { $ne: "" },
+                    dateOfCompletionPhotoUpload: ""
+                });
+                console.log(`Found ${jobs.length} jobs for user: ${username} that need completion photo upload`);
+                // Update the dateOfCompletionPhotoUpload field for these jobs to 1 hour after the completionDate
+                for (const job of jobs) {
+                    if (job.completionDate) {
+                        const completionDate = new Date(job.completionDate);
+                        const dateOfCompletionPhotoUpload = new Date(completionDate.getTime() + 60 * 60 * 1000); // Add 1 hour
+                        job.dateOfCompletionPhotoUpload = dateOfCompletionPhotoUpload.toISOString();
+                        yield job.save();
+                        console.log(`Updated job with ID: ${job._id} for user: ${username} with dateOfCompletionPhotoUpload: ${dateOfCompletionPhotoUpload.toISOString()}`);
+                    }
+                    else {
+                        console.log(`Job with ID: ${job._id} has an invalid completionDate`);
+                    }
+                }
+                res.status(200).send({ message: 'User status updated to active and jobs updated', user: updatedUser });
+                console.log(`Response sent successfully for user: ${username}`);
+            }
+            catch (err) {
+                console.error(`Error updating user status or jobs for username: ${username}`, err);
+                res.status(500).send({ message: 'Error updating user status or jobs', error: err });
+            }
+        });
         this.updateUserWithProfilePic = (req, res) => {
             const { username, first_name, last_name, gender, address, phone_number, email, credit_card_number, type, status } = req.body;
             let profilePicPath = req.file ? `/uploads/${req.file.filename}` : '';
@@ -275,6 +419,22 @@ class UserController {
                 }
             }));
         };
+        this.employDecor = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { companyId, decorId } = req.body;
+            try {
+                const user = yield user_1.default.findOne({ _id: decorId, type: 'decor' });
+                if (!user) {
+                    return res.status(404).json({ message: 'Decorator not found' });
+                }
+                user.companyId = companyId;
+                yield user.save();
+                res.status(200).json({ message: 'Decorator employed successfully', user });
+            }
+            catch (err) {
+                console.log(err);
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+        });
     }
     acceptUser(req, res) {
         const username = req.body.username;

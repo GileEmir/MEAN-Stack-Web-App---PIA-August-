@@ -101,6 +101,14 @@ const gardenScheduleSchema = new mongoose_1.default.Schema({
     },
     completionDate: {
         type: String
+    },
+    dateOfCompletionPhotoUpload: {
+        type: String,
+        default: ''
+    },
+    estimatedCompletionDate: {
+        type: String,
+        default: ''
     }
 }, {
     versionKey: false

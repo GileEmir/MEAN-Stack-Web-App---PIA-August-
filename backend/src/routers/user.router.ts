@@ -39,9 +39,15 @@ userRouter.route("/register").post(
 userRouter.route("/get_all_usernames").get(
     (req, res) => new UserController().getAllUserNames(req, res)
 );
+userRouter.route("/get_all_emails").get(
+  (req, res) => new UserController().getAllEmails(req, res)
+);
 
 userRouter.route("/get_requested_users").get(
     (req, res) => new UserController().getRequestedUsers(req, res)
+);
+userRouter.route("/get_blocked_users").get(
+  (req, res) => new UserController().getBlockedUsers(req, res)
 );
 
 userRouter.route("/accept_user").post(
@@ -51,6 +57,10 @@ userRouter.route("/accept_user").post(
 userRouter.route("/decline_user").post(
   (req, res) => new UserController().declineUser(req, res)
 );  
+
+userRouter.route("/unblock_user").post(
+  (req, res) => new UserController().unblockUser(req, res)
+); 
 
 userRouter.route("/change-password").post(
   (req, res) => new UserController().changePassword(req, res)
@@ -63,6 +73,23 @@ userRouter.route("/updateUser").post(
   (req, res) => new UserController().updateUser(req, res)
 );
 
+userRouter.route("/get_all_owners").get(
+  (req, res) => new UserController().getAllOwners(req, res)
+);
 
+userRouter.route("/getUserByUsername").post(
+  (req, res) => new UserController().getUserByUsername(req, res)
+);
+
+userRouter.route("/get_all_decors").get(
+  (req, res) => new UserController().getAllDecors(req, res)
+);
+
+userRouter.route("/get_unemployed_decors").get(
+  (req, res) => new UserController().getUnemployedDecors(req, res)
+);
+userRouter.route("/employ-decor").post(
+  (req, res) => new UserController().employDecor(req, res)
+);
 
 export default userRouter;

@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   companyId: string | null = null; // Add this field
 
   all_user_names: string[] = [];
+  all_emails: string[] = [];
 
   constructor(private userService: UserService, private router: Router) {}
   
@@ -45,6 +46,16 @@ export class RegisterComponent implements OnInit {
       (response) => {
         this.all_user_names = response; // Assign the response to the array
         console.log(this.all_user_names); // Log the filled array
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+    this.userService.getAllEmails().subscribe(
+      (response) => {
+        this.all_emails = response; // Assign the response to the array
+        console.log(this.all_emails); // Log the filled array
       },
       (error) => {
         console.error(error);
@@ -121,7 +132,11 @@ export class RegisterComponent implements OnInit {
         this.message = "Please enter a valid phone number containing only digits";
     } else if (this.email == "") {
         this.message = "Please enter email";
-    } else if (!emailPattern.test(this.email)) {
+    } 
+    else if (this.all_emails.includes(this.email)) {
+      this.message = "Email is already taken. Please enter a different email";
+    } 
+    else if (!emailPattern.test(this.email)) {
         this.message = "Please enter a valid email address";
     } else if (this.profile_pic == null) {
         this.message = "Please select a profile picture";

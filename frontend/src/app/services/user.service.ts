@@ -24,6 +24,10 @@ export class UserService {
   getAllUsernames(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/get_all_usernames`);
   }
+
+  getAllEmails(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/get_all_emails`);
+  }
   
   getRequestedUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/get_requested_users`);
@@ -76,6 +80,10 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/decline_user`, user);
   }
 
+  unblock(user: User) {
+    return this.http.post(`${this.baseUrl}/unblock_user`, user);
+  }
+
   
   getUserRole(): string | null {
     const user = this.getLoggedInUser();
@@ -96,5 +104,30 @@ export class UserService {
     };
 
     return this.http.post(`${this.baseUrl}/change-password`, payload);
+  }
+
+  getAllOwners(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/get_all_owners`);
+  }
+  getAllDecors(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/get_all_decors`);
+  }
+
+  getUnemployedDecors(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/get_unemployed_decors`);
+  }
+
+  getUserByUsername(username:string ): Observable<User> {
+    console.log(username)
+    return this.http.post<User>(`${this.baseUrl}/getUserByUsername`, { username });
+  }
+
+  getBlockedUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/get_blocked_users`);
+  }
+
+  employDecor(companyId: string, decorId: string): Observable<any> {
+    const payload = { companyId, decorId };
+    return this.http.post(`${this.baseUrl}/employ-decor`, payload);
   }
 }

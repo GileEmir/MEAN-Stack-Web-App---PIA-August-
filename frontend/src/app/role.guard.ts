@@ -14,7 +14,9 @@ export class RoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const expectedRole = route.data['expectedRole']; // Accessing 'expectedRole' with bracket notation
-    if (this.userService.hasRole(expectedRole)) {
+    const userRoles = this.userService.getUserRole(); // Assuming this method returns an array of roles
+
+    if (userRoles && (userRoles.includes('admin') || userRoles.includes(expectedRole))) {
       return true;
     } else {
       // Return a UrlTree to navigate to 'not_authorized' page

@@ -17,6 +17,7 @@ export class DecorAppointmentsComponent implements OnInit{
   myRating: number = 0;
   hoverRating: number = 0;
   my_user: User = new User();
+  selectedFile: File | null = null;
 
   constructor(private gardenSchedulingService: GardenSchedulingService,private userService:UserService) {}
 
@@ -169,25 +170,30 @@ export class DecorAppointmentsComponent implements OnInit{
   }
 
   submitPhoto(appointment: GardenSchedule): void {
-    // const file = this.selectedFiles[appointment.id];
-    // if (!file) {
-    //   alert('Please select a photo to upload');
-    //   return;
-    // }
+    console.log("Dva");
+    const file = this.selectedFile;
+    if (!file) {
+      alert('Please select a photo to upload');
+      return;
+    }
+    
+    const formData = new FormData();
+    console.log('Appending photo:', file);
+    formData.append('photo', file);
 
-    // const formData = new FormData();
-    // formData.append('photo', file);
-    // formData.append('appointmentId', appointment.id);
-
-    // this.gardenSchedulingService.uploadCompletionPhoto(formData).subscribe(() => {
-    //   this.loadMyAppointments();
-    // });
+    formData.append('appointment', JSON.stringify(appointment)); 
+    this.gardenSchedulingService.uploadCompletionPhoto(formData).subscribe(
+      () => {
+        this.loadMyAppointments();
+      },
+      (error) => {
+        console.error("Error uploading photo:", error);
+      }
+    );
+    alert("Photo uploaded successfully");
   }
 
   onFileSelected(event: any, appointment: GardenSchedule): void {
-    // const file: File = event.target.files[0];
-    // if (file) {
-    //   this.selectedFiles[appointment.id] = file;
-    // }
+    this.selectedFile = event.target.files[0];
   }
 }

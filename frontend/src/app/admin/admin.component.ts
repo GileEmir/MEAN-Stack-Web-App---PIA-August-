@@ -10,12 +10,19 @@ import { User } from '../models/User';
 export class AdminComponent implements OnInit {
 
   users: User[] = [];
+  blockedUsers: User[] = [];
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.getRequestedUsers().subscribe((data: User[]) => {
       this.users = data;
+      console.log(data);
+    });
+
+    this.userService.getBlockedUsers().subscribe((data: User[]) => {
+      this.blockedUsers = data;
+      console.log(data);
     });
   }
 
@@ -47,5 +54,19 @@ export class AdminComponent implements OnInit {
       }
     );
 
+  }
+
+  unblock(user: User): void {
+    this.userService.unblock(user).subscribe(
+      () => {
+        console.log('User Unblocked:', user);
+        this.userService.getBlockedUsers().subscribe((data: User[]) => {
+          this.blockedUsers = data;
+        });
+      },
+      (error) => {
+        console.error('Error accepting user:', error);
+      }
+    );
   }
 }

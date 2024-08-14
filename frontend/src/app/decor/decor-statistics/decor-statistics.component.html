@@ -1,1 +1,49 @@
-<p>decor-statistics works!</p>
+<div class="container">
+    <div class="chart-container">
+      <h2>Jobs Per Month</h2>
+      <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+    
+    <div class="chart-container">
+      <h2>Jobs Distribution Among Decorators</h2>
+      <ngx-charts-pie-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="jobsDistribution"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        (select)="onSelect($event)">
+      </ngx-charts-pie-chart>
+    </div>
+    
+    <div class="chart-container">
+      <h2>Average Jobs Per Day of the Week</h2>
+      <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="averageJobsPerDay"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="'Day of the Week'"
+        [yAxisLabel]="'Average Number of Jobs'"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>

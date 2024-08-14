@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GardenSchedulingService {
- 
 
+ 
   private apiUrl = 'http://localhost:4000/garden-schedules';
 
   constructor(private http: HttpClient) {}
@@ -32,6 +32,10 @@ export class GardenSchedulingService {
     return this.http.get<GardenSchedule[]>(`${this.apiUrl}/company-schedules/${companyId}`);
   }
 
+  getMaintenancesByCompany( companyId: string): Observable<GardenSchedule[]> {
+    return this.http.get<GardenSchedule[]>(`${this.apiUrl}/company-schedules/maintenances/${companyId}`);
+  }
+
   cancelSchedule(data: GardenSchedule): Observable<any> {
     return this.http.post(`${this.apiUrl}/cancel-schedule`,data);
   }
@@ -41,7 +45,13 @@ export class GardenSchedulingService {
   }
 
   acceptAppointment(data: { appointment: GardenSchedule; username: string }): Observable<any> {
+    console.log(data)
     return this.http.post(`${this.apiUrl}/accept-schedule`, data);
+  }
+
+  acceptMaintenance(data: { appointment: GardenSchedule; username: string,maintenanceDate:string,maintenanceTime:string }): Observable<any> {
+    console.log(data)
+    return this.http.post(`${this.apiUrl}/accept-maintenance`, data);
   }
   updateRated(appointmentId: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/update-rated`, { id: appointmentId }); 
@@ -51,8 +61,28 @@ export class GardenSchedulingService {
     return this.http.post<any[]>(`${this.apiUrl}/worker`, { username });
   }
 
+  getMaintenancesForWorker(username: string): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/worker/maintenances`, { username });
+  }
+
   finnishAppointment(data: { appointment: GardenSchedule; completionDate: string }) {
-    console.log(data);
     return this.http.post<any[]>(`${this.apiUrl}/finnish-appointment`, { data });
+  }
+
+  uploadCompletionPhoto(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/upload-completion-photo`, formData);
+}
+
+  getJobsPerMonthForUser(username: string): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/jobs-per-month-user`, { username });
+  }
+
+  getJobsDistributionByCompany(companyId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/jobs-distribution/${companyId}`);
+  }
+
+  getAverageJobsPerDay(companyId: string): Observable<any> {
+    console.log(companyId)
+    return this.http.get(`${this.apiUrl}/average-jobs-per-day/${companyId}`);
   }
 }

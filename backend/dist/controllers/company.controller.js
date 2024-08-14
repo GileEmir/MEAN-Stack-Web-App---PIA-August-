@@ -18,6 +18,88 @@ const multer_1 = __importDefault(require("multer"));
 const upload = (0, multer_1.default)();
 class CompanyController {
     constructor() {
+        this.registerCompany = (req, res) => {
+            upload.none()(req, res, (err) => {
+                if (err) {
+                    console.error('Error processing form data:', err);
+                    return res.status(400).json({ message: 'Error processing form data' });
+                }
+                let name = req.body.name;
+                let address = req.body.address;
+                let phone_number = req.body.phone_number;
+                let email = req.body.email;
+                let website = req.body.website;
+                let description = req.body.description;
+                let averageRating = req.body.averageRating;
+                let contactPerson = req.body.contactPerson;
+                let services = req.body.services;
+                let pricing = req.body.pricing;
+                let comments = req.body.comments;
+                let location = req.body.location;
+                let annualLeaveStart = req.body.annualLeaveStart;
+                let annualLeaveEnd = req.body.annualLeaveEnd;
+                console.log('Received values:');
+                console.log('name:', name);
+                console.log('address:', address);
+                console.log('phone_number:', phone_number);
+                console.log('email:', email);
+                console.log('website:', website);
+                console.log('description:', description);
+                console.log('averageRating:', averageRating);
+                console.log('contactPerson:', contactPerson);
+                console.log('services:', services);
+                console.log('pricing:', pricing);
+                console.log('comments:', comments);
+                console.log('location:', location);
+                console.log('annualLeaveStart:', annualLeaveStart);
+                console.log('annualLeaveEnd:', annualLeaveEnd);
+                // Validate and parse location
+                let parsedLocation;
+                try {
+                    parsedLocation = JSON.parse(location);
+                    if (!parsedLocation.type || !parsedLocation.coordinates || parsedLocation.coordinates.length !== 2) {
+                        return res.status(400).json({ message: 'Invalid location format' });
+                    }
+                }
+                catch (error) {
+                    console.error('Invalid location format:', error);
+                    return res.status(400).json({ message: 'Invalid location format' });
+                }
+                // Parse JSON fields
+                let parsedServices;
+                let parsedComments;
+                try {
+                    parsedServices = JSON.parse(services);
+                    parsedComments = JSON.parse(comments);
+                }
+                catch (error) {
+                    console.error('Invalid JSON format for services or comments:', error);
+                    return res.status(400).json({ message: 'Invalid JSON format for services or comments' });
+                }
+                const company = {
+                    name: name,
+                    address: address,
+                    phone_number: phone_number,
+                    email: email,
+                    website: website,
+                    description: description,
+                    averageRating: averageRating,
+                    contactPerson: contactPerson,
+                    services: parsedServices,
+                    pricing: pricing,
+                    comments: parsedComments,
+                    location: parsedLocation,
+                    annualLeaveStart: annualLeaveStart,
+                    annualLeaveEnd: annualLeaveEnd
+                };
+                new company_1.default(company).save().then(savedCompany => {
+                    res.status(201).json({ message: "ok", company: savedCompany });
+                }).catch(err => {
+                    console.error('Error saving company:', err);
+                    res.status(500).json({ message: 'Internal Server Error' });
+                });
+            });
+        };
         this.addCompany = (req, res) => {
             const { name, address, phone_number, email, website, description, averageRating, owner, services, pricing, comments, location } = req.body;
             let logoPath = req.file ? `/uploads/${req.file.filename}` : '';

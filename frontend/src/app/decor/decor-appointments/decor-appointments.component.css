@@ -1,122 +1,196 @@
 table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+thead tr {
+  background-color: #48CAE4;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+th, td {
+  padding: 12px 15px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+  border-bottom: 2px solid #48CAE4;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+a {
+  color: #48CAE4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #48CAE4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #ef476f;
+}
+
+textarea, input[type="number"], input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+textarea:focus, input[type="number"]:focus, input[type="text"]:focus {
+  border-color: #48CAE4;
+}
+
+form button {
+  width: auto;
+  margin-top: 10px;
+}
+
+.stars {
+  display: inline-block;
+}
+
+.filled-star {
+  color: #ffdd00;
+}
+
+.empty-star {
+  color: #cccccc;
+}
+
+.half-star {
+  position: relative;
+  display: inline-block;
+  color: #cccccc;
+}
+
+.half-star::before {
+  content: '\2605';
+  color: #ffdd00;
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.refuse-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.disabled-button {
+  background-color: grey;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.overlay {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: calc(100vw - 219.6px);
+  height: calc(100vh - 64px);
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.overlay-content p {
+  margin: 0;
+  font-size: 1.5em;
+  color: black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table {
+    display: block;
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 18px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
     text-align: left;
   }
-  
-  thead tr {
-    background-color: #48CAE4;
-    color: #ffffff;
-    text-align: left;
+
+  td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: calc(50% - 20px);
+    padding-right: 10px;
+    white-space: nowrap;
     font-weight: bold;
   }
-  
-  th, td {
-    padding: 12px 15px;
-  }
-  
-  tbody tr {
-    border-bottom: 1px solid #dddddd;
-  }
-  
-  tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-  }
-  
-  tbody tr:last-of-type {
-    border-bottom: 2px solid #48CAE4;
-  }
-  
-  tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  a {
-    color: #48CAE4;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  button {
-    background-color: #48CAE4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  button:hover {
-    background-color: #ef476f;
-  }
-  
-  textarea, input[type="number"], input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-  }
-  
-  textarea:focus, input[type="number"]:focus, input[type="text"]:focus {
-    border-color: #48CAE4;
-  }
-  
-  form button {
-    width: auto;
-    margin-top: 10px;
-  }
-  
-  .stars {
-    display: inline-block;
-  }
-  
-  .filled-star {
-    color: #ffdd00;
-  }
-  
-  .empty-star {
-    color: #cccccc;
-  }
-  
-  .half-star {
-    position: relative;
-    display: inline-block;
-    color: #cccccc;
-  }
-  
-  .half-star::before {
-    content: '\2605';
-    color: #ffdd00;
-    position: absolute;
-    left: 0;
-    width: 50%;
-    overflow: hidden;
-  }
-  
-  .actions-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .confirm-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-
-  }
-  
-  .refuse-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-
-  }
+}

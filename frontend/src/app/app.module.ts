@@ -40,6 +40,16 @@ import { ScheduleFormComponent } from './schedule-form/schedule-form.component';
 import { GardenCanvasComponent } from './garden-canvas/garden-canvas.component';
 import { GardenSchedulingComponent } from './garden-scheduling/garden-scheduling.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AdminOwnersComponent } from './admin/admin-owners/admin-owners.component';
+import { AdminCompaniesComponent } from './admin/admin-companies/admin-companies.component';
+import { AdminDecorsComponent } from './admin/admin-decors/admin-decors.component';
+import { UserDetailComponent } from './userdetail/userdetail.component';
+import { AdminAddDecoratorComponent } from './admin/admin-add-decorator/admin-add-decorator.component';
+import { AdminAddCompanyComponent } from './admin/admin-add-company/admin-add-company.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +77,13 @@ import { GardenSchedulingComponent } from './garden-scheduling/garden-scheduling
     CompanyDetailComponent,
     ScheduleFormComponent,
     GardenCanvasComponent,
-    GardenSchedulingComponent
+    GardenSchedulingComponent,
+    AdminOwnersComponent,
+    AdminCompaniesComponent,
+    AdminDecorsComponent,
+    UserDetailComponent,
+    AdminAddDecoratorComponent,
+    AdminAddCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -79,8 +95,8 @@ import { GardenSchedulingComponent } from './garden-scheduling/garden-scheduling
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
-  
+    MatNativeDateModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,1 +1,84 @@
-<p>mainpage works!</p>
+<div class="container">
+    <div class="statistics">
+        <h1>Statistics</h1>
+        <div class="statistics-grid">
+            <div class="stat-item">
+                <p>Total Decorated Gardens</p>
+                <h2>{{ statistics.totalDecoratedGardens }}</h2>
+            </div>
+            <div class="stat-item">
+                <p>Total Registered Owners</p>
+                <h2>{{ statistics.totalRegisteredOwners }}</h2>
+            </div>
+            <div class="stat-item">
+                <p>Total Registered Decorators</p>
+                <h2>{{ statistics.totalRegisteredDecorators }}</h2>
+            </div>
+            <div class="stat-item">
+                <p>Jobs Scheduled in Last 24 Hours</p>
+                <h2>{{ statistics.jobsLast24Hours }}</h2>
+            </div>
+            <div class="stat-item">
+                <p>Jobs Scheduled in Last 7 Days</p>
+                <h2>{{ statistics.jobsLast7Days }}</h2>
+            </div>
+            <div class="stat-item">
+                <p>Jobs Scheduled in Last 30 Days</p>
+                <h2>{{ statistics.jobsLast30Days }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="companies">
+        <h1>Companies</h1>
+        <div class="search-bar">
+            <input type="text" [(ngModel)]="searchQuery" placeholder="Search by name or address">
+            <button (click)="searchCompanies()">Search</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th (click)="sortCompanies('name')" class="clickable">Name {{ getSortIcon('name') }}</th>
+                    <th (click)="sortCompanies('address')" class="clickable">Address {{ getSortIcon('address') }}</th>
+                    <th>Decorators</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let company of companies">
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.address }}</td>
+                    <td>
+                        <div class="decorator-list">
+                            <div *ngFor="let decorator of company.decorators" class="decorator-item">
+                                <svg width="1.125em" height="1.125em" viewBox="0 0 18 18" fill="none" class="decorator-icon">
+                                    <circle cx="9" cy="4.5" r="3" fill="currentColor" />
+                                    <path opacity="0.5" d="M15 13.125C15 14.989 15 16.5 9 16.5C3 16.5 3 14.989 3 13.125C3 11.261 5.68629 9.75 9 9.75C12.3137 9.75 15 11.261 15 13.125Z" fill="currentColor" />
+                                </svg>
+                                {{ decorator.first_name }}
+                                {{ decorator.last_name }}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="recent-jobs">
+        <h1>Recent Jobs</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Completion Date</th>
+                    <th>Completion Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let job of recentJobs">
+                    <td>{{ job.completionDate | date: 'short' }}</td>
+                    <td><img [src]="getCompletionPhotoPath(job.completionPhoto)" alt="Completion Photo" class="completion-photo"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

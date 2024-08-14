@@ -1,0 +1,180 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.statistics, .companies, .recent-jobs {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.statistics p, .companies p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    background-color: #48CAE4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #ef476f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+thead tr {
+    background-color: #48CAE4;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 12px 15px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #48CAE4;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.recent-jobs .job-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.recent-jobs .job {
+    flex: 1 1 calc(33.333% - 10px);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.recent-jobs .job img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.statistics {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.statistics h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.statistics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.stat-item {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.stat-item h2 {
+    margin: 10px 0 0;
+    font-size: 24px;
+    color: #48CAE4;
+}
+
+/* New styles for decorators */
+.decorator-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.decorator-item {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+    font-size: 16px;
+    color: #555;
+}
+
+.decorator-icon {
+    margin-right: 10px;
+    color: #48CAE4;
+    vertical-align: middle;
+}
+
+.completion-photo {
+    height: 200px;
+    object-fit: contain; /* Ensures the aspect ratio is maintained */
+}
+.clickable {
+    cursor: pointer;
+}

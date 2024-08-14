@@ -1,0 +1,114 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+  }
+  
+  thead tr {
+    background-color: #48CAE4;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  
+  tbody tr:last-of-type {
+    border-bottom: 2px solid #48CAE4;
+  }
+  
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  a {
+    color: #48CAE4;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .stars {
+    display: inline-block;
+  }
+  
+  .filled-star {
+    color: #ffdd00; /* Yellow color for filled stars */
+  }
+  
+  .empty-star {
+    color: #cccccc; /* Grey color for empty stars */
+  }
+  
+  .half-star {
+    position: relative;
+    display: inline-block;
+    color: #cccccc; /* Grey color for half stars */
+  }
+  
+  .half-star::before {
+    content: '\2605'; /* Unicode character for star */
+    color: #ffdd00; /* Yellow color for filled part */
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+  }
+  
+  .three-quarter-star {
+    position: relative;
+    display: inline-block;
+    color: #cccccc; /* Grey color for three-quarter stars */
+  }
+  
+  .three-quarter-star::before {
+    content: '\2605'; /* Unicode character for star */
+    color: #ffdd00; /* Yellow color for filled part */
+    position: absolute;
+    left: 0;
+    width: 75%;
+    overflow: hidden;
+  }
+  
+  .one-quarter-star {
+    position: relative;
+    display: inline-block;
+    color: #cccccc; /* Grey color for one-quarter stars */
+  }
+  
+  .one-quarter-star::before {
+    content: '\2605'; /* Unicode character for star */
+    color: #ffdd00; /* Yellow color for filled part */
+    position: absolute;
+    left: 0;
+    width: 25%;
+    overflow: hidden;
+  }
+
+  button {
+    background-color: #48CAE4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #ef476f;
+  }
+  

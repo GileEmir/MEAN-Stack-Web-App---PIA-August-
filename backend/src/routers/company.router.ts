@@ -24,6 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 companyRouter.route("/add").post(
   upload.single('logo'), // Add multer middleware
   (req, res) => new CompanyController().addCompany(req, res)
@@ -52,6 +53,10 @@ companyRouter.route("/:id").get(
 
 companyRouter.route("/:id/comments").post(
   (req, res) => new CompanyController().addCommentToCompany(req, res)
+);
+
+companyRouter.route("/register").post(
+  (req, res) => new CompanyController().registerCompany(req, res)
 );
 
 export default companyRouter;

@@ -21,6 +21,12 @@ import { DecorAppointmentsComponent } from './decor/decor-appointments/decor-app
 import { DecorMaintenanceComponent } from './decor/decor-maintenance/decor-maintenance.component';
 import { DecorStatisticsComponent } from './decor/decor-statistics/decor-statistics.component';
 import { CompanyDetailComponent } from './companydetail/companydetail.component';
+import { AdminOwnersComponent } from './admin/admin-owners/admin-owners.component';
+import { AdminDecorsComponent } from './admin/admin-decors/admin-decors.component';
+import { AdminCompaniesComponent } from './admin/admin-companies/admin-companies.component';
+import { UserDetailComponent } from './userdetail/userdetail.component';
+import { AdminAddDecoratorComponent } from './admin/admin-add-decorator/admin-add-decorator.component';
+import { AdminAddCompanyComponent } from './admin/admin-add-company/admin-add-company.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
@@ -92,12 +98,49 @@ const routes: Routes = [
         component: DecorStatisticsComponent, 
         canActivate: [RoleGuard], 
         data: { expectedRole: 'decor' } 
-      },{
-      path: "admin", 
+      },
+      {
+      path: "admin/registration-requests", 
       component: AdminComponent, 
       canActivate: [RoleGuard], 
       data: { expectedRole: 'admin' }
-      }, 
+      },
+      {
+        path: "admin/owners", 
+        component: AdminOwnersComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'admin' }
+      },
+      {
+        path: "admin/decors", 
+        component: AdminDecorsComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'admin' }
+      },
+      {
+        path: "admin/companies", 
+        component: AdminCompaniesComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'admin' }
+      },
+      {
+        path: "admin/users/:username", 
+        component: UserDetailComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'admin' }
+      },
+      {
+        path: "admin/add-decorator", 
+        component: AdminAddDecoratorComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'admin' }
+      },
+      {
+        path: "admin/add-company", 
+        component: AdminAddCompanyComponent, 
+        canActivate: [RoleGuard], 
+        data: { expectedRole: 'admin' }
+      }  
     ]
   },
   { path: 'not_authorized', component: NotAuthorizedComponent },

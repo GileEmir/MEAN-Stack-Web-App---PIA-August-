@@ -44,8 +44,12 @@ export class LoginComponent {
       } else {
         this.message = "Invalid credentials. Please try again.";
       }
-    }, error => {
-      this.message = "Invalid credentials. Please try again.";
+    },error => {
+      if (error.status === 403 && error.error.message === 'User is not active') {
+        alert("Admin has not yet approved your registration");
+      } else {
+        this.message = "Invalid credentials. Please try again.";
+      }
     });
     return false;
   }

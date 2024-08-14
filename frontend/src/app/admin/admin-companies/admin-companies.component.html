@@ -1,0 +1,43 @@
+<h2>All Companies</h2>
+
+<button [routerLink]="['/dashboard/admin/add-company']">Add New Company</button>
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Average Rating</th> 
+        <th>Employ Decor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let company of companies">
+        <td>
+          <a [routerLink]="['/dashboard/owner/companies', company._id]">{{ company.name }}</a>
+          <br>
+          <a [href]="company.website" target="_blank">{{ company.website }}</a>
+        </td>
+        <td>{{ company.address }}</td>
+        <td>
+          {{ company.averageRating }}
+          <span class="stars">
+            <ng-container *ngFor="let star of [0, 1, 2, 3, 4]; let i = index">
+              <span [ngClass]="{
+                'filled-star': i < floor(roundToQuarter(company.averageRating)),
+                'three-quarter-star': i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0.75,
+                'half-star': i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0.5,
+                'one-quarter-star': i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0.25,
+                'empty-star': i > floor(roundToQuarter(company.averageRating)) || (i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0)
+              }">&#9733;</span>
+            </ng-container>
+          </span>
+        </td>
+        <td>
+          <select [(ngModel)]="selectedDecor[company._id]">
+            <option *ngFor="let decor of unemployedDecors" [value]="decor._id">{{ decor.username }}</option>
+          </select>
+          <button (click)="employDecor(company._id, selectedDecor[company._id])">Employ Decor</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

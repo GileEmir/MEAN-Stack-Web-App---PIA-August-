@@ -20,6 +20,9 @@ app.use(express.json());
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
+app.use('/finishedJobs', express.static(path.join(__dirname, '..', 'uploads', 'finishedJobs')));
+
+
 mongoose.connect("mongodb://127.0.0.1/vasaMastaVasaBasta");
 const conn = mongoose.connection;
 conn.once('open', () => {

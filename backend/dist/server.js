@@ -19,6 +19,7 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json());
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '..', 'uploads')));
+app.use('/finishedJobs', express_1.default.static(path_1.default.join(__dirname, '..', 'uploads', 'finishedJobs')));
 mongoose_1.default.connect("mongodb://127.0.0.1/vasaMastaVasaBasta");
 const conn = mongoose_1.default.connection;
 conn.once('open', () => {

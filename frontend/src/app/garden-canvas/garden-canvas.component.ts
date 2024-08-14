@@ -29,6 +29,28 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
 
   selectShape(shape: string): void {
     this.selectedShape = shape;
+    switch (shape) {
+      case 'smallGreenSquare':
+        this.shapeColor = '#00FF00';
+        this.shapeSize = 50;
+        break;
+      case 'largeBlueRectangle':
+        this.shapeColor = '#0000FF';
+        this.shapeSize = 150;
+        break;
+      case 'largeBlueCircle':
+        this.shapeColor = '#0000FF';
+        this.shapeSize = 150;
+        break;
+      case 'smallBrownCircle':
+        this.shapeColor = '#A52A2A';
+        this.shapeSize = 50;
+        break;
+      case 'smallGrayRectangle':
+        this.shapeColor = '#808080';
+        this.shapeSize = 100;
+        break;
+    }
   }
 
   onCanvasMouseMove(event: MouseEvent): void {
@@ -41,19 +63,19 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
       this.shapes.forEach(shape => this.drawShape(shape));
 
       this.ctx.fillStyle = this.shapeColor;
-      if (this.selectedShape === 'square') {
+      if (this.selectedShape === 'smallGreenSquare') {
         this.ctx.fillRect(x - this.shapeSize / 2, y - this.shapeSize / 2, this.shapeSize, this.shapeSize);
-      } else if (this.selectedShape === 'rectangle') {
+      } else if (this.selectedShape === 'largeBlueRectangle') {
         this.ctx.fillRect(x - this.shapeSize, y - this.shapeSize / 2, this.shapeSize * 2, this.shapeSize);
-      } else if (this.selectedShape === 'circle') {
+      } else if (this.selectedShape === 'largeBlueCircle') {
         this.ctx.beginPath();
         this.ctx.arc(x, y, this.shapeSize / 2, 0, 2 * Math.PI);
         this.ctx.fill();
-      } else if (this.selectedShape === 'smallCircle') {
+      } else if (this.selectedShape === 'smallBrownCircle') {
         this.ctx.beginPath();
-        this.ctx.arc(x, y, this.shapeSize / 5, 0, 2 * Math.PI);
+        this.ctx.arc(x, y, this.shapeSize / 2, 0, 2 * Math.PI);
         this.ctx.fill();
-      } else if (this.selectedShape === 'smallRectangle') {
+      } else if (this.selectedShape === 'smallGrayRectangle') {
         this.ctx.fillRect(x - this.shapeSize / 2, y - this.shapeSize / 5, this.shapeSize, this.shapeSize / 2.5);
       }
     }
@@ -67,19 +89,19 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
 
       let shape: Shape;
       switch (this.selectedShape) {
-        case 'square':
+        case 'smallGreenSquare':
           shape = { type: 'square', x: x - this.shapeSize / 2, y: y - this.shapeSize / 2, size: this.shapeSize, color: this.shapeColor };
           break;
-        case 'rectangle':
+        case 'largeBlueRectangle':
           shape = { type: 'rectangle', x: x - this.shapeSize, y: y - this.shapeSize / 2, width: this.shapeSize * 2, height: this.shapeSize, color: this.shapeColor };
           break;
-        case 'circle':
+        case 'largeBlueCircle':
           shape = { type: 'circle', x, y, radius: this.shapeSize / 2, color: this.shapeColor };
           break;
-        case 'smallCircle':
-          shape = { type: 'circle', x, y, radius: this.shapeSize / 5, color: this.shapeColor };
+        case 'smallBrownCircle':
+          shape = { type: 'circle', x, y, radius: this.shapeSize / 2, color: this.shapeColor };
           break;
-        case 'smallRectangle':
+        case 'smallGrayRectangle':
           shape = { type: 'rectangle', x: x - this.shapeSize / 2, y: y - this.shapeSize / 5, width: this.shapeSize, height: this.shapeSize / 2.5, color: this.shapeColor };
           break;
         default:
