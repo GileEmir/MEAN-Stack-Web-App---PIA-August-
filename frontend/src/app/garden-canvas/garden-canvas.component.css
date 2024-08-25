@@ -1,5 +1,81 @@
+.garden-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  flex: 1 1 30%;
+  padding: 8px 12px;
+  background-color: #5ae448;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #41c230;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-right: 10px;
+  color: #333;
+}
+
+input[type="number"],
+input[type="color"] {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
 canvas {
+  display: block;
+  margin: 0 auto;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rotateButton{
+  flex: 1 1 30%;
+  padding: 8px 12px;
+  background-color: #489be4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.rotateButton:hover {
+  background-color: #3278b6;
 }

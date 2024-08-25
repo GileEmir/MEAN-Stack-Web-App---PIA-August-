@@ -7,7 +7,7 @@ table {
   }
   
   thead tr {
-    background-color: #48CAE4;
+    background-color: #89ca63;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
@@ -34,7 +34,7 @@ table {
   }
   
   button {
-    background-color: #48CAE4;
+    background-color: #5ae448;
     color: white;
     border: none;
     padding: 10px 20px;

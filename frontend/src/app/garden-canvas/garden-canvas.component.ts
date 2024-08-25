@@ -1,8 +1,6 @@
-// garden-canvas.component.ts
 import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GardenLayout, Shape } from './../models/GardenLayout'; // Adjust the path as needed
-
 
 @Component({
   selector: 'app-garden-canvas',
@@ -17,6 +15,7 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
   private selectedShape: string | null = null;
   shapeColor: string = '#00FF00';
   shapeSize: number = 50;
+  private isShapesRotated: boolean = false; // Track rotation state
 
   constructor(private http: HttpClient) {}
 
@@ -53,6 +52,18 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
     }
   }
 
+  rotateShapes(): void {
+    this.isShapesRotated = !this.isShapesRotated;
+    this.redrawShapes();
+  }
+
+  redrawShapes(): void {
+    if (this.ctx) {
+      this.ctx.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
+      this.shapes.forEach(shape => this.drawShape(shape));
+    }
+  }
+
   onCanvasMouseMove(event: MouseEvent): void {
     if (this.selectedShape && this.ctx) {
       const rect = this.canvas!.getBoundingClientRect();
@@ -66,7 +77,11 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
       if (this.selectedShape === 'smallGreenSquare') {
         this.ctx.fillRect(x - this.shapeSize / 2, y - this.shapeSize / 2, this.shapeSize, this.shapeSize);
       } else if (this.selectedShape === 'largeBlueRectangle') {
-        this.ctx.fillRect(x - this.shapeSize, y - this.shapeSize / 2, this.shapeSize * 2, this.shapeSize);
+        if (this.isShapesRotated) {
+          this.ctx.fillRect(x - this.shapeSize / 2, y - this.shapeSize, this.shapeSize, this.shapeSize * 2);
+        } else {
+          this.ctx.fillRect(x - this.shapeSize, y - this.shapeSize / 2, this.shapeSize * 2, this.shapeSize);
+        }
       } else if (this.selectedShape === 'largeBlueCircle') {
         this.ctx.beginPath();
         this.ctx.arc(x, y, this.shapeSize / 2, 0, 2 * Math.PI);
@@ -76,10 +91,15 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
         this.ctx.arc(x, y, this.shapeSize / 2, 0, 2 * Math.PI);
         this.ctx.fill();
       } else if (this.selectedShape === 'smallGrayRectangle') {
-        this.ctx.fillRect(x - this.shapeSize / 2, y - this.shapeSize / 5, this.shapeSize, this.shapeSize / 2.5);
+        if (this.isShapesRotated) {
+          this.ctx.fillRect(x - this.shapeSize / 5, y - this.shapeSize / 2, this.shapeSize / 2.5, this.shapeSize);
+        } else {
+          this.ctx.fillRect(x - this.shapeSize / 2, y - this.shapeSize / 5, this.shapeSize, this.shapeSize / 2.5);
+        }
       }
     }
   }
+
 
   onCanvasClick(event: MouseEvent): void {
     if (this.selectedShape && this.ctx) {
@@ -102,7 +122,11 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
           shape = { type: 'circle', x, y, radius: this.shapeSize / 2, color: this.shapeColor };
           break;
         case 'smallGrayRectangle':
-          shape = { type: 'rectangle', x: x - this.shapeSize / 2, y: y - this.shapeSize / 5, width: this.shapeSize, height: this.shapeSize / 2.5, color: this.shapeColor };
+          if (this.isShapesRotated) {
+            shape = { type: 'rectangle', x: x - this.shapeSize / 5, y: y - this.shapeSize / 2, width: this.shapeSize / 2.5, height: this.shapeSize, color: this.shapeColor };
+          } else {
+            shape = { type: 'rectangle', x: x - this.shapeSize / 2, y: y - this.shapeSize / 5, width: this.shapeSize, height: this.shapeSize / 2.5, color: this.shapeColor };
+          }
           break;
         default:
           return;
@@ -150,9 +174,7 @@ export class GardenCanvasComponent implements OnInit, AfterViewInit {
       return this.checkRectangleSquareOverlap(shape2, shape1);
     }
     return false;
-  }
-
-  checkCircleCircleOverlap(circle1: Shape, circle2: Shape): boolean {
+  }  checkCircleCircleOverlap(circle1: Shape, circle2: Shape): boolean {
     const dx = circle1.x - circle2.x;
     const dy = circle1.y - circle2.y;
     const distance = Math.sqrt(dx * dx + dy * dy);

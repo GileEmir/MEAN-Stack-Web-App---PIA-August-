@@ -221,6 +221,10 @@ class CompanyController {
                 // Add the new comment to the company's comments array
                 console.log('Adding new comment to company:', newComment);
                 company.comments.push(newComment);
+                // Recalculate the average rating
+                const totalRatings = company.comments.reduce((sum, comment) => sum + comment.rating, 0);
+                const averageRating = totalRatings / company.comments.length;
+                company.averageRating = averageRating;
                 yield company.save();
                 // Respond with success message and updated company data
                 console.log('Comment added successfully');

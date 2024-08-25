@@ -83,7 +83,7 @@ export class GardenSchedulingComponent implements OnInit {
       const chairs = formValue.chairs || 0;
   
       if (poolArea + greenArea + furnitureArea + fountainArea > totalArea) {
-        this.errorMessage = 'The sum of the areas exceeds the total area.';
+        alert( 'The sum of the areas exceeds the total area.');
         return;
       }
   
@@ -94,6 +94,23 @@ export class GardenSchedulingComponent implements OnInit {
       const [hours, minutes] = selectedTime.split(':').map(Number);
       const appointmentDate = new Date(selectedDate);
       appointmentDate.setHours(hours, minutes, 0, 0);
+
+      // Check if the selected date is within the company's annual leave period
+      if (this.company) {
+        const annualLeaveStart = new Date(this.company.annualLeaveStart);
+        const annualLeaveEnd = new Date(this.company.annualLeaveEnd);
+
+        // Normalize the dates to the same year for comparison
+        const appointmentMonthDay = `${appointmentDate.getMonth() + 1}-${appointmentDate.getDate()}`;
+        const annualLeaveStartMonthDay = `${annualLeaveStart.getMonth() + 1}-${annualLeaveStart.getDate()}`;
+        const annualLeaveEndMonthDay = `${annualLeaveEnd.getMonth() + 1}-${annualLeaveEnd.getDate()}`;
+
+        if (annualLeaveStartMonthDay <= appointmentMonthDay && appointmentMonthDay <= annualLeaveEndMonthDay) {
+          alert('The selected date falls within the company\'s annual leave period. Please choose another date.');
+          return;
+        }
+      }
+    
   
       const gardenSchedule: GardenSchedule = {
         _id : '',

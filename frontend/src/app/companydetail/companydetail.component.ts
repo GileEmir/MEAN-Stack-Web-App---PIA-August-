@@ -99,4 +99,20 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   submitGardenSchedule(): void {
     this.gardenSchedulingComponent.onSubmit();
   }
+
+  floor(value: number): number {
+    return Math.floor(value);
+  }
+
+  ceil(value: number): number {
+    return Math.ceil(value);
+  }
+
+  roundToQuarter(rating: number): number {
+    return Math.round(rating * 4) / 4;
+  }
+  
+  fractionalPart(rating: number): number {
+    return rating - Math.floor(rating);
+  }
 }

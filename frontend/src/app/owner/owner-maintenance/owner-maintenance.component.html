@@ -48,7 +48,7 @@
           <td>{{ job.canceled ? 'Canceled' : 'In Progress' }}</td>
           <td>
             <span *ngIf="job.canceled">Cancelled</span>
-            <button *ngIf="!job.canceled && canCancelJob(job)" (click)="cancelJob(job)">Cancel</button>
+            <button class="declineButton"*ngIf="!job.canceled && canCancelJob(job)" (click)="cancelJob(job)">Cancel</button>
             <span *ngIf="!job.canceled && !canCancelJob(job)">Not Cancellable</span>
           </td>
         </tr>

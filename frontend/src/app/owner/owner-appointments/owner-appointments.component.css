@@ -7,7 +7,7 @@ table {
 }
 
 thead tr {
-  background-color: #48CAE4;
+  background-color: #89ca63;
   color: #ffffff;
   text-align: left;
   font-weight: bold;
@@ -43,7 +43,7 @@ a:hover {
 }
 
 button {
-  background-color: #48CAE4;
+  background-color: #5ae448;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -52,7 +52,23 @@ button {
 }
 
 button:hover {
-  background-color: #ef476f;
+  background-color: #41c230;
+}
+.declineButton{
+  background-color: #f7567c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.declineButton:hover{
+  background-color: #e14a6d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 textarea, input[type="number"] {

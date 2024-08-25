@@ -1,68 +1,88 @@
 <div>
   <h2>Schedule Garden Decoration</h2>
   <form [formGroup]="gardenForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="currentStep === 1">
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="selectedDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="time" placeholder="Choose a time" formControlName="selectedTime">
-      </mat-form-field>
-      <label for="area">Total Area (sqm):</label>
-      <input type="number" id="area" formControlName="totalArea">
-      <div class="full-width">
+    <div *ngIf="currentStep === 1" class="form-step">
+      <div class="div1">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="selectedDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="time" placeholder="Choose a time" formControlName="selectedTime">
+        </mat-form-field>
+      </div>
+      <div class="div2">
+        <label for="area">Total Area (sqm):</label>
+        <input type="number" id="area" formControlName="totalArea">
+      </div>
+      <div class="div3" style="flex: auto;">
         <label for="type">Garden Type:</label>
         <select id="type" formControlName="gardenType">
           <option value="private">Private Garden</option>
           <option value="restaurant">Restaurant Garden</option>
         </select>
       </div>
-      <button type="button" (click)="nextStep()">Next</button>
+      <div>
+        <button type="button" (click)="nextStep()">Next</button>
+      </div>
     </div>
 
-    <div *ngIf="currentStep === 2">
+    <div *ngIf="currentStep === 2" class="parent">
       <div *ngIf="gardenForm.get('gardenType')?.value === 'private'">
-        <label for="poolArea">Pool Area (sqm):</label>
-        <input type="number" id="poolArea" formControlName="poolArea">
-        <label for="greenArea">Green Area (sqm):</label>
-        <input type="number" id="greenArea" formControlName="greenArea">
-        <div class="full-width">
+        <div class="divA1">
+          <label for="poolArea">Pool Area (sqm):</label>
+          <input type="number" id="poolArea" formControlName="poolArea">
+        </div>
+        <div class="divA2">
+          <label for="greenArea">Green Area (sqm):</label>
+          <input type="number" id="greenArea" formControlName="greenArea">
+        </div>
+        <div class="divA3">
           <label for="furnitureArea">Furniture Area (sqm):</label>
           <input type="number" id="furnitureArea" formControlName="furnitureArea">
         </div>
       </div>
       <div *ngIf="gardenForm.get('gardenType')?.value === 'restaurant'">
-        <label for="fountainArea">Fountain Area (sqm):</label>
-        <input type="number" id="fountainArea" formControlName="fountainArea">
-        <label for="greenArea">Green Area (sqm):</label>
-        <input type="number" id="greenArea" formControlName="greenArea">
-        <div class="full-width">
+        <div class="divB1">
+          <label for="fountainArea">Fountain Area (sqm):</label>
+          <input type="number" id="fountainArea" formControlName="fountainArea">
+        </div>
+        <div class="divB2">
+          <label for="greenArea">Green Area (sqm):</label>
+          <input type="number" id="greenArea" formControlName="greenArea">
+        </div>
+        <div class="divB3">
           <label for="tables">Number of Tables:</label>
           <input type="number" id="tables" formControlName="tables">
         </div>
-        <label for="chairs">Number of Chairs:</label>
-        <input type="number" id="chairs" formControlName="chairs">
       </div>
-      <label for="description">Description:</label>
-      <textarea id="description" formControlName="description"></textarea>
-      <label>Options:</label>
-      <div formGroupName="options">
-        <div *ngFor="let option of options">
-          <label>
-            <input type="checkbox" [formControlName]="option"> {{ option }}
-          </label>
+      <div class="divA4 divB4">
+        <label for="description">Description:</label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+      <div class="divA5 divB5">
+        <label>Options:</label>
+        <div formGroupName="options" class="options-group">
+          <div *ngFor="let option of options" class="option-item">
+            <label>
+              <input type="checkbox" [formControlName]="option"> {{ option }}
+            </label>
+          </div>
         </div>
       </div>
-      <button type="button" (click)="previousStep()">Previous</button>
-    </div>
-    </form>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    </div>
-    <div id="successPopup" class="popup">
-      <div class="popup-content">
-        <span class="close" (click)="closePopup()">&times;</span>
-        <p>Garden schedule submitted successfully!</p>
+      <div class="divA6 divB6"></div>
+      <div class="divA7 divB7"></div>
+      <div>
+        <button type="button" class="previous" (click)="previousStep()">&#8592; Previous</button>
       </div>
     </div>
+  </form>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>
+<div id="successPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" (click)="closePopup()">&times;</span>
+    <p>Garden schedule submitted successfully!</p>
+  </div>
+</div>

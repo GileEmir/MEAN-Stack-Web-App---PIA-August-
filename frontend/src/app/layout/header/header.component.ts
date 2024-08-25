@@ -26,4 +26,8 @@ export class HeaderComponent {
     localStorage.removeItem("logg");
     this.router.navigate(['']);
   }
+
+  isCurrentPath(path: string): boolean {
+    return this.router.url === path;
+  }
 }

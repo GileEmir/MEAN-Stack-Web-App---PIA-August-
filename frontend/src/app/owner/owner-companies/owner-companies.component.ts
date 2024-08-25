@@ -8,8 +8,11 @@ import { Company } from 'src/app/models/Company';
   styleUrls: ['./owner-companies.component.css']
 })
 export class OwnerCompaniesComponent implements OnInit {
-  companies: Company[] = [];
+  companies: any[] = [];
   searchQuery: string = '';
+  allCompanies: any[] = [];
+  sortColumn: string = '';
+  sortDirection: string = 'asc';
 
   constructor(private companyService: CompanyService) {}
 
@@ -21,23 +24,42 @@ export class OwnerCompaniesComponent implements OnInit {
     this.companyService.getCompanies().subscribe(companies => {
       console.log('Fetched companies:', companies); // Debugging statement
       this.companies = companies;
+      this.allCompanies = companies; 
     }, error => {
       console.error('Error fetching companies:', error); // Debugging statement
     });
   }
 
   searchCompanies(): void {
-    if (this.searchQuery) {
-      this.companyService.searchCompanies(this.searchQuery).subscribe(companies => {
-        console.log('Searched companies:', companies); // Debugging statement
-        this.companies = companies;
-      }, error => {
-        console.error('Error searching companies:', error); // Debugging statement
-      });
-    } else {
-      this.fetchCompanies();
-    }
+    const query = this.searchQuery.toLowerCase();
+    this.companies = this.allCompanies.filter(company =>
+      company.name.toLowerCase().includes(query) ||
+      company.address.toLowerCase().includes(query)
+    );
   }
+
+  sortCompanies(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    this.companies.sort((a, b) => {
+      const valueA = a[column].toLowerCase();
+      const valueB = b[column].toLowerCase();
+
+      if (valueA < valueB) {
+        return this.sortDirection === 'asc' ? -1 : 1;
+      } else if (valueA > valueB) {
+        return this.sortDirection === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
 
   
   floor(value: number): number {
@@ -54,5 +76,12 @@ export class OwnerCompaniesComponent implements OnInit {
   
   fractionalPart(rating: number): number {
     return rating - Math.floor(rating);
+  }
+
+  getSortIcon(column: string): string {
+    if (this.sortColumn === column) {
+      return this.sortDirection === 'asc' ? '▼' : '▲';
+    }
+    return '';
   }
 }

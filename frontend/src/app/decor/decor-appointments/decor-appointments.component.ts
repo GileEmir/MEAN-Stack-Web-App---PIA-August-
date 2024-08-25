@@ -39,9 +39,27 @@ export class DecorAppointmentsComponent implements OnInit{
     this.gardenSchedulingService.getSchedulesForWorker(this.my_user.username)
       .subscribe(
         (appointments: any[]) => {
-          this.myAppointments = appointments;
-
-          this.myAppointments.sort((a, b) => {
+          let pom = appointments;
+  
+          const now = new Date();
+          this.myAppointments = [];
+          this.pastAppointments = [];
+  
+          pom.forEach(appointment => {
+            const datePart = appointment.date.split('T')[0];
+            const appointmentDate = new Date(`${datePart}T00:00:00.000Z`);
+            const [hours, minutes] = appointment.time.split(':').map(Number);
+  
+            appointmentDate.setHours(hours, minutes, 0, 0);
+  
+            if (appointmentDate > now) {
+              this.myAppointments.push(appointment);
+            } else {
+              this.pastAppointments.push(appointment);
+            }
+          });
+  
+          this.pastAppointments.sort((a, b) => {
             const dateA = new Date(a.date);
             const dateB = new Date(b.date);
             const [hoursA, minutesA] = a.time.split(':').map(Number);
@@ -50,18 +68,21 @@ export class DecorAppointmentsComponent implements OnInit{
             dateB.setHours(hoursB, minutesB);
             return dateB.getTime() - dateA.getTime();
           });
+
+          console.log(this.myAppointments);
+          console.log(this.pastAppointments);
         },
         (error: any) => {
           console.error('Error loading my appointments', error);
         }
       );
   }
+
   loadAppointments(): void {
     const companyId = this.my_user.companyId; // Replace with actual company ID
     this.gardenSchedulingService.getSchedulesByCompany(companyId ?? '').subscribe(
       (appointments: GardenSchedule[]) => {
         this.availableAppointments = [];
-        this.pastAppointments = [];
   
         const now = new Date();
         appointments.forEach(appointment => {
@@ -73,8 +94,6 @@ export class DecorAppointmentsComponent implements OnInit{
   
           if (appointmentDate > now) {
             this.availableAppointments.push(appointment);
-          } else {
-            this.pastAppointments.push(appointment);
           }
         });
   

@@ -1,7 +1,7 @@
 
 body {
   min-height: 100vh;
-  background: url('/assets/images/auth/bg-gradient.png') no-repeat center center fixed;
+  background: linear-gradient(45deg, #ffffff, #000000);
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
@@ -24,7 +24,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  background: linear-gradient(45deg, #ffffff, #d3d3d3);
   opacity: 0.8;
   z-index: -1;
   border-radius: 10px;
@@ -93,4 +93,17 @@ body {
 .detail-item p {
   margin: 0;
   color: #333;
+}
+
+button {
+  background-color: #5ae448;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #41c230;
 }

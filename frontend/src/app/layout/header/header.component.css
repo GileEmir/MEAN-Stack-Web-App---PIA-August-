@@ -1,5 +1,5 @@
 .header {
-  background-color: #4580E0;
+  background-color: #a6e781;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -27,17 +27,13 @@
   position: relative;
   padding-right: 1rem;
 }
-.user-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+.icon-gear svg {
+  transition: transform 0.3s ease, fill 0.3s ease; /* Smooth transition for transform and fill */
 }
 
-.user-icon:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.icon-gear svg:hover {
+  transform: rotate(20deg) scale(1.1); /* Rotate and scale on hover */
+  fill: #58c519; /* Change fill color on hover */
 }
 
 .menu {
@@ -48,7 +44,7 @@
   background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Add a subtle gradient */
   color: black;
   border-radius: 0.5rem; /* Increase border radius for a more rounded look */
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.235);
   animation: fadeIn 0.3s ease-in-out;
   padding: 1rem; /* Add padding inside the menu */
 }
@@ -71,21 +67,22 @@
 }
 
 .toggle-button {
-  background-color: #5086E0;
-  color: #fff;
+  background-color: #a6e781;
+  color: #000000;
   border: none;
-  height: 100%; /* Set height to 100% to match the header */
-  padding: 0 15px; /* Adjust padding to maintain alignment */
+  height: 64px; /* Set height to 100% to match the header */
+  width: 64px;
+  margin-left:15px;
   cursor: pointer;
   border-radius: 5px; /* Rounded corners */
   transition: background-color 0.3s, transform 0.3s;
-  font-size: 1.2rem; /* Adjust font size for better consistency */
+  font-size: 2rem; /* Adjust font size for better consistency */
   font-weight: bold; /* Make the font bold */
   margin-right: 10px; /* Add some margin to the right */
 }
 
 .toggle-button:hover {
-  background-color: #79A0E0;
+  background-color: #58c519;
   transform: scale(1.05);
 }
 

@@ -18,33 +18,33 @@
     <li class="sidebar-item" *ngIf="isCurrentPath('/dashboard/main_page')">
       <a href="/dashboard/main_page" class="sidebar-link">Dashboard Main Page</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+    <li class="sidebar-item" *ngIf="user?.type=='owner' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/owner/info" class="sidebar-link">Owner profile</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+    <li class="sidebar-item" *ngIf="user?.type=='owner' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/owner/companies" class="sidebar-link">Companies</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+    <li class="sidebar-item" *ngIf="user?.type=='owner' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/owner/appointments" class="sidebar-link">Appointments</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='owner'">
+    <li class="sidebar-item" *ngIf="user?.type=='owner' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/owner/maintenance" class="sidebar-link">Maintenance</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+    <li class="sidebar-item" *ngIf="user?.type=='decor' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/decor/info" class="sidebar-link">Decor profile</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+    <li class="sidebar-item" *ngIf="user?.type=='decor' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/decor/appointments" class="sidebar-link">Appointments</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+    <li class="sidebar-item" *ngIf="user?.type=='decor' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/decor/maintenance" class="sidebar-link">Maintenance</a>
     </li>
-    <li class="sidebar-item" *ngIf="user?.type=='decor'">
+    <li class="sidebar-item" *ngIf="user?.type=='decor' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/decor/statistics" class="sidebar-link">Statistics</a>
     </li>
 
 
-    <li class="sidebar-item" *ngIf="user?.type=='admin'">
+    <li class="sidebar-item" *ngIf="user?.type=='admin' ">
       <a routerLink="/dashboard/admin/registration-requests" class="sidebar-link">Registration Requests</a>
     </li>
     <li class="sidebar-item" *ngIf="user?.type=='admin'">

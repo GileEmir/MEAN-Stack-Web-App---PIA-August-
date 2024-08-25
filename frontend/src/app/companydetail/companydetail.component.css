@@ -1,33 +1,34 @@
 #map {
   height: 400px;
   width: 100%;
+  max-width: 800px; /* Set a maximum width */
+  margin: 0 auto; /* Center the map */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .company-detail {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: 'Roboto', sans-serif;
+  margin: 20px auto; /* Center the component */
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.company-detail:hover {
   background-color: #f1f1f1;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  max-width: 900px; /* Set a maximum width */
 }
 
 .company-header {
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .company-header h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 32px;
   color: #333;
   animation: fadeIn 1s ease-in-out;
 }
@@ -35,12 +36,22 @@
 .company-header p {
   margin: 5px 0 0;
   color: #666;
+  font-size: 18px;
   animation: fadeIn 1.5s ease-in-out;
 }
 
-.company-info p {
-  margin: 10px 0;
-  color: #333;
+.company-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.info-item {
+  flex: 1 1 calc(50% - 20px);
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   animation: fadeIn 2s ease-in-out;
 }
 
@@ -60,7 +71,7 @@
 
 .company-comments h2 {
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 24px;
   color: #333;
   animation: fadeIn 3s ease-in-out;
 }
@@ -70,13 +81,50 @@
   padding: 0;
 }
 
-.company-comments li {
-  margin-bottom: 10px;
-  padding: 10px;
+.comment-item {
+  margin-bottom: 10px; /* Reduced margin */
+  padding: 10px; /* Reduced padding */
   border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #fff;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   animation: fadeIn 3.5s ease-in-out;
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.comment-header svg.decorator-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.comment-header .stars {
+  margin-left: auto;
+}
+
+.comment-bubble {
+  background-color: #fff;
+  padding: 3px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+}
+
+.comment-date {
+  font-size: 10px;
+  color: #999;
+  margin-bottom: 2px;
+  margin-left:5px;
+}
+
+.comment-text {
+  font-size: 16px;
+  color: #555;
+  margin-left: 10px;
+  margin-bottom: 2px;
 }
 
 .company-location {
@@ -85,7 +133,7 @@
 
 .company-location h2 {
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 24px;
   color: #333;
   animation: fadeIn 4s ease-in-out;
 }
@@ -96,6 +144,26 @@
   animation: fadeIn 4.5s ease-in-out;
 }
 
+.submit-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -103,4 +171,57 @@
   to {
     opacity: 1;
   }
+}
+
+.filled-star {
+  color: #ffdd00; /* Yellow color for filled stars */
+}
+
+.empty-star {
+  color: #cccccc; /* Grey color for empty stars */
+}
+
+.half-star {
+  position: relative;
+  display: inline-block;
+  color: #cccccc; /* Grey color for half stars */
+}
+
+.half-star::before {
+  content: '\2605'; /* Unicode character for star */
+  color: #ffdd00; /* Yellow color for filled part */
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.three-quarter-star {
+  position: relative;
+  display: inline-block;
+  color: #cccccc; /* Grey color for three-quarter stars */
+}
+
+.three-quarter-star::before {
+  content: '\2605'; /* Unicode character for star */
+  color: #ffdd00; /* Yellow color for filled part */
+  position: absolute;
+  left: 0;
+  width: 75%;
+  overflow: hidden;
+}
+
+.one-quarter-star {
+  position: relative;
+  display: inline-block;
+  color: #cccccc; /* Grey color for one-quarter stars */
+}
+
+.one-quarter-star::before {
+  content: '\2605'; /* Unicode character for star */
+  color: #ffdd00; /* Yellow color for filled part */
+  position: absolute;
+  left: 0;
+  width: 25%;
+  overflow: hidden;
 }

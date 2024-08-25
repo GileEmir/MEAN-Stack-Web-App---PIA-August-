@@ -1,5 +1,8 @@
 .sidebar {
-  background-color: #5086E0;
+  background: #74ebd5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
+  background-color: #aae985;
+  background: #aae985;
   color: #fff;
   width: 219.6px; /* Directly set the sidebar width */
   min-height: 100vh;
@@ -35,13 +38,14 @@
   transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Add transition for smooth animation */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Modern box shadow */
   border-radius: 5px; /* Add border radius for rounded corners */
-  background-color: #5086E0; /* Initial background color */
+  background-color: #89ca63; /* Initial background color */
+  
 }
 
 .sidebar-item:hover {
   transform: translateX(5px); /* Pop-out effect */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-  background-color: #79A0E0; /* Change background color on hover */
+  background-color: #74f12c; /* Change background color on hover */
 }
 
 .sidebar-item::after {
@@ -60,14 +64,15 @@
 }
 
 .sidebar-link {
-  color: #DCE0E0;
-  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
   display: block;
   transition: color 0.3s; /* Transition for color change */
+  text-decoration: none;
 }
 
 .sidebar-link:hover {
-  color: #fff;
+  color: #000000;
 }
 
 .image-container {

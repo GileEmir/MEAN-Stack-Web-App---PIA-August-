@@ -94,3 +94,16 @@ body {
     margin: 0;
     color: #333;
   }
+
+  button {
+    background-color: #5ae448;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #41c230;
+  }

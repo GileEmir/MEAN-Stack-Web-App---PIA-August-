@@ -1,7 +1,10 @@
+
+/* Existing styles */
 .layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background: transparent; /* Ensure the layout background is transparent */
 }
 
 header {
@@ -15,6 +18,7 @@ header {
   flex-direction: column;
   flex: 1;
   min-height: 0; /* Ensure the main container can shrink */
+  background: transparent; /* Ensure the main container background is transparent */
 }
 
 .main-content {
@@ -26,6 +30,7 @@ header {
   padding: 1rem; /* Add padding for content spacing */
   box-sizing: border-box; /* Ensure padding is included in the width */
   transition: margin-left 0.3s ease; /* Add transition for smooth toggle */
+  background: transparent; /* Ensure the main content background is transparent */
 }
 
 .sidebar-collapsed .main-content {
@@ -34,7 +39,6 @@ header {
 
 .sidebar {
   width: 250px;
-  background: #f4f4f4;
   padding: 1rem;
 }
 

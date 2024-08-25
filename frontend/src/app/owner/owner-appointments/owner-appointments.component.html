@@ -16,7 +16,7 @@
           <td>{{ getServices(appointment) }}</td>
           <td>
             <span *ngIf="appointment.canceled">Cancelled</span>
-            <button *ngIf="!appointment.canceled && canCancelAppointment(appointment)" (click)="cancelAppointment(appointment)">Cancel</button>
+            <button class="declineButton" *ngIf="!appointment.canceled && canCancelAppointment(appointment)" (click)="cancelAppointment(appointment)">Cancel</button>
             <span *ngIf="!appointment.canceled && !canCancelAppointment(appointment)">Not Cancellable</span>
           </td>
         </tr>

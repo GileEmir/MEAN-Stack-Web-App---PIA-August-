@@ -1,21 +1,73 @@
 <div *ngIf="company" class="company-detail">
   <div class="company-header">
-    <h1>{{ company.name }}</h1>
+    <h1>
+      {{ company.name }} -  {{company.averageRating}}
+      <span class="company-rating">
+        <ng-container *ngFor="let star of [0, 1, 2, 3, 4]; let i = index">
+          <span [ngClass]="{
+            'filled-star': i < floor(roundToQuarter(company.averageRating)),
+            'three-quarter-star': i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0.75,
+            'half-star': i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0.5,
+            'one-quarter-star': i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0.25,
+            'empty-star': i > floor(roundToQuarter(company.averageRating)) || (i === floor(roundToQuarter(company.averageRating)) && fractionalPart(roundToQuarter(company.averageRating)) === 0)
+          }">&#9733;</span>
+        </ng-container>
+      </span>
+    </h1>
     <p>{{ company.description }}</p>
   </div>
   <div class="company-info">
-    <p><strong>Address:</strong> {{ company.address }}</p>
-    <p><strong>Phone:</strong> {{ company.phone_number }}</p>
-    <p><strong>Email:</strong> <a href="mailto:{{ company.email }}">{{ company.email }}</a></p>
-    <p><strong>Website:</strong> <a href="{{ company.website }}" target="_blank">{{ company.website }}</a></p>
-    <p><strong>Services:</strong> {{ company.services.join(', ') }}</p>
-    <p><strong>Pricing:</strong> {{ company.pricing }}</p>
+    <div class="info-item">
+      <strong>Address:</strong> {{ company.address }}
+    </div>
+    <div class="info-item">
+      <strong>Phone:</strong> {{ company.phone_number }}
+    </div>
+    <div class="info-item">
+      <strong>Email:</strong> <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+    </div>
+    <div class="info-item">
+      <strong>Website:</strong> <a href="{{ company.website }}" target="_blank">{{ company.website }}</a>
+    </div>
+    <div class="info-item">
+      <strong>Services:</strong> {{ company.services.join(', ') }}
+    </div>
+    <div class="info-item">
+      <strong>Pricing:</strong> {{ company.pricing }}
+    </div>
+    <div class="info-item">
+      <strong>Annual Leave Start:</strong> {{ company.annualLeaveStart | date:'longDate' }}
+    </div>
+    <div class="info-item">
+      <strong>Annual Leave End:</strong> {{ company.annualLeaveEnd | date:'longDate' }}
+    </div>
   </div>
   <div class="company-comments">
-    <h2>Comments</h2>
+    <h2>Comments :</h2>
     <ul>
-      <li *ngFor="let comment of company.comments">
-        <p><strong>{{ comment.user }}</strong> ({{ comment.date | date }}): {{ comment.comment }} <strong>Rating:</strong> {{ comment.rating }}</p>
+      <li *ngFor="let comment of company.comments" class="comment-item">
+        <div class="comment-header" style="gap: 5px;">
+          <svg width="1.125em" height="1.125em" viewBox="0 0 18 18" fill="none" style=" color: #48CAE4;">
+            <circle cx="9" cy="4.5" r="3" fill="currentColor" />
+            <path opacity="0.5" d="M15 13.125C15 14.989 15 16.5 9 16.5C3 16.5 3 14.989 3 13.125C3 11.261 5.68629 9.75 9 9.75C12.3137 9.75 15 11.261 15 13.125Z" fill="currentColor" />
+          </svg>
+          <strong>{{ comment.user }}</strong>
+          <span class="stars">
+            <ng-container *ngFor="let star of [0, 1, 2, 3, 4]; let i = index">
+              <span [ngClass]="{
+                'filled-star': i < floor(roundToQuarter(comment.rating)),
+                'three-quarter-star': i === floor(roundToQuarter(comment.rating)) && fractionalPart(roundToQuarter(comment.rating)) === 0.75,
+                'half-star': i === floor(roundToQuarter(comment.rating)) && fractionalPart(roundToQuarter(comment.rating)) === 0.5,
+                'one-quarter-star': i === floor(roundToQuarter(comment.rating)) && fractionalPart(roundToQuarter(comment.rating)) === 0.25,
+                'empty-star': i > floor(roundToQuarter(comment.rating)) || (i === floor(roundToQuarter(comment.rating)) && fractionalPart(roundToQuarter(comment.rating)) === 0)
+              }">&#9733;</span>
+            </ng-container>
+          </span>
+        </div>
+        <div class="comment-bubble">
+          <p class="comment-date">{{ comment.date | date }}</p>
+          <p class="comment-text">{{ comment.comment }}</p>
+        </div>
       </li>
     </ul>
   </div>

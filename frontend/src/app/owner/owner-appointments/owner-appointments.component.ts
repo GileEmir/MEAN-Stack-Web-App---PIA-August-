@@ -59,6 +59,16 @@ export class OwnerAppointmentsComponent implements OnInit {
             dateB.setHours(hoursB, minutesB);
             return dateB.getTime() - dateA.getTime();
           });
+
+          this.currentAppointments.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            const [hoursA, minutesA] = a.time.split(':').map(Number);
+            const [hoursB, minutesB] = b.time.split(':').map(Number);
+            dateA.setHours(hoursA, minutesA);
+            dateB.setHours(hoursB, minutesB);
+            return dateB.getTime() - dateA.getTime();
+          });
         },
         (error) => {
           this.errorMessage = error;
