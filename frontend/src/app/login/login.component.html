@@ -1,62 +1,61 @@
-<div style="display: flex; height: 100vh; width: 100vw; position: relative;">
-  
+<div class="d-flex flex-column flex-md-row vh-100 vw-100 position-relative">
   <!-- Left side with big text -->
-  <div style="width: 60%; display: flex; justify-content: flex-start; align-items: center; background: linear-gradient(to right, #008000, #80FF66); padding-left: 4em; padding-right: 4em; box-shadow: 4px 0 8px rgba(0,0,0,0.2);">
-    <div style="color: white;">
-      <h1 style="font-family: 'Roboto', sans-serif; color: white; font-size: 3.5em; font-weight: bold; margin-bottom: 0.5em; letter-spacing: 2px;text-shadow: 1px 1px 2px black;; ">Vasa Masta-Vasa Basta</h1>
-      <h2 style="font-family: 'Roboto', sans-serif; color: rgb(20, 29, 29); font-size: 2em; font-weight: 300; margin-top: 0; letter-spacing: 1.5px;text-shadow: 1px 1px 2px black;">- Elevate Your Outdoors -</h2>
-      <p style="font-family: 'Roboto', sans-serif; color: lightgray; font-size: 1em; margin-top: 1em; line-height: 1.5; text-shadow: 1px 1px 2px black;">
+  <div class="col-12 col-md-7 d-flex justify-content-start align-items-center p-4 p-md-5 shadow" style="background: linear-gradient(to right, #008000, #80FF66);">
+    <div class="text-white">
+      <h1 class="display-4 font-weight-bold mb-3 text-shadow">Vasa Masta-Vasa Basta</h1>
+      <h2 class="h2 font-weight-light text-dark text-shadow">- Elevate Your Outdoors -</h2>
+      <p class="mt-3 text-light text-shadow">
         Welcome to your ultimate garden companion! Our app helps you schedule and manage all your garden tasks effortlessly.
       </p>
-      <p style="font-family: 'Roboto', sans-serif; color: lightgray; font-size: 1em; margin-top: 1em; line-height: 1.5; text-shadow: 1px 1px 2px black;">
+      <p class="mt-3 text-light text-shadow">
         From watering schedules to plant care reminders, we ensure your garden thrives all year round.
       </p>
     </div>
   </div>
 
   <!-- Right side for the form -->
-  <div style="width: 40%; display: flex; justify-content: center; align-items: center; background: linear-gradient(45deg, #ffffff, #d3d3d3); padding: 2em; box-shadow: -4px 0 8px rgba(0,0,0,0.2);">
-    <div style="width: 100%; max-width: 500px; border-radius: 25px; padding: 2em;">
-      <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1em;">
-        <a routerLink="/dashboard/main_page" class="modern-link">Click to find out more about us!</a>
+  <div class="col-12 col-md-5 d-flex justify-content-center align-items-center p-4 p-md-5 shadow" style="background: linear-gradient(45deg, #ffffff, #d3d3d3);">
+    <div class="w-100 max-w-500 p-4 rounded">
+      <div class="d-flex justify-content-center align-items-center mb-3">
+        <a routerLink="/dashboard/main_page" class="modern-link text-decoration-none">Click to find out more about us!</a>
       </div>
-      <h1 style="text-align: center; margin-top: 0; margin-bottom: 1em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 1.8em;">Login to your account</h1>
+      <h1 class="text-center mb-4">Login to your account</h1>
 
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <p style="margin: 0; padding-bottom: 10%; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1em; color: rgba(0, 0, 0, 0.729); font-style: italic;">{{message}}</p>
+      <div class="d-flex justify-content-center align-items-center mb-3">
+        <p class="m-0 pb-3 text-center text-muted">{{message}}</p>
         <ng-container *ngIf="message != 'Enter your credentials to continue'">
-            <icon-warning-hex></icon-warning-hex>
+          <icon-warning-hex></icon-warning-hex>
         </ng-container>
       </div>
 
       <form>
-        <div style="margin-bottom: 1em;">
-          <label for="username" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Username</label>
-          <div style="position: relative;">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <div class="position-relative">
             <icon-user></icon-user>
-            <input [(ngModel)]="username" type="username" id="username" placeholder="Enter Username" name="username" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease; background-color: #efffef;">
+            <input [(ngModel)]="username" type="text" id="username" placeholder="Enter Username" name="username" class="form-control border-1 border-dark rounded-pill">
           </div>
         </div>
-    
-        <div style="margin-bottom: 1em;">
-          <label for="password" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Password</label>
-          <div style="position: relative;">
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <div class="position-relative">
             <icon-lock-dots></icon-lock-dots>
-            <input [(ngModel)]="password" type="password" id="password" placeholder="Enter Password" name="password" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease; background-color: #efffef;">
+            <input [(ngModel)]="password" type="password" id="password" placeholder="Enter Password" name="password" class="form-control border-1 border-dark rounded-pill">
           </div>
         </div>
-        <div style="text-align: center;">
-          <button (click)="login()" class="modern-button">Login</button>  
+        <div class="text-center">
+          <button (click)="login()" class="modern-button rounded-pill">Login</button>
         </div>
       </form>
-      
-      <div style="text-align: center;">
-        <h1 style="margin-top: 0; margin-top: 1.5em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 0.7em;">Don't Have an Account?</h1>
-        <a routerLink="/register" style="display: block;  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:  #0055ff9d; font-size: 0.9em;">Register</a>
+
+      <div class="text-center mt-4">
+        <h1 class="h6">Don't Have an Account?</h1>
+        <a routerLink="/register" class="btn btn-link text-decoration-none">Register</a>
       </div>
-      <div style="text-align: center;">
-        <h1 style="margin-top: 0; margin-top: 1.5em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 0.7em;">Do you want to change your password?</h1>
-        <a routerLink="/change_password" style="display: block; margin-top: 1; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:  #0055ff9d; font-size: 0.9em;">Change password</a>
+      <div class="text-center mt-4">
+        <h1 class="h6">Do you want to change your password?</h1>
+        <a routerLink="/change_password" class="btn btn-link text-decoration-none">Change password</a>
       </div>
     </div>
   </div>

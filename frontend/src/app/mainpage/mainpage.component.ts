@@ -70,7 +70,8 @@ export class MainPageComponent implements OnInit {
       this.statistics.jobsLast7Days = schedules.filter(schedule => (now.getTime() - new Date(schedule.date).getTime()) <= 7 * 24 * 60 * 60 * 1000).length;
       this.statistics.jobsLast30Days = schedules.filter(schedule => (now.getTime() - new Date(schedule.date).getTime()) <= 30 * 24 * 60 * 60 * 1000).length;
     
-      this.recentJobs = schedules.filter(schedule => schedule.completionPhoto).slice(-3);
+      this.recentJobs = schedules.filter(schedule => schedule.completionPhoto && schedule.completionPhoto !== '').slice(-3);
+      console.log(this.recentJobs);
     });
   }
 

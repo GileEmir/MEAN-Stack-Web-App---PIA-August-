@@ -1,11 +1,11 @@
-<div class="header">
-  <button class="toggle-button" (click)="toggleSidebar()">☰</button>
-  <img src="assets/images/auth/vmvb-removebg-preview.png" alt="image" class="header-image" />
+<div class="header d-flex justify-content-between align-items-center p-3 text-black">
+  <button class="btn toggle-button" (click)="toggleSidebar()">☰</button>
+  <img src="assets/images/auth/vmvb-removebg-preview.png" alt="image" class="header-image img-fluid" />
   
-  <div class="user-info">
+  <div class="user-info position-relative">
     <icon-gear (click)="toggleMenu()"></icon-gear> 
-    <div class="menu" *ngIf="menuOpen">
-      <ul>
+    <div class="menu position-absolute bg-white text-dark p-2 rounded" *ngIf="menuOpen">
+      <ul class="list-unstyled m-0">
         <li *ngIf="!isCurrentPath('/dashboard/main_page'); else SignInTemplate" (click)="logout()">Logout</li>
         <ng-template #SignInTemplate>
           <li (click)="logout()">Return to Sign In</li>

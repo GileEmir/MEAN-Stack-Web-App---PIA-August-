@@ -1,61 +1,65 @@
-<div class="owner-info-container">
-  <div style="text-align: center;">
+<div class="container mt-5">
+    <div class="text-center mb-4">
       <h1>Owner Info</h1>
-      <p style="margin: 0; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1em; color: grey; font-style: italic;">{{message}}</p>
+      <p class="text-muted" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1em; font-style: italic;">{{message}}</p>
       <ng-container *ngIf="(message !== '') && (message !== 'Looks Good')">
-          <icon-warning-hex></icon-warning-hex>
+        <icon-warning-hex></icon-warning-hex>
       </ng-container>
-  </div>
-  <div class="profile-header">
-      <div class="profile-text">
-          <h1>{{ my_user.first_name }} {{ my_user.last_name }}</h1>
-          <p class="username">@{{ my_user.username }}</p>
+    </div>
+    
+    <div class="d-flex justify-content-center mb-4">
+      <div class="text-center">
+        <h1>{{ my_user.first_name }} {{ my_user.last_name }}</h1>
+        <p class="username">@{{ my_user.username }}</p>
+        <img [src]="getProfilePicPath()" alt="Profile Picture" class="img-thumbnail" style="max-width:200px; max-height: 200px;">
       </div>
-      <img [src]="getProfilePicPath()" alt="Profile Picture" style="max-width:200px; max-height: 200px;">
-  </div>
-  <form (ngSubmit)="updateUser()">
-      <div class="profile-details">
-          <div class="detail-item">
-              <label>First Name:</label>
-              <input type="text" [(ngModel)]="updated_user.first_name" name="first_name">
-          </div>
-          <div class="detail-item">
-              <label>Last Name:</label>
-              <input type="text" [(ngModel)]="updated_user.last_name" name="last_name">
-          </div>
-          <div class="detail-item">
-              <label>Email:</label>
-              <input type="email" [(ngModel)]="updated_user.email" name="email">
-          </div>
-          <div class="detail-item">
-              <label>Phone Number:</label>
-              <input type="text" [(ngModel)]="updated_user.phone_number" name="phone_number">
-          </div>
-          <div class="detail-item">
-              <label>Address:</label>
-              <input type="text" [(ngModel)]="updated_user.address" name="address">
-          </div>
-          <div class="detail-item">
-              <label>Gender:</label>
-              <input type="text" [(ngModel)]="updated_user.gender" name="gender">
-          </div>
-          <div class="detail-item">
-              <label>Account Type:</label>
-              <input type="text" [(ngModel)]="updated_user.type" name="type">
-          </div>
-          <div class="detail-item">
-              <label>Status:</label>
-              <input type="text" [(ngModel)]="updated_user.status" name="status">
-          </div>
-          <div class="detail-item">
-              <label>Profile Picture:</label>
-              <input type="file" (change)="onFileSelected($event)" name="profile_pic">
-          </div>
-          <div class="detail-item">
-              <label>Credit Card Number:</label>
-              <input type="text" [(ngModel)]="updated_user.credit_card_number" name="credit_card_number">
-          </div>
-          <button type="submit">Update</button>
+    </div>
+    
+    <form (ngSubmit)="updateUser()">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="first_name" class="form-label">First Name</label>
+          <input type="text" [(ngModel)]="updated_user.first_name" name="first_name" id="first_name" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="last_name" class="form-label">Last Name</label>
+          <input type="text" [(ngModel)]="updated_user.last_name" name="last_name" id="last_name" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" [(ngModel)]="updated_user.email" name="email" id="email" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="phone_number" class="form-label">Phone Number</label>
+          <input type="text" [(ngModel)]="updated_user.phone_number" name="phone_number" id="phone_number" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" [(ngModel)]="updated_user.address" name="address" id="address" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="gender" class="form-label">Gender</label>
+          <input type="text" [(ngModel)]="updated_user.gender" name="gender" id="gender" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="type" class="form-label">Account Type</label>
+          <input type="text" [(ngModel)]="updated_user.type" name="type" id="type" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="status" class="form-label">Status</label>
+          <input type="text" [(ngModel)]="updated_user.status" name="status" id="status" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="profile_pic" class="form-label">Profile Picture</label>
+          <input type="file" (change)="onFileSelected($event)" name="profile_pic" id="profile_pic" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="credit_card_number" class="form-label">Credit Card Number</label>
+          <input type="text" [(ngModel)]="updated_user.credit_card_number" name="credit_card_number" id="credit_card_number" class="form-control">
+        </div>
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
       </div>
-  </form>
-</div>
+    </form>
+  </div>

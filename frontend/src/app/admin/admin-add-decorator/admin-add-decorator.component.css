@@ -1,0 +1,18 @@
+.modern-button {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #118AB2;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #118AB2;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.modern-button:hover {
+    background-color: #0d6c8a;
+    color: #fff;
+}

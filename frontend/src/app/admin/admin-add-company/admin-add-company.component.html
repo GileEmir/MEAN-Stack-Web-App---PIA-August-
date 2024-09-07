@@ -12,6 +12,17 @@
 
     <div style="display: flex; justify-content: space-between;">
         <div style="flex: 1; margin-right: 0.5em;">
+            <label for="phoneNumber" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Phone Number</label>
+            <input [(ngModel)]="phoneNumber" type="text" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        </div>
+        <div style="flex: 1; margin-left: 0.5em;">
+            <label for="email" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Email</label>
+            <input [(ngModel)]="email" type="email" id="email" placeholder="Enter Email" name="email" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-right: 0.5em;">
             <label for="services" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Services</label>
             <input [(ngModel)]="services" type="text" id="services" placeholder="Enter Services" name="services" style="width: 100%; padding: 0.5em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
         </div>

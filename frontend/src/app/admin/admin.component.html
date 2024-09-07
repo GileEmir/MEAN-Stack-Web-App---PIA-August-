@@ -1,58 +1,52 @@
-<div>
-  <h2>Current Join Requests</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Gender</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.username }}</td>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.phone_number }}</td>
-        <td>{{ user.gender }}</td>
-        <td>
-          <button (click)="acceptUser(user)">Accept</button>
-          <button class="declineButton" (click)="declineUser(user)">Decline</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="admin-container">
+  <h2 class="my-4">Current Join Requests</h2>
+  <div class="row">
+    <div class="col-12">
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>
+              <button class="btn btn-success btn-sm" (click)="acceptUser(user)">Accept</button>
+              <button class="btn btn-danger btn-sm declineButton" (click)="declineUser(user)">Decline</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-  <h2>Current Blocked Users</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Gender</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of blockedUsers">
-        <td>{{ user.username }}</td>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.phone_number }}</td>
-        <td>{{ user.gender }}</td>
-        <td>
-          <button (click)="unblock(user)">Unblock User</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <h2 class="my-4">Current Blocked Users</h2>
+  <div class="row">
+    <div class="col-12">
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of blockedUsers">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="unblock(user)">Unblock User</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

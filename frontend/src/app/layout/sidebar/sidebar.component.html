@@ -1,20 +1,8 @@
-<div class="sidebar" [class.collapsed]="isCollapsed">
+<div class="sidebar d-flex flex-column" [class.collapsed]="isCollapsed">
   <div class="sidebar-header">
     <div class="image-placeholder"></div> <!-- Placeholder div -->
   </div>
-  <ul class="sidebar-menu">
-    <!-- <li class="sidebar-item">
-      <a href="#" class="sidebar-link">Home</a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link">About</a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link">Services</a>
-    </li>
-    <li class="sidebar-item">
-      <a href="#" class="sidebar-link">Contact</a>
-    </li> -->
+  <ul class="sidebar-menu list-unstyled p-3">
     <li class="sidebar-item" *ngIf="isCurrentPath('/dashboard/main_page')">
       <a href="/dashboard/main_page" class="sidebar-link">Dashboard Main Page</a>
     </li>
@@ -42,8 +30,6 @@
     <li class="sidebar-item" *ngIf="user?.type=='decor' && !isCurrentPath('/dashboard/main_page')">
       <a routerLink="/dashboard/decor/statistics" class="sidebar-link">Statistics</a>
     </li>
-
-
     <li class="sidebar-item" *ngIf="user?.type=='admin' ">
       <a routerLink="/dashboard/admin/registration-requests" class="sidebar-link">Registration Requests</a>
     </li>

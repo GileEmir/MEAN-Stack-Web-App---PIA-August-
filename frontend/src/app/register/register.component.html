@@ -1,110 +1,111 @@
-<div style="display: flex; height: 100vh; width: 100vw; position: relative;">
-  
+<div class="d-flex flex-column flex-md-row vh-100 vw-100 position-relative">
   <!-- Left side with big text -->
-  <div style="width: 60%; display: flex; justify-content: flex-start; align-items: center; background: linear-gradient(to right, #008000, #80FF66); padding-left: 4em; padding-right: 4em; box-shadow: 4px 0 8px rgba(0,0,0,0.2);">
-    <div style="color: white;">
-      <h1 style="font-family: 'Roboto', sans-serif; color: white; font-size: 3.5em; font-weight: bold; margin-bottom: 0.5em; letter-spacing: 2px;text-shadow: 1px 1px 2px black;; ">Vasa Masta-Vasa Basta</h1>
-      <h2 style="font-family: 'Roboto', sans-serif; color: rgb(20, 29, 29); font-size: 2em; font-weight: 300; margin-top: 0; letter-spacing: 1.5px;text-shadow: 1px 1px 2px black;">- Elevate Your Outdoors -</h2>
-      <p style="font-family: 'Roboto', sans-serif; color: lightgray; font-size: 1em; margin-top: 1em; line-height: 1.5; text-shadow: 1px 1px 2px black;">
+  <div class="col-12 col-md-7 d-flex justify-content-start align-items-center p-4 p-md-5 shadow custom-bg-gradient-left">
+    <div class="text-white">
+      <h1 class="display-4 font-weight-bold text-white mb-3 custom-text-shadow custom-font-roboto">Vasa Masta-Vasa Basta</h1>
+      <h2 class="h2 font-weight-light text-dark custom-text-shadow custom-font-roboto">- Elevate Your Outdoors -</h2>
+      <p class="mt-3 text-light custom-text-shadow custom-font-roboto">
         Welcome to your ultimate garden companion! Our app helps you schedule and manage all your garden tasks effortlessly.
       </p>
-      <p style="font-family: 'Roboto', sans-serif; color: lightgray; font-size: 1em; margin-top: 1em; line-height: 1.5; text-shadow: 1px 1px 2px black;">
+      <p class="mt-3 text-light custom-text-shadow custom-font-roboto">
         From watering schedules to plant care reminders, we ensure your garden thrives all year round.
       </p>
     </div>
   </div>
-  <!-- Right side for the form -->
-  <div style="width: 40%; display: flex; justify-content: center; align-items: flex-start; background: linear-gradient(45deg, #ffffff, #d3d3d3); padding: 2em; box-shadow: -4px 0 8px rgba(0,0,0,0.2); overflow-y: auto; height: 100vh;">
-    <div style="width: 100%; max-width: 500px; border-radius: 25px; padding: 2em;">
-      <h1 style="text-align: center; margin-top: 0; margin-bottom: 1em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 1.8em;">Register a new account</h1>
 
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <p style="margin: 0; padding-bottom: 10%; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1em; color: rgba(0, 0, 0, 0.729); font-style: italic;">{{message}}</p>
+  <!-- Right side for the form -->
+  <div class="col-12 col-md-5 d-flex justify-content-center align-items-start p-4 p-md-5 shadow overflow-auto" style="background: linear-gradient(45deg, #ffffff, #d3d3d3); height: 100vh;">
+    <div class="w-100 max-w-500 p-4 rounded">
+      <h1 class="text-center text-black mb-4">Register a new account</h1>
+
+      <div class="d-flex justify-content-center align-items-center mb-3">
+        <p class="m-0 pb-3 text-center text-muted">{{message}}</p>
         <ng-container *ngIf="(message !== 'Enter your credentials to continue') && (message !== 'Looks Good')">
             <icon-warning-hex></icon-warning-hex>
         </ng-container>
       </div>
 
-      <form style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em;">
-        <div style=" margin-bottom: 1em;">
-          <label for="username" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Username</label>
-          <div style="position: relative;">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="username" class="form-label">Username</label>
+          <div class="position-relative">
             <icon-user></icon-user>
-            <input [(ngModel)]="username" type="username" id="username" placeholder="Enter Username" name="username" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+            <input [(ngModel)]="username" type="text" id="username" placeholder="Enter Username" name="username" class="form-control border-1 border-dark rounded-pill">
           </div>
         </div>
           
-        <div>
-          <label for="password" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Password</label>
-          <div style="position: relative;">
+        <div class="col-md-6">
+          <label for="password" class="form-label">Password</label>
+          <div class="position-relative">
             <icon-lock-dots></icon-lock-dots>
-            <input [(ngModel)]="password" type="password" id="password" placeholder="Enter Password" name="password" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+            <input [(ngModel)]="password" type="password" id="password" placeholder="Enter Password" name="password" class="form-control border-1 border-dark rounded-pill">
           </div>
         </div>
 
-        <div>
-          <label for="first_name" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">First Name</label>
-          <input [(ngModel)]="first_name" type="text" id="first_name" placeholder="Enter First Name" name="first_name" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        <div class="col-md-6">
+          <label for="first_name" class="form-label">First Name</label>
+          <input [(ngModel)]="first_name" type="text" id="first_name" placeholder="Enter First Name" name="first_name" class="form-control border-1 border-dark rounded-pill">
         </div>
 
-        <div>
-          <label for="last_name" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Last Name</label>
-          <input [(ngModel)]="last_name" type="text" id="last_name" placeholder="Enter Last Name" name="last_name" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        <div class="col-md-6">
+          <label for="last_name" class="form-label">Last Name</label>
+          <input [(ngModel)]="last_name" type="text" id="last_name" placeholder="Enter Last Name" name="last_name" class="form-control border-1 border-dark rounded-pill">
         </div>
 
-        <div>
-          <label for="gender" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Gender</label>
-          <select [(ngModel)]="gender" id="gender" name="gender" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        <div class="col-md-6">
+          <label for="gender" class="form-label">Gender</label>
+          <select [(ngModel)]="gender" id="gender" name="gender" class="form-control border-1 border-dark rounded-pill">
             <option value="">Select Gender</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
           </select>
         </div>
 
-        <div>
-          <label for="address" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Address</label>
-          <input [(ngModel)]="address" type="text" id="address" placeholder="Enter Address" name="address" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        <div class="col-md-6">
+          <label for="address" class="form-label">Address</label>
+          <input [(ngModel)]="address" type="text" id="address" placeholder="Enter Address" name="address" class="form-control border-1 border-dark rounded-pill">
         </div>
 
-        <div>
-          <label for="phone_number" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Phone Number</label>
-          <input [(ngModel)]="phone_number" type="text" id="phone_number" placeholder="Enter Phone Number" name="phone_number" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        <div class="col-md-6">
+          <label for="phone_number" class="form-label">Phone Number</label>
+          <input [(ngModel)]="phone_number" type="text" id="phone_number" placeholder="Enter Phone Number" name="phone_number" class="form-control border-1 border-dark rounded-pill">
         </div>
 
-        <div>
-          <label for="email" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Email</label>
-          <input [(ngModel)]="email" type="email" id="email" placeholder="Enter Email" name="email" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email</label>
+          <input [(ngModel)]="email" type="email" id="email" placeholder="Enter Email" name="email" class="form-control border-1 border-dark rounded-pill">
         </div>
 
-        <div style="grid-column: span 2; margin-bottom: 1em;">
-          <label for="profile_pic" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Profile Picture</label>
-          <input type="file" id="profile_pic" (change)="onFileSelected($event)" accept="image/jpeg, image/png" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
+        <div class="col-12">
+          <label for="profile_pic" class="form-label">Profile Picture</label>
+          <input type="file" id="profile_pic" (change)="onFileSelected($event)" accept="image/jpeg, image/png" class="form-control border-1 border-dark rounded-pill">
           <label *ngIf="profilePicPreview">Profile Picture Preview:</label>
-          <img *ngIf="profilePicPreview" [src]="profilePicPreview" alt="Profile Picture Preview" style="margin-top: 1em; max-width: 100px; max-height: 100px; border: 1px solid #EDF2EF; border-radius: 5px;">
+          <img *ngIf="profilePicPreview" [src]="profilePicPreview" alt="Profile Picture Preview" class="mt-2 img-thumbnail" style="max-width: 100px; max-height: 100px;">
         </div>
 
-        <div style="grid-column: span 2; margin-bottom: 1em;">
-          <label for="creditCardNumber" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Credit Card Number</label>
-          <input type="text" id="creditCardNumber" name="creditCardNumber" [(ngModel)]="credit_card_number" (input)="validateCard($event)" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
-          <img id="cardIcon" src="/assets/images/card/credit-card.png" alt="" style="display: inline; width: 50px; height: 30px;">
+        <div class="col-12">
+          <label for="creditCardNumber" class="form-label">Credit Card Number</label>
+          <input type="text" id="creditCardNumber" name="creditCardNumber" [(ngModel)]="credit_card_number" (input)="validateCard($event)" class="form-control border-1 border-dark rounded-pill">
+          <img id="cardIcon" src="/assets/images/card/credit-card.png" alt="" class="mt-2" style="width: 50px; height: 30px;">
         </div>
 
-        <div style="grid-column: span 2; margin-bottom: 1em;">
-          <label for="type" style="display: block; margin-bottom: 0.5em; font-size: 1em; font-family: 'Segoe UI', sans-serif;">Type</label>
-          <select [(ngModel)]="type" id="type" name="type" style="width: 100%; padding: 1em; border: 1px solid #EDF2EF; border-radius: 5px; box-sizing: border-box; transition: border 0.3s ease;">
-            <option value="">Select Type</option>
+        <div class="col-12">
+          <label for="type" class="form-label">Type</label>
+          <select [(ngModel)]="type" id="type" name="type" class="form-control border-1 border-dark rounded-pill">
+            <option value="">Select Type</option> 
             <option value="owner">Owner</option>
             <option value="decor">Decorator</option>
           </select>
         </div>
         
-        <div style="grid-column: span 2; text-align: center;">
-          <button class="modern-button" (click)="register()" >Register</button>
+        <div class="col-12 text-center">
+          <button class="modern-button rounded-pill" (click)="register()">Register</button>
         </div>
       </form>
-      <div style="text-align: center;">
-        <h1 style="margin-top: 0; margin-top: 1.5em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; font-size: 0.7em;">Already have an Account?</h1>
-        <a routerLink="" style="display: block; margin-top: 1; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:  #0055ff9d; font-size: 0.9em;">Login</a>
+
+      <div class="text-center mt-4">
+        <h1 class="h6 text-dark">Already have an Account?</h1>
+        <a routerLink="" class="btn btn-link text-decoration-none">Login</a>
       </div>
     </div>
   </div>
